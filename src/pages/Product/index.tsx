@@ -1,47 +1,45 @@
 import {
   IonContent,
-  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
   IonPage,
-  IonTitle,
-  IonToolbar,
-  IonCardContent,
-  IonButton,
-  useIonRouter,
 } from "@ionic/react";
-import ProductCard from "components/ProductCard.tsx";
-import { useProductList } from "mock";
 
-const Tab1: React.FC = () => {
-  const { data: products } = useProductList();
-  const history = useIonRouter();
+import Toolbar from "components/Toolbar.tsx";
+import { chevronForward } from "ionicons/icons";
+import { useHistory } from "react-router";
+
+const Products: React.FC = () => {
+  const history = useHistory();
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Products</IonTitle>
-          <IonButton
-            slot="end"
-            class="ion-margin-end"
-            onClick={() => history.push("/product/add")}
-          >
-            Add Product
-          </IonButton>
-        </IonToolbar>
-      </IonHeader>
+      <Toolbar title="Product" defaultHref="/" />
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Product </IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <IonCardContent>
-          {products?.map((product) => (
-            <ProductCard key={product.prd_code} item={product} />
-          ))}
-        </IonCardContent>
+        <IonList lines="full">
+          <IonItem>
+            <IonLabel onClick={() => history.push("/product")}>
+              Product List
+            </IonLabel>
+            <IonIcon icon={chevronForward} />
+          </IonItem>
+          <IonItem>
+            <IonLabel onClick={() => history.push("/productBatch")}>
+              Product Batch
+            </IonLabel>
+            <IonIcon icon={chevronForward} />
+          </IonItem>
+          <IonItem>
+            <IonLabel onClick={() => history.push("/productQrCode")}>
+              QR Code
+            </IonLabel>
+            <IonIcon icon={chevronForward} />
+          </IonItem>
+        </IonList>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default Products;

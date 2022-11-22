@@ -1,8 +1,7 @@
-import { Redirect, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -10,7 +9,6 @@ import {
   setupIonicReact,
 } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
-import { ellipse, square, triangle } from "ionicons/icons";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
@@ -32,54 +30,60 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 import Product from "pages/Product";
-import AddProduct from "pages/Product/AddProduct";
+import SetupProduct from "pages/Product/SetupProduct";
 import Tab2 from "pages/ProductBatch";
 import Tab3 from "pages/Tab3";
 import ViewProduct from "pages/Product/ViewProduct";
 import EditProduct from "pages/Product/EditProduct";
+import Home from "pages/Home";
+import ProductList from "pages/Product/List";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/" render={() => <Redirect to="/product" />} />
-          {/* Product  */}
-          <Route exact path="/product" component={Product} />
-          <Route path="/product/:code" component={ViewProduct} />
-          <Route path="/product/add" component={AddProduct} />
-          <Route path="/product/edit/:code" component={EditProduct} />
-          {/* <Route path="/product/edit/:id">
-            <AddProduct />
+const App: React.FC = () => {
+  return (
+    <IonApp>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/" component={Home} />
+            {/* Product  */}
+            <Route exact path="/manageProduct" component={Product} />
+            <Route exact path="/product" component={ProductList} />
+            <Route path="/product/:code" component={ViewProduct} />
+            <Route path="/product/add" component={SetupProduct} />
+            <Route path="/product/edit/:code" component={EditProduct} />
+            {/* <Route path="/product/edit/:id">
+         
           </Route> */}
 
-          {/* Product Batch */}
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/product">
-            <IonIcon icon={triangle} />
-            <IonLabel>Product</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Product Batch</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+            {/* Product Batch */}
+            <Route exact path="/tab2">
+              <Tab2 />
+            </Route>
+            <Route path="/tab3">
+              <Tab3 />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom" color="primary">
+            <IonTabButton tab="tab1" href="/">
+              <IonIcon src="/assets/icon/home.svg" />
+            </IonTabButton>
+            <IonTabButton tab="tab2" href="/manageProduct">
+              <IonIcon src="/assets/icon/food.svg" />
+              {/* <img alt="food" src="/assets/icon/healthy-food 1.svg" /> */}
+            </IonTabButton>
+            <IonTabButton tab="tab3" href="/history">
+              <IonIcon src="/assets/icon/history.svg" />
+            </IonTabButton>
+            <IonTabButton tab="tab3" href="/profile">
+              <IonIcon src="/assets/icon/union.svg" />
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
+    </IonApp>
+  );
+};
 
 export default App;
