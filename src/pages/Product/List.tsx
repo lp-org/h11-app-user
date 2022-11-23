@@ -33,10 +33,10 @@ const ProductList: React.FC = () => {
               <IonLabel onClick={() => history.push("/product")}>
                 <b>{product.prd_name}</b>
                 <div>Product ID: {product.prd_code} </div>
-                <div>Category: {product.prd_nutrition_info} </div>
-                <div>Type: {product.prd_nutrition_info} </div>
+                <div>Category: {product.prd_code} </div>
+                <div>Type: {product.prd_code} </div>
                 <div>Flavour: {product.prd_flavour} </div>
-                <div> Information: {product.prd_nutrition_info} </div>
+                <div> Information: {product.prd_code} </div>
               </IonLabel>
             </IonItem>
           ))}

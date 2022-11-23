@@ -74,6 +74,13 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-gray: #dcdcdc;
+  --ion-color-gray-rgb: 220, 220, 220;
+  --ion-color-gray-contrast: #000000;
+  --ion-color-gray-contrast-rgb: 0, 0, 0;
+  --ion-color-gray-shade: #c2c2c2;
+  --ion-color-gray-tint: #e0e0e0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -234,8 +241,37 @@ http://ionicframework.com/docs/theming/ */
   }
 }
 
+.ion-color-gray {
+  --ion-color-base: var(--ion-color-gray);
+  --ion-color-base-rgb: var(--ion-color-gray-rgb);
+  --ion-color-contrast: var(--ion-color-gray-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-gray-contrast-rgb);
+  --ion-color-shade: var(--ion-color-gray-shade);
+  --ion-color-tint: var(--ion-color-gray-tint);
+}
+
 .wrap-text {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.required:after {
+  content: " *";
+  color: red;
+}
+
+.add-row-button {
+  border-style: dotted;
+  border-width: 2px;
+  border-color: #dcdcdc;
+  border-radius: 10px;
+
+  width: 100%;
+}
+
+ion-item {
+  --inner-padding-end: 0px;
+  --height: 100%;
+  /* --padding-right: 0px; */
 }

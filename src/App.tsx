@@ -30,15 +30,17 @@ import "@ionic/react/css/display.css";
 import "./theme/variables.css";
 
 import Product from "pages/Product";
-import SetupProduct from "pages/Product/SetupProduct";
+
 import Tab2 from "pages/ProductBatch";
 import Tab3 from "pages/Tab3";
 import ViewProduct from "pages/Product/ViewProduct";
 import EditProduct from "pages/Product/EditProduct";
 import Home from "pages/Home";
 import ProductList from "pages/Product/List";
+import SetupProductStep1 from "pages/Product/SetupProduct/SetupProductStep1";
+import SetupProductStep2 from "pages/Product/SetupProduct/SetupProductStep2";
 
-setupIonicReact();
+setupIonicReact({ rippleEffect: true, mode: "md" });
 
 const App: React.FC = () => {
   return (
@@ -51,7 +53,8 @@ const App: React.FC = () => {
             <Route exact path="/manageProduct" component={Product} />
             <Route exact path="/product" component={ProductList} />
             <Route path="/product/:code" component={ViewProduct} />
-            <Route path="/product/add" component={SetupProduct} />
+            <Route path="/product/add" component={SetupProductStep1} />
+            <Route path="/product/add-2" component={SetupProductStep2} />
             <Route path="/product/edit/:code" component={EditProduct} />
             {/* <Route path="/product/edit/:id">
          
