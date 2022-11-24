@@ -1,7 +1,10 @@
-import { IonItem, IonLabel, IonList, IonPage } from "@ionic/react";
+import { IonContent, IonIcon, IonItem, IonLabel, IonPage } from "@ionic/react";
+import ShowProduct from "components/ShowProduct";
+import Toolbar from "components/Toolbar.tsx";
 
-import { useGetProductById } from "mock";
-import { useRouteMatch } from "react-router";
+import { useGetProductById } from "hooks";
+import { pencil } from "ionicons/icons";
+import { useHistory, useRouteMatch } from "react-router";
 
 interface paramsProps {
   code: string;
@@ -9,21 +12,27 @@ interface paramsProps {
 
 const ViewProduct: React.FC = () => {
   const match = useRouteMatch<paramsProps>();
+  const history = useHistory();
   const { code } = match.params;
+
   const { data } = useGetProductById(code);
   return (
     <IonPage>
-      <IonList class="ion-margin">
-        <IonItem>
-          <IonLabel>Name: {data?.prd_name}</IonLabel>
+      <Toolbar title="View Product" defaultHref="/product" />
+
+      <IonContent fullscreen className="ion-padding">
+        <IonItem lines="none">
+          <b>{data?.prd_name}</b>
+          <div style={{ marginLeft: "auto" }}>
+            <IonIcon
+              onClick={() => history.push(`/product/edit/${data?.prd_code}`)}
+              src="assets/icon/edit.svg"
+              size="default"
+            />
+          </div>
         </IonItem>
-        <IonItem>
-          <IonLabel>Flavour: {data?.prd_flavour}</IonLabel>
-        </IonItem>
-        <IonItem>
-          <IonLabel>Period: {data?.prd_expiry_period}</IonLabel>
-        </IonItem>
-      </IonList>
+        <ShowProduct item={data!} />
+      </IonContent>
     </IonPage>
   );
 };

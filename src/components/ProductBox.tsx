@@ -21,7 +21,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
         width: 150,
       }}
     >
-      <img alt="Silhouette of mountains" src={"/assets/products/chip.png"} />
+      <img alt="Food" src={"/assets/products/chip.png"} />
 
       <div style={{ padding: 8, textAlign: "left" }}>
         <div className="wrap-text">

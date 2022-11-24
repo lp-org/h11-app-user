@@ -16,12 +16,17 @@ export function useProductList() {
 
 export function useAddProduct() {
   const history = useHistory();
-
+  const dispatchClearTempProductSetup = useProductStore(
+    (state) => state.clearTempProductSetup
+  );
   return useMutation(
     async (payload: AddProductProps) =>
       await request.post("/product/add", payload),
     {
-      onSuccess: () => history.push("/product"),
+      onSuccess: () => {
+        history.push("/product");
+        dispatchClearTempProductSetup();
+      },
     }
   );
 }
@@ -30,5 +35,12 @@ export function useGetProductById(code: string) {
   return useQuery({
     queryFn: async (): Promise<Product> =>
       (await request.get(`/product/show/${code}`)).data.data,
+  });
+}
+
+export function useGetProductId() {
+  return useQuery({
+    queryFn: async (): Promise<string> =>
+      (await request.get(`/product/getproductcode`)).data.data.New_Product_Code,
   });
 }

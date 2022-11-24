@@ -8,51 +8,42 @@ import {
   IonButton,
 } from "@ionic/react";
 import { FormikProps, useFormik } from "formik";
-import { useGetProductId } from "hooks";
+import { useGetProductById, useGetProductId } from "hooks";
 import { FC, useEffect } from "react";
-import { useHistory } from "react-router";
-import { useProductStore } from "store";
+import { useHistory, useRouteMatch } from "react-router";
+import { useProductStore, useProductWithoutLsStore } from "store";
 import { AddProductProps } from "types/product";
 import SetupProduct from ".";
 
-interface SetupProductStep1Props {
-  formik: FormikProps<AddProductProps>;
-  setStep: (step: number) => void;
+interface paramsProps {
+  code: string;
 }
-
-const SetupProductStep1: FC<SetupProductStep1Props> = () => {
+const EditProductStep1: FC = () => {
+  const match = useRouteMatch<paramsProps>();
+  const { code } = match.params;
   const history = useHistory();
-  const { data: productId } = useGetProductId();
-  const tempProductSetup = useProductStore((state) => state.tempProductSetup);
+
+  const { data } = useGetProductById(code);
+  const tempProductEdit = useProductWithoutLsStore(
+    (state) => state.tempProductEdit
+  );
 
   const formik = useFormik<AddProductProps>({
-    initialValues: tempProductSetup
-      ? { ...tempProductSetup, prd_code: productId! }
-      : {
-          prd_code: productId!,
-          prd_expiry_period: null,
-          prd_flavour: "",
-          prd_ingredients: "",
-          prd_name: "",
-          prd_keep_it_fresh: "",
-          prd_nutrition_json: null,
-          prd_storage_instructions: "",
-          prd_category: "",
-        },
+    initialValues: tempProductEdit?.prd_code ? tempProductEdit : data!,
     enableReinitialize: true,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-      history.push("/product/add-2");
+      history.push(`/product/edit-2/${code}`);
     },
   });
 
-  const dispatchProductSetup = useProductStore(
-    (state) => state.setTempProductSetup
+  const dispatchProductEdit = useProductWithoutLsStore(
+    (state) => state.setTempProductEdit
   );
   useEffect(() => {
-    console.log(formik.values);
-    dispatchProductSetup(formik.values);
+    dispatchProductEdit(formik.values);
   }, [formik.values]);
+  console.log(tempProductEdit);
+  if (!formik.values) return <></>;
   return (
     <SetupProduct>
       <IonRow>
@@ -182,4 +173,4 @@ const SetupProductStep1: FC<SetupProductStep1Props> = () => {
   );
 };
 
-export default SetupProductStep1;
+export default EditProductStep1;

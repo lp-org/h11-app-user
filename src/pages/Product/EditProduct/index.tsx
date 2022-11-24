@@ -10,18 +10,22 @@ const SetupProduct: React.FC<{ children: React.ReactNode }> = ({
   const { path } = useRouteMatch();
 
   const [step, setStep] = useState(
-    path === "/product/add" ? 1 : path === "/product/add-2" ? 2 : 3
+    path === "/product/edit/:code"
+      ? 1
+      : path === "/product/edit-2/:code"
+      ? 2
+      : 3
   );
   let title = null;
   if (step === 1 || step === 2) {
     title = `${
       step === 1 ? "Food Product Information" : "Nutrition Facts"
-    } Setup ( ${step} of 2 )`;
+    } Edit ( ${step} of 2 )`;
   }
 
   return (
     <IonPage>
-      <Toolbar title="Setup Product" defaultHref="/product" />
+      <Toolbar title="Edit Product" defaultHref={`/product`} />
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div className="ion-margin-bottom">

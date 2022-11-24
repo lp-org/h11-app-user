@@ -5,10 +5,17 @@ import { devtools, persist } from "zustand/middleware";
 interface BearState {
   recentProducts: Product[];
   addRecentProduct: (payload: AddProductProps) => void;
-  tempProductSetup1: AddProductProps | null;
-  tempProductSetup2: any | null;
-  setTempProductSetup1: (payload: AddProductProps) => void;
-  clearTempProductSetup1: () => void;
+  tempProductSetup: AddProductProps | null;
+
+  setTempProductSetup: (payload: AddProductProps) => void;
+  clearTempProductSetup: () => void;
+}
+
+interface productStateWithoutLsState {
+  tempProductEdit: AddProductProps | null;
+
+  setTempProductEdit: (payload: AddProductProps) => void;
+  clearTempProductEdit: () => void;
 }
 
 export const useProductStore = create<BearState>()(
@@ -16,8 +23,8 @@ export const useProductStore = create<BearState>()(
     persist(
       (set) => ({
         recentProducts: [],
-        tempProductSetup1: null,
-        tempProductSetup2: null,
+        tempProductSetup: null,
+
         addRecentProduct: (payload) =>
           set((state) => ({
             recentProducts: [
@@ -34,14 +41,14 @@ export const useProductStore = create<BearState>()(
               },
             ],
           })),
-        setTempProductSetup1: (payload) =>
+        setTempProductSetup: (payload) =>
           set((state) => ({
-            tempProductSetup1: { ...payload },
+            tempProductSetup: { ...payload },
           })),
 
-        clearTempProductSetup1: () =>
+        clearTempProductSetup: () =>
           set((state) => ({
-            tempProductSetup1: null,
+            tempProductSetup: null,
           })),
       }),
       {
@@ -49,4 +56,20 @@ export const useProductStore = create<BearState>()(
       }
     )
   )
+);
+
+export const useProductWithoutLsStore = create<productStateWithoutLsState>()(
+  devtools((set) => ({
+    tempProductEdit: null,
+
+    setTempProductEdit: (payload) =>
+      set((state) => ({
+        tempProductEdit: { ...payload },
+      })),
+
+    clearTempProductEdit: () =>
+      set((state) => ({
+        tempProductEdit: null,
+      })),
+  }))
 );

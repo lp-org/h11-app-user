@@ -11,8 +11,9 @@ import {
 } from "@ionic/react";
 import { FormikProps, useFormik } from "formik";
 import { removeCircle } from "ionicons/icons";
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment, useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { useProductStore } from "store";
 import { AddProductProps } from "types/product";
 import SetupProduct from ".";
 
@@ -28,6 +29,7 @@ const templatePayload = {
     {
       Nutrition_type: "",
       Size: "",
+      unit: "g",
       Daily_Value: "",
     },
   ],
@@ -35,14 +37,46 @@ const templatePayload = {
 
 const SetupProductStep2: FC<SetupProductStep2Props> = () => {
   const history = useHistory();
-  const [initialValues, setInitialValues] = useState(templatePayload);
+  const tempProductSetup = useProductStore((state) => state.tempProductSetup);
+  // const [initialValues, setInitialValues] = useState(templatePayload);
+  console.log(tempProductSetup);
   const formik = useFormik<any>({
-    initialValues: { ...initialValues },
+    initialValues: tempProductSetup?.prd_nutrition_json || templatePayload,
     enableReinitialize: true,
     onSubmit: (values) => {
       alert(JSON.stringify(values, null, 2));
+      history.push("/product/add-3");
     },
   });
+  const dispatchProductSetup = useProductStore(
+    (state) => state.setTempProductSetup
+  );
+
+  useEffect(() => {
+    dispatchProductSetup(
+      tempProductSetup
+        ? {
+            ...tempProductSetup,
+            prd_nutrition_json: formik.values!,
+          }
+        : {
+            prd_code: "",
+            prd_category: "",
+            prd_expiry_period: null,
+            prd_flavour: "",
+            prd_ingredients: "",
+            prd_keep_it_fresh: "",
+            prd_name: "",
+            prd_nutrition_json: "",
+            prd_storage_instructions: "",
+          }
+    );
+  }, [formik.values]);
+  useEffect(() => {
+    if (!tempProductSetup || !tempProductSetup.prd_name) {
+      history.push("/product/add");
+    }
+  }, []);
 
   return (
     <SetupProduct>
@@ -82,17 +116,13 @@ const SetupProductStep2: FC<SetupProductStep2Props> = () => {
                               }}
                               icon={removeCircle}
                               color="gray"
-                              onClick={() =>
-                                setInitialValues(() => {
-                                  formik.values.Serving.splice(index, 1);
-
-                                  // return prev;
-                                  return {
-                                    ...formik.values,
-                                    Serving: [...formik.values.Serving],
-                                  };
-                                })
-                              }
+                              onClick={() => {
+                                formik.values.Serving.splice(index, 1);
+                                formik.setValues({
+                                  ...formik.values,
+                                  Serving: [...formik.values.Serving],
+                                });
+                              }}
                             />
                           </IonRow>
                         </IonLabel>
@@ -124,7 +154,19 @@ const SetupProductStep2: FC<SetupProductStep2Props> = () => {
                             value={formik.values[key][index]["Size"]}
                           ></IonInput>
                           <IonItem color={"gray"}>
-                            <IonSelect value={"g"}>
+                            <IonSelect
+                              value={formik.values[key][index].unit}
+                              name={`${key}[${index}].unit`}
+                              onIonChange={(e) => {
+                                formik.values.Serving[index].unit =
+                                  e.target.value;
+                                formik.setValues({
+                                  ...formik.values,
+                                  Serving: formik.values.Serving,
+                                });
+                                // formik.handleChange(e);
+                              }}
+                            >
                               <IonSelectOption value="g">g</IonSelectOption>
                               <IonSelectOption value="mg">mg</IonSelectOption>
                             </IonSelect>
@@ -158,7 +200,7 @@ const SetupProductStep2: FC<SetupProductStep2Props> = () => {
             color="light"
             class="ion-margin-top add-row-button"
             onClick={() =>
-              setInitialValues((prev) => ({
+              formik.setValues({
                 ...formik.values,
                 Serving: [
                   ...formik.values.Serving,
@@ -166,9 +208,10 @@ const SetupProductStep2: FC<SetupProductStep2Props> = () => {
                     Nutrition_type: "",
                     Size: "",
                     Daily_Value: "",
+                    unit: "g",
                   },
                 ],
-              }))
+              })
             }
           >
             Add Row

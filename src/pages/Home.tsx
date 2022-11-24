@@ -12,7 +12,7 @@ import ProductBox from "components/ProductBox";
 
 import Toolbar from "components/Toolbar.tsx";
 import { addCircle, scanCircle, personCircle } from "ionicons/icons";
-import { useProductList } from "mock";
+import { useProductList } from "hooks";
 import { useHistory } from "react-router";
 
 const QuickAccessList = [

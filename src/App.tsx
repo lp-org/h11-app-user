@@ -34,11 +34,15 @@ import Product from "pages/Product";
 import Tab2 from "pages/ProductBatch";
 import Tab3 from "pages/Tab3";
 import ViewProduct from "pages/Product/ViewProduct";
-import EditProduct from "pages/Product/EditProduct";
+
 import Home from "pages/Home";
 import ProductList from "pages/Product/List";
 import SetupProductStep1 from "pages/Product/SetupProduct/SetupProductStep1";
 import SetupProductStep2 from "pages/Product/SetupProduct/SetupProductStep2";
+import SetupProductStep3 from "pages/Product/SetupProduct/SetupProductStep3";
+import EditProductStep1 from "pages/Product/EditProduct/EditProductStep1";
+import EditProductStep2 from "pages/Product/EditProduct/EditProductStep2";
+import EditProductStep3 from "pages/Product/EditProduct/EditProductStep3";
 
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
@@ -52,10 +56,15 @@ const App: React.FC = () => {
             {/* Product  */}
             <Route exact path="/manageProduct" component={Product} />
             <Route exact path="/product" component={ProductList} />
-            <Route path="/product/:code" component={ViewProduct} />
+            <Route exact path="/product/:code" component={ViewProduct} />
             <Route path="/product/add" component={SetupProductStep1} />
             <Route path="/product/add-2" component={SetupProductStep2} />
-            <Route path="/product/edit/:code" component={EditProduct} />
+            <Route path="/product/add-3" component={SetupProductStep3} />
+
+            {/* Edit Product */}
+            <Route path="/product/edit/:code" component={EditProductStep1} />
+            <Route path="/product/edit-2/:code" component={EditProductStep2} />
+            <Route path="/product/edit-3/:code" component={EditProductStep3} />
             {/* <Route path="/product/edit/:id">
          
           </Route> */}
