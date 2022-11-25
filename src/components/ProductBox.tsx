@@ -17,7 +17,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
         margin: 0,
         borderRadius: 10,
         textAlign: "center",
-        height: 170,
+        height: "100%",
         width: 150,
       }}
     >

@@ -7,6 +7,7 @@ import {
   IonText,
   IonIcon,
   IonButton,
+  IonLabel,
 } from "@ionic/react";
 import ProductBox from "components/ProductBox";
 
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
         {/* Quick Access */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonText>
-            <h1>Quick Access</h1>
+            <h2>Quick Access</h2>
           </IonText>
           <IonRow>
             {QuickAccessList.map((el, i) => (
@@ -45,20 +46,25 @@ const Home: React.FC = () => {
                     borderRadius: 10,
                     padding: 8,
                     textAlign: "center",
-                    height: 120,
+
+                    height: "100%",
                   }}
                   onClick={() => history.push(el.path)}
                 >
-                  <div>
-                    <IonIcon
-                      icon={el.icon}
-                      style={{ fontSize: "70px" }}
-                      color="primary"
-                    />
-                  </div>
-                  <IonText>
-                    <small>{el.title}</small>
-                  </IonText>
+                  <IonRow>
+                    <IonCol size="12">
+                      <IonIcon
+                        icon={el.icon}
+                        style={{ fontSize: "70px" }}
+                        color="primary"
+                      />
+                    </IonCol>
+                    <IonCol size="12">
+                      <IonLabel>
+                        <small>{el.title}</small>
+                      </IonLabel>
+                    </IonCol>
+                  </IonRow>
                 </div>
               </IonCol>
             ))}
@@ -68,7 +74,7 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h1>My Products</h1>
+              <h2>My Products</h2>
             </IonText>
 
             <IonButton
@@ -97,7 +103,7 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h1>Product Batch</h1>
+              <h2>Product Batch</h2>
             </IonText>
 
             <IonButton
