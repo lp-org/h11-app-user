@@ -9,17 +9,13 @@ import {
   IonSelectOption,
   IonIcon,
 } from "@ionic/react";
-import { FormikProps, useFormik } from "formik";
+import { useFormik } from "formik";
 import { useGetProductById } from "hooks";
 import { removeCircle } from "ionicons/icons";
-import { FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment } from "react";
 import { useHistory, useRouteMatch } from "react-router";
-import { useProductStore, useProductWithoutLsStore } from "store";
-import { AddProductProps } from "types/product";
-import {
-  processNutritionInfoToInputData,
-  processNutritionInfoToInputDataFromCache,
-} from "utils";
+import { useProductWithoutLsStore } from "store";
+import { processNutritionInfoToInputData } from "utils";
 import { SERVING } from "utils/enum";
 import SetupProduct from ".";
 
@@ -45,6 +41,9 @@ const EditProductStep2: FC = () => {
   const tempProductEdit = useProductWithoutLsStore(
     (state) => state.tempProductEdit
   );
+  const dispatchProductEdit = useProductWithoutLsStore(
+    (state) => state.setTempProductEdit
+  );
   // const [initialValues, setInitialValues] = useState(templatePayload);
   const match = useRouteMatch<paramsProps>();
   const { code } = match.params;
@@ -52,41 +51,17 @@ const EditProductStep2: FC = () => {
   const { data } = useGetProductById(code);
 
   const formik = useFormik<any>({
-    initialValues: tempProductEdit?.prd_code
-      ? processNutritionInfoToInputDataFromCache(tempProductEdit)
-      : data?.prd_nutrition_json
+    initialValues: data?.prd_nutrition_json
       ? processNutritionInfoToInputData(data)
       : templatePayload,
     enableReinitialize: true,
     onSubmit: (values) => {
+      dispatchProductEdit({ ...tempProductEdit!, prd_nutrition_json: values! });
       alert(JSON.stringify(values, null, 2));
       history.push(`/product/edit-3/${code}`);
     },
   });
-  const dispatchProductEdit = useProductWithoutLsStore(
-    (state) => state.setTempProductEdit
-  );
-  useEffect(() => {
-    dispatchProductEdit(
-      tempProductEdit
-        ? {
-            ...tempProductEdit,
-            prd_nutrition_json: { Nutrition_Facts: formik.values! },
-          }
-        : {
-            prd_code: "",
-            prd_category: "",
-            prd_expiry_period: null,
-            prd_flavour: "",
-            prd_ingredients: "",
-            prd_keep_it_fresh: "",
-            prd_name: "",
-            prd_nutrition_json: "",
-            prd_storage_instructions: "",
-          }
-    );
-  }, [formik.values]);
-  console.log(tempProductEdit);
+
   return (
     <SetupProduct>
       <IonRow>

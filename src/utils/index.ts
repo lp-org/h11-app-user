@@ -33,34 +33,15 @@ export function processNutritionInfoToInputData(
 
   const input = {
     ...nutritionInfo,
-    Serving: Object.entries(nutritionInfo.Serving).map(([key]) => ({
-      Nutrition_type: key,
-      Size: nutritionInfo.Serving[key].Size,
-      unit: "g",
-      Daily_Value: nutritionInfo.Serving[key].Daily_Value,
-    })),
-  };
-  return input;
-}
-
-export function processNutritionInfoToInputDataFromCache(
-  payload: AddProductProps
-): AddProductProps | undefined {
-  if (!payload.prd_nutrition_json) {
-    return undefined;
-  }
-
-  const nutritionInfo = payload.prd_nutrition_json.Nutrition_Facts;
-  console.log(nutritionInfo.Serving);
-  const input = {
-    ...nutritionInfo,
     Serving: Object.entries(nutritionInfo.Serving).map(([key]) => {
-      console.log(key);
+      const Size = parseFloat(nutritionInfo.Serving[key].Size);
+      const unit = nutritionInfo.Serving[key].Size.replace(Size, "");
+      const Daily_Value = parseFloat(nutritionInfo.Serving[key].Daily_Value);
       return {
         Nutrition_type: key,
-        Size: nutritionInfo.Serving[key].Size,
-        unit: "g",
-        Daily_Value: nutritionInfo.Serving[key].Daily_Value,
+        Size,
+        unit,
+        Daily_Value,
       };
     }),
   };

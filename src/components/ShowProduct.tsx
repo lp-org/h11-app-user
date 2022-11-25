@@ -24,11 +24,11 @@ const ShowProduct: React.FC<ShowProductProps> = ({ item }) => {
         </IonRow>
         <IonRow>
           <IonCol size="4">Product Category:</IonCol>
-          <IonCol>{item?.prd_name}</IonCol>
+          <IonCol>{item?.prd_category}</IonCol>
         </IonRow>
         <IonRow>
           <IonCol size="4">Product Type:</IonCol>
-          <IonCol>{item?.prd_name}</IonCol>
+          <IonCol>{item?.prd_type}</IonCol>
         </IonRow>
         <IonRow>
           <IonCol size="4">Flavour:</IonCol>

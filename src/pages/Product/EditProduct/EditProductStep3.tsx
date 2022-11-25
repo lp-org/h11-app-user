@@ -2,7 +2,7 @@ import { IonButton } from "@ionic/react";
 import ShowProduct from "components/ShowProduct";
 import { useAddProduct } from "hooks";
 import { FC } from "react";
-import { useProductStore, useProductWithoutLsStore } from "store";
+import { useProductWithoutLsStore } from "store";
 import { processNutritionInfoPayload } from "utils";
 import SetupProduct from ".";
 

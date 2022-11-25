@@ -9,18 +9,12 @@ import {
   IonSelectOption,
   IonIcon,
 } from "@ionic/react";
-import { FormikProps, useFormik } from "formik";
+import { useFormik } from "formik";
 import { removeCircle } from "ionicons/icons";
-import { FC, Fragment, useEffect, useState } from "react";
+import { FC, Fragment, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store";
-import { AddProductProps } from "types/product";
 import SetupProduct from ".";
-
-interface SetupProductStep2Props {
-  formik: FormikProps<AddProductProps>;
-  setStep: (step: number) => void;
-}
 
 const templatePayload = {
   Serving_Size: "",
@@ -35,7 +29,7 @@ const templatePayload = {
   ],
 };
 
-const SetupProductStep2: FC<SetupProductStep2Props> = () => {
+const SetupProductStep2: FC = () => {
   const history = useHistory();
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
   // const [initialValues, setInitialValues] = useState(templatePayload);
@@ -69,6 +63,7 @@ const SetupProductStep2: FC<SetupProductStep2Props> = () => {
             prd_name: "",
             prd_nutrition_json: "",
             prd_storage_instructions: "",
+            prd_type: "",
           }
     );
   }, [formik.values]);

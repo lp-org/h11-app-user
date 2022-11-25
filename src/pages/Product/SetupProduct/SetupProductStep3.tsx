@@ -11,7 +11,9 @@ const SetupProductStep3: FC = () => {
   const productAdd = useAddProduct();
   return (
     <SetupProduct>
-      {productPreview && <ShowProduct item={productPreview} />}
+      {productPreview && (
+        <ShowProduct item={processNutritionInfoPayload(productPreview)} />
+      )}
 
       <IonButton
         onClick={() => {

@@ -7,7 +7,7 @@ import {
   IonTextarea,
   IonButton,
 } from "@ionic/react";
-import { FormikProps, useFormik } from "formik";
+import { useFormik } from "formik";
 import { useGetProductId } from "hooks";
 import { FC, useEffect } from "react";
 import { useHistory } from "react-router";
@@ -15,12 +15,7 @@ import { useProductStore } from "store";
 import { AddProductProps } from "types/product";
 import SetupProduct from ".";
 
-interface SetupProductStep1Props {
-  formik: FormikProps<AddProductProps>;
-  setStep: (step: number) => void;
-}
-
-const SetupProductStep1: FC<SetupProductStep1Props> = () => {
+const SetupProductStep1: FC = () => {
   const history = useHistory();
   const { data: productId } = useGetProductId();
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
@@ -38,6 +33,7 @@ const SetupProductStep1: FC<SetupProductStep1Props> = () => {
           prd_nutrition_json: null,
           prd_storage_instructions: "",
           prd_category: "",
+          prd_type: "",
         },
     enableReinitialize: true,
     onSubmit: (values) => {

@@ -7,11 +7,11 @@ import {
   IonTextarea,
   IonButton,
 } from "@ionic/react";
-import { FormikProps, useFormik } from "formik";
-import { useGetProductById, useGetProductId } from "hooks";
-import { FC, useEffect } from "react";
+import { useFormik } from "formik";
+import { useGetProductById } from "hooks";
+import { FC } from "react";
 import { useHistory, useRouteMatch } from "react-router";
-import { useProductStore, useProductWithoutLsStore } from "store";
+import { useProductWithoutLsStore } from "store";
 import { AddProductProps } from "types/product";
 import SetupProduct from ".";
 
@@ -24,25 +24,19 @@ const EditProductStep1: FC = () => {
   const history = useHistory();
 
   const { data } = useGetProductById(code);
-  const tempProductEdit = useProductWithoutLsStore(
-    (state) => state.tempProductEdit
-  );
-
-  const formik = useFormik<AddProductProps>({
-    initialValues: tempProductEdit?.prd_code ? tempProductEdit : data!,
-    enableReinitialize: true,
-    onSubmit: (values) => {
-      history.push(`/product/edit-2/${code}`);
-    },
-  });
-
   const dispatchProductEdit = useProductWithoutLsStore(
     (state) => state.setTempProductEdit
   );
-  useEffect(() => {
-    dispatchProductEdit(formik.values);
-  }, [formik.values]);
-  console.log(tempProductEdit);
+  const formik = useFormik<AddProductProps>({
+    initialValues: data!,
+    enableReinitialize: true,
+    onSubmit: (values) => {
+      history.push(`/product/edit-2/${code}`);
+
+      dispatchProductEdit(values);
+    },
+  });
+
   if (!formik.values) return <></>;
   return (
     <SetupProduct>
