@@ -1,6 +1,5 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { Fragment } from "react";
-import { useHistory } from "react-router";
 import { Product } from "../types/product";
 
 interface ShowProductProps {

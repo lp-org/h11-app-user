@@ -9,7 +9,7 @@ const SetupProduct: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const { path } = useRouteMatch();
 
-  const [step, setStep] = useState(
+  const [step] = useState(
     path === "/product/add" ? 1 : path === "/product/add-2" ? 2 : 3
   );
   let title = null;

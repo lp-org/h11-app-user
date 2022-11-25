@@ -1,6 +1,6 @@
-import { IonButton } from "@ionic/react";
+import { IonButton, useIonToast } from "@ionic/react";
 import ShowProduct from "components/ShowProduct";
-import { useAddProduct } from "hooks";
+import { useAddProduct } from "hooks/useProduct";
 import { FC } from "react";
 import { useProductStore } from "store";
 import { processNutritionInfoPayload } from "utils";
@@ -9,6 +9,7 @@ import SetupProduct from ".";
 const SetupProductStep3: FC = () => {
   const productPreview = useProductStore((state) => state.tempProductSetup);
   const productAdd = useAddProduct();
+  const [present] = useIonToast();
   return (
     <SetupProduct>
       {productPreview && (
@@ -19,7 +20,11 @@ const SetupProductStep3: FC = () => {
         onClick={() => {
           if (productPreview) {
             productAdd.mutate(processNutritionInfoPayload(productPreview));
-            console.log("success");
+            present({
+              message: "Product have been successfully created!",
+              duration: 1500,
+              position: "top",
+            });
           }
         }}
       >

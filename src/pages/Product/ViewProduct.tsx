@@ -1,9 +1,9 @@
-import { IonContent, IonIcon, IonItem, IonLabel, IonPage } from "@ionic/react";
+import { IonContent, IonIcon, IonItem, IonPage } from "@ionic/react";
 import ShowProduct from "components/ShowProduct";
 import Toolbar from "components/Toolbar.tsx";
 
-import { useGetProductById } from "hooks";
-import { pencil } from "ionicons/icons";
+import { useGetProductById } from "hooks/useProduct";
+
 import { useHistory, useRouteMatch } from "react-router";
 
 interface paramsProps {

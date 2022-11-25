@@ -12,7 +12,7 @@ import ProductBox from "components/ProductBox";
 
 import Toolbar from "components/Toolbar.tsx";
 import { addCircle, scanCircle, personCircle } from "ionicons/icons";
-import { useProductList } from "hooks";
+import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 
 const QuickAccessList = [
@@ -97,11 +97,11 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h1>Recently Added</h1>
+              <h1>Product Batch</h1>
             </IonText>
 
             <IonButton
-              onClick={() => history.push("/product")}
+              onClick={() => history.push("/productBatch")}
               style={{ marginLeft: "auto" }}
               fill="clear"
               size="small"

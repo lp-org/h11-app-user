@@ -10,7 +10,7 @@ import {
   IonIcon,
 } from "@ionic/react";
 import { useFormik } from "formik";
-import { useGetProductById } from "hooks";
+import { useGetProductById } from "hooks/useProduct";
 import { removeCircle } from "ionicons/icons";
 import { FC, Fragment } from "react";
 import { useHistory, useRouteMatch } from "react-router";
@@ -57,7 +57,7 @@ const EditProductStep2: FC = () => {
     enableReinitialize: true,
     onSubmit: (values) => {
       dispatchProductEdit({ ...tempProductEdit!, prd_nutrition_json: values! });
-      alert(JSON.stringify(values, null, 2));
+
       history.push(`/product/edit-3/${code}`);
     },
   });

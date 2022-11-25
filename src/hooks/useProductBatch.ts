@@ -1,16 +1,15 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
 
 import { useHistory } from "react-router";
 import { useProductStore } from "store";
-import { AddProductProps, Product } from "types/product";
+import { AddProductBatchProps, ProductBatch } from "types/productBatch";
 import { request } from "utils/request";
 
-export function useProductList() {
+export function useProductBatchList() {
   return useQuery({
     queryKey: ["products"],
-    queryFn: async (): Promise<Product[]> =>
-      (await request.get("/product/showall")).data.data,
+    queryFn: async (): Promise<ProductBatch[]> =>
+      (await request.get("/product_batch/showall")).data.data,
   });
 }
 
@@ -20,11 +19,11 @@ export function useAddProduct() {
     (state) => state.clearTempProductSetup
   );
   return useMutation(
-    async (payload: AddProductProps) =>
-      await request.post("/product/add", payload),
+    async (payload: AddProductBatchProps) =>
+      await request.post("/product_batch/add", payload),
     {
       onSuccess: () => {
-        history.push("/product");
+        history.push("/productBatch");
         dispatchClearTempProductSetup();
       },
     }
@@ -33,14 +32,16 @@ export function useAddProduct() {
 
 export function useGetProductById(code: string) {
   return useQuery({
-    queryFn: async (): Promise<Product> =>
-      (await request.get(`/product/show/${code}`)).data.data,
+    queryFn: async (): Promise<ProductBatch> =>
+      (await request.get(`/product_batch/show/${code}`)).data.data,
   });
 }
 
-export function useGetProductId() {
+export function useGetProducBatchCodeByProductId(code: string) {
   return useQuery({
     queryFn: async (): Promise<string> =>
-      (await request.get(`/product/getproductcode`)).data.data.New_Product_Code,
+      (await request.get(`/product_batch/getbatchinfo/${code}`)).data.data
+        .New_Product_Code,
+    enabled: !!code,
   });
 }

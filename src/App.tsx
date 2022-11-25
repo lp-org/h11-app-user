@@ -31,7 +31,6 @@ import "./theme/variables.css";
 
 import Product from "pages/Product";
 
-import Tab2 from "pages/ProductBatch";
 import Tab3 from "pages/Tab3";
 import ViewProduct from "pages/Product/ViewProduct";
 
@@ -43,6 +42,8 @@ import SetupProductStep3 from "pages/Product/SetupProduct/SetupProductStep3";
 import EditProductStep1 from "pages/Product/EditProduct/EditProductStep1";
 import EditProductStep2 from "pages/Product/EditProduct/EditProductStep2";
 import EditProductStep3 from "pages/Product/EditProduct/EditProductStep3";
+import ProductBatch from "pages/ProductBatch";
+import SetupProductBatchStep1 from "pages/ProductBatch/SetupProductBatch/SetupProductBatchStep1";
 
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
@@ -65,14 +66,17 @@ const App: React.FC = () => {
             <Route path="/product/edit/:code" component={EditProductStep1} />
             <Route path="/product/edit-2/:code" component={EditProductStep2} />
             <Route path="/product/edit-3/:code" component={EditProductStep3} />
-            {/* <Route path="/product/edit/:id">
-         
-          </Route> */}
 
             {/* Product Batch */}
-            <Route exact path="/tab2">
-              <Tab2 />
-            </Route>
+            <Route exact path="/productBatch" component={ProductBatch} />
+            <Route
+              path="/productBatch/add"
+              component={SetupProductBatchStep1}
+            />
+            <Route
+              path="/productBatch/add-2"
+              component={SetupProductBatchStep1}
+            />
             <Route path="/tab3">
               <Tab3 />
             </Route>

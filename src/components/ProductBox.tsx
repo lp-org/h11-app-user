@@ -9,7 +9,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
   const history = useHistory();
   return (
     <div
-      onClick={() => history.push("/")}
+      onClick={() => history.push(`/product/${item.prd_code}`)}
       style={{
         borderColor: "#999999",
         border: "solid 1px",

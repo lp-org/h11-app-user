@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   IonRow,
   IonCol,
@@ -32,13 +33,11 @@ const templatePayload = {
 const SetupProductStep2: FC = () => {
   const history = useHistory();
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
-  // const [initialValues, setInitialValues] = useState(templatePayload);
-  console.log(tempProductSetup);
+
   const formik = useFormik<any>({
     initialValues: tempProductSetup?.prd_nutrition_json || templatePayload,
     enableReinitialize: true,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       history.push("/product/add-3");
     },
   });

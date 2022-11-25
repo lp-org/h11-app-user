@@ -8,7 +8,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import { useFormik } from "formik";
-import { useGetProductById } from "hooks";
+import { useGetProductById } from "hooks/useProduct";
 import { FC } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store";

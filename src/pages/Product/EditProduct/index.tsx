@@ -9,7 +9,7 @@ const SetupProduct: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const { path } = useRouteMatch();
 
-  const [step, setStep] = useState(
+  const [step] = useState(
     path === "/product/edit/:code"
       ? 1
       : path === "/product/edit-2/:code"

@@ -275,3 +275,7 @@ ion-item {
   --height: 100%;
   /* --padding-right: 0px; */
 }
+
+ion-searchbar input {
+  --border-radius: 35px;
+}

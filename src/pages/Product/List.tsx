@@ -7,12 +7,15 @@ import {
   IonLabel,
   IonList,
   IonPage,
+  IonSearchbar,
+  IonSegment,
+  IonSegmentButton,
 } from "@ionic/react";
 
 import Toolbar from "components/Toolbar.tsx";
 import { add } from "ionicons/icons";
 
-import { useProductList } from "hooks";
+import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 
 const ProductList: React.FC = () => {
@@ -22,8 +25,21 @@ const ProductList: React.FC = () => {
   return (
     <IonPage>
       <Toolbar title="Product" defaultHref="/" />
+
       <IonContent fullscreen>
+        <IonSegment value="default">
+          <IonSegmentButton value="default">
+            <IonLabel className="ion-text-capitalize">Active Products</IonLabel>
+          </IonSegmentButton>
+          <IonSegmentButton value="segment">
+            <IonLabel className="ion-text-capitalize">
+              Archived Products
+            </IonLabel>
+          </IonSegmentButton>
+        </IonSegment>
+
         <IonList lines="full" className="ion-padding">
+          <IonSearchbar />
           {products?.map((product) => (
             <IonItem>
               <img
@@ -38,7 +54,7 @@ const ProductList: React.FC = () => {
                 <div>Category: {product.prd_code} </div>
                 <div>Type: {product.prd_code} </div>
                 <div>Flavour: {product.prd_flavour} </div>
-                <div> Information: {product.prd_code} </div>
+                <div>Information: {product.prd_code} </div>
               </IonLabel>
             </IonItem>
           ))}

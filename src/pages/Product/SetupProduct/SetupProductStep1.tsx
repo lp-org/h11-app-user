@@ -8,7 +8,7 @@ import {
   IonButton,
 } from "@ionic/react";
 import { useFormik } from "formik";
-import { useGetProductId } from "hooks";
+import { useGetProductId } from "hooks/useProduct";
 import { FC, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store";
@@ -37,7 +37,6 @@ const SetupProductStep1: FC = () => {
         },
     enableReinitialize: true,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
       history.push("/product/add-2");
     },
   });
@@ -46,7 +45,6 @@ const SetupProductStep1: FC = () => {
     (state) => state.setTempProductSetup
   );
   useEffect(() => {
-    console.log(formik.values);
     dispatchProductSetup(formik.values);
   }, [formik.values]);
   return (
