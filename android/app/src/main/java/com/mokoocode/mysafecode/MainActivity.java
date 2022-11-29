@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.mokoocode.mysafecode;
 
 import com.getcapacitor.BridgeActivity;
 

@@ -1,8 +1,8 @@
 import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "io.ionic.starter",
-  appName: "h11-app",
+  appId: "com.mokoocode.mysafecode",
+  appName: "MySafeCode",
   webDir: "build",
   bundledWebRuntime: false,
 };

@@ -5,6 +5,12 @@ import { useProductStore } from "store";
 import { AddProductBatchProps, ProductBatch } from "types/productBatch";
 import { request } from "utils/request";
 
+interface ProductBatchInfo {
+  pbth_code: string;
+  pbth_expiry_date: string;
+  pbth_manufactured_date: string;
+}
+
 export function useProductBatchList() {
   return useQuery({
     queryKey: ["products"],
@@ -39,9 +45,9 @@ export function useGetProductById(code: string) {
 
 export function useGetProducBatchCodeByProductId(code: string) {
   return useQuery({
-    queryFn: async (): Promise<string> =>
-      (await request.get(`/product_batch/getbatchinfo/${code}`)).data.data
-        .New_Product_Code,
+    queryKey: ["productBatchId", code],
+    queryFn: async (): Promise<ProductBatchInfo> =>
+      (await request.get(`/product_batch/getbatchinfo/${code}`)).data.data,
     enabled: !!code,
   });
 }
