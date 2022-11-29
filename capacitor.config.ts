@@ -5,6 +5,9 @@ const config: CapacitorConfig = {
   appName: "MySafeCodeMerchant",
   webDir: "build",
   bundledWebRuntime: false,
+  server: {
+    cleartext: true,
+  },
 };
 
 export default config;
