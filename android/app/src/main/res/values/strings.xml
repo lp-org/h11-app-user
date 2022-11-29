@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MySafeCode</string>
-    <string name="title_activity_main">MySafeCode</string>
-    <string name="package_name">com.mokoocode.mysafecode</string>
-    <string name="custom_url_scheme">com.mokoocode.mysafecode</string>
+    <string name="app_name">MySafeCodeMerchant</string>
+    <string name="title_activity_main">MySafeCodeMerchant</string>
+    <string name="package_name">com.mokoocode.mysafecodemerchant</string>
+    <string name="custom_url_scheme">com.mokoocode.mysafecodemerchant</string>
 </resources>
