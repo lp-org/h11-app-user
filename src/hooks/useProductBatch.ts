@@ -4,6 +4,7 @@ import { useHistory } from "react-router";
 import { useProductStore } from "store";
 import { AddProductBatchProps, ProductBatch } from "types/productBatch";
 import { request } from "utils/request";
+import { usePopUpMessage } from "./notification";
 
 interface ProductBatchInfo {
   pbth_code: string;
@@ -13,30 +14,35 @@ interface ProductBatchInfo {
 
 export function useProductBatchList() {
   return useQuery({
-    queryKey: ["products"],
+    queryKey: ["productBatchList"],
     queryFn: async (): Promise<ProductBatch[]> =>
       (await request.get("/product_batch/showall")).data.data,
   });
 }
 
-export function useAddProduct() {
+export function useAddProductBatch() {
   const history = useHistory();
-  const dispatchClearTempProductSetup = useProductStore(
-    (state) => state.clearTempProductSetup
-  );
+  const popUpMsg = usePopUpMessage();
   return useMutation(
-    async (payload: AddProductBatchProps) =>
-      await request.post("/product_batch/add", payload),
+    async (payload: AddProductBatchProps) => {
+      const res = await request.post("/product_batch/add", payload);
+      if (res.data.code === 200) {
+        popUpMsg("Product batch have been successfully created!", "success");
+        return res;
+      } else {
+        popUpMsg(res.data.message, "error");
+        throw new Error(res.data.message);
+      }
+    },
     {
       onSuccess: () => {
-        history.push("/productBatch");
-        dispatchClearTempProductSetup();
+        history.replace("/productBatch");
       },
     }
   );
 }
 
-export function useGetProductById(code: string) {
+export function useGetProductBatchById(code: string) {
   return useQuery({
     queryFn: async (): Promise<ProductBatch> =>
       (await request.get(`/product_batch/show/${code}`)).data.data,

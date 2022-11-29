@@ -67,8 +67,8 @@ const EditProductStep2: FC = () => {
       <IonRow>
         {formik.values && (
           <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
-            {Object.entries(formik.values).map(([key]) => (
-              <Fragment>
+            {Object.entries(formik.values).map(([key], i) => (
+              <Fragment key={i}>
                 {key !== SERVING && (
                   <IonCol size="12">
                     <IonLabel position="floating" className="required ">
@@ -88,7 +88,7 @@ const EditProductStep2: FC = () => {
             ))}
 
             {formik.values[SERVING].map((servingVal: any, index: number) => (
-              <Fragment>
+              <Fragment key={index}>
                 <hr />
                 <IonCol size="12">
                   <IonLabel position="floating">

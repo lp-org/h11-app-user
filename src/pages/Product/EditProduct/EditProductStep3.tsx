@@ -16,6 +16,7 @@ const EditProductStep3: FC = () => {
       {productPreview && <ShowProduct item={productPreview} />}
 
       <IonButton
+        expand="full"
         onClick={() => {
           if (productPreview) {
             productAdd.mutate({

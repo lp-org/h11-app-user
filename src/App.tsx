@@ -44,6 +44,11 @@ import EditProductStep2 from "pages/Product/EditProduct/EditProductStep2";
 import EditProductStep3 from "pages/Product/EditProduct/EditProductStep3";
 import ProductBatch from "pages/ProductBatch";
 import SetupProductBatchStep1 from "pages/ProductBatch/SetupProductBatch/SetupProductBatchStep1";
+import SetupProductBatchStep2 from "pages/ProductBatch/SetupProductBatch/SetupProductBatchStep2";
+import ViewProductBatch from "pages/Product/ViewProductBatch";
+import QrCode from "pages/QrCode";
+import PrintQrCode from "pages/QrCode/PrintQrCode";
+import ViewQrCodeHistory from "pages/QrCode/ViewQrCodeHistory";
 
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
@@ -66,6 +71,7 @@ const App: React.FC = () => {
             <Route path="/product/edit/:code" component={EditProductStep1} />
             <Route path="/product/edit-2/:code" component={EditProductStep2} />
             <Route path="/product/edit-3/:code" component={EditProductStep3} />
+            <Route path="/productBatch/:code" component={ViewProductBatch} />
 
             {/* Product Batch */}
             <Route exact path="/productBatch" component={ProductBatch} />
@@ -75,8 +81,18 @@ const App: React.FC = () => {
             />
             <Route
               path="/productBatch/add-2"
-              component={SetupProductBatchStep1}
+              component={SetupProductBatchStep2}
             />
+
+            {/* QR code */}
+            <Route exact path="/qrcode" component={QrCode} />
+            <Route exact path="/qrcode/:batchCode" component={PrintQrCode} />
+            <Route
+              exact
+              path="/qrcodeHistory/:code"
+              component={ViewQrCodeHistory}
+            />
+
             <Route path="/tab3">
               <Tab3 />
             </Route>

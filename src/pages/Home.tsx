@@ -15,6 +15,8 @@ import Toolbar from "components/Toolbar.tsx";
 import { addCircle, scanCircle, personCircle } from "ionicons/icons";
 import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
+import { useProductBatchList } from "hooks/useProductBatch";
+import ProductBatchBox from "components/ProductBatchBox";
 
 const QuickAccessList = [
   { title: "Add New Product", path: "/product/add", icon: addCircle },
@@ -24,6 +26,7 @@ const QuickAccessList = [
 
 const Home: React.FC = () => {
   const { data: products } = useProductList();
+  const { data: productBatch } = useProductBatchList();
   const history = useHistory();
 
   return (
@@ -100,6 +103,8 @@ const Home: React.FC = () => {
             ))}
           </IonRow>
         </IonGrid>
+
+        {/* Product Batch */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
@@ -122,9 +127,9 @@ const Home: React.FC = () => {
               overflowY: "hidden",
             }}
           >
-            {products?.map((product, i) => (
+            {productBatch?.map((productBatch, i) => (
               <IonCol key={i}>
-                <ProductBox item={product} />
+                <ProductBatchBox item={productBatch} />
               </IonCol>
             ))}
           </IonRow>

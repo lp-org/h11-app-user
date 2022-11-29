@@ -34,6 +34,7 @@ const SetupProductBatchStep1: FC = () => {
   };
   const formik = useFormik<AddProductBatchProps>({
     initialValues: {
+      pbth_name: "",
       pbth_code: "",
       pbth_expiry_date: "",
       pbth_manufactured_date: "",
@@ -42,10 +43,13 @@ const SetupProductBatchStep1: FC = () => {
     enableReinitialize: true,
     validationSchema: ProductBatchAddSchema,
     onSubmit: (values) => {
-      console.log(values);
-      // history.push("/product/add-2");
+      history.push({
+        pathname: "/productBatch/add-2",
+        state: { values },
+      });
     },
   });
+
   const { data: productList } = useProductList();
 
   const { data: selectedProductBatch } = useGetProducBatchCodeByProductId(
@@ -54,26 +58,45 @@ const SetupProductBatchStep1: FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Product Batch Setup" defaultHref="/product" />
+      <Toolbar title="Product Batch Setup" defaultHref="/productBatch" />
       <IonContent fullscreen className="ion-padding">
         <IonRow>
+          <IonCol size="12" className="ion-margin-bottom">
+            <IonLabel>
+              <b>Product Batch Information Setup</b>
+            </IonLabel>
+          </IonCol>
           <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
             <IonCol size="12">
               <IonLabel position="fixed" className="required">
                 Select Product:
               </IonLabel>
+              <IonSelect
+                hidden
+                name="pbth_name"
+                onBlur={() => formik.setFieldTouched("pbth_name", true)}
+              ></IonSelect>
               <IonItem fill="outline" className="ion-margin-bottom ion-invalid">
                 <IonSelect
-                  name="pbth_prd_code"
-                  onIonChange={(e) =>
-                    formik.setFieldValue("pbth_prd_code", e.target.value)
-                  }
+                  onIonChange={(e) => {
+                    formik.setFieldValue("pbth_prd_code", e.target.value);
+                    formik.setFieldValue(
+                      "pbth_name",
+                      productList?.find((el) => el.prd_code === e.target.value)
+                        ?.prd_name
+                    );
+                  }}
                 >
                   {productList?.map((product) => (
-                    <IonSelectOption value={product.prd_code}>
+                    <IonSelectOption
+                      key={product.prd_code}
+                      value={product.prd_code}
+                      aria-label={product.prd_name}
+                    >
                       {product.prd_name}
                     </IonSelectOption>
                   ))}
+                  <>{formik.values.pbth_name}</>
                 </IonSelect>
                 <IonNote slot="error">
                   {formik.errors.pbth_prd_code
@@ -88,28 +111,24 @@ const SetupProductBatchStep1: FC = () => {
                 <IonInput
                   disabled
                   placeholder="Product ID will be auto filled once product is selected"
-                  name="prd_name"
+                  name="pbth_prd_code"
                   onIonChange={formik.handleChange}
                   value={formik.values.pbth_prd_code}
                 ></IonInput>
               </IonItem>
             </IonCol>
-
             <IonCol size="12">
               <IonLabel position="stacked">Product Batch ID:</IonLabel>
               <IonItem fill="outline" className="ion-margin-bottom">
                 <IonInput
                   disabled
+                  name="pbth_code"
                   placeholder="Batch ID will be auto generated"
-                  name="prd_category"
-                  onIonChange={handleDateChange}
-                  value={
-                    formik.values.pbth_code || selectedProductBatch?.pbth_code
-                  }
+                  onIonChange={formik.handleChange}
+                  value={selectedProductBatch?.pbth_code}
                 ></IonInput>
               </IonItem>
             </IonCol>
-
             <IonCol size="12">
               <IonLabel position="stacked" className="required">
                 Manufactured Date:
@@ -131,12 +150,12 @@ const SetupProductBatchStep1: FC = () => {
                         selectedProductBatch?.pbth_manufactured_date
                       ).format("YYYY-MM-DDTHH:mmZ")
                     }
+                    max={dayjs().add(100, "years").year().toString()}
                     onIonChange={handleDateChange}
                   ></IonDatetime>
                 </IonModal>
               </IonItem>
             </IonCol>
-
             <IonCol size="12">
               <IonLabel position="stacked" className="required">
                 Expiry Date:
@@ -155,12 +174,12 @@ const SetupProductBatchStep1: FC = () => {
                         "YYYY-MM-DDTHH:mmZ"
                       )
                     }
+                    max={dayjs().add(100, "years").year().toString()}
                     onIonChange={handleDateChange}
                   ></IonDatetime>
                 </IonModal>
               </IonItem>
             </IonCol>
-
             <IonButton type="submit" expand="block" class="ion-margin-top">
               Next
             </IonButton>

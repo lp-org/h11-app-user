@@ -9,7 +9,7 @@ import SetupProduct from ".";
 const SetupProductStep3: FC = () => {
   const productPreview = useProductStore((state) => state.tempProductSetup);
   const productAdd = useAddProduct();
-  const [present] = useIonToast();
+
   return (
     <SetupProduct>
       {productPreview && (
@@ -20,11 +20,6 @@ const SetupProductStep3: FC = () => {
         onClick={() => {
           if (productPreview) {
             productAdd.mutate(processNutritionInfoPayload(productPreview));
-            present({
-              message: "Product have been successfully created!",
-              duration: 1500,
-              position: "top",
-            });
           }
         }}
       >

@@ -28,11 +28,14 @@ const ProductBatch: React.FC = () => {
         <IonList lines="full" className="ion-padding">
           <IonSearchbar />
           {products?.map((product) => (
-            <IonItem>
+            <IonItem key={product.pbth_code}>
               <IonLabel
-                onClick={() => history.push(`/product/${product.pbth_code}`)}
+                onClick={() =>
+                  history.push(`/productBatch/${product.pbth_code}`)
+                }
               >
                 <b>Batch ID: {product.pbth_code} </b>
+                <div>Product ID: {product.pbth_prd_code} </div>
                 <div>Product Name: {product.pbth_prd_code} </div>
                 <div>Manufactured Date: {product.pbth_manufactured_date} </div>
                 <div>Expiry Date: {product.pbth_expiry_date} </div>

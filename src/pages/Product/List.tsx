@@ -41,7 +41,7 @@ const ProductList: React.FC = () => {
         <IonList lines="full" className="ion-padding">
           <IonSearchbar />
           {products?.map((product) => (
-            <IonItem>
+            <IonItem key={product.prd_code}>
               <img
                 alt="Silhouette of mountains"
                 src={"/assets/products/chip.png"}
@@ -54,7 +54,7 @@ const ProductList: React.FC = () => {
                 <div>Category: {product.prd_code} </div>
                 <div>Type: {product.prd_code} </div>
                 <div>Flavour: {product.prd_flavour} </div>
-                <div>Information: {product.prd_code} </div>
+                <div>Batch Information: {product.prd_code} </div>
               </IonLabel>
             </IonItem>
           ))}

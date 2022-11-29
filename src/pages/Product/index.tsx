@@ -31,9 +31,7 @@ const Products: React.FC = () => {
             <IonIcon icon={chevronForward} />
           </IonItem>
           <IonItem>
-            <IonLabel onClick={() => history.push("/productQrCode")}>
-              QR Code
-            </IonLabel>
+            <IonLabel onClick={() => history.push("/qrcode")}>QR Code</IonLabel>
             <IonIcon icon={chevronForward} />
           </IonItem>
         </IonList>
