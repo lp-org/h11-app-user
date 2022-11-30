@@ -23,10 +23,6 @@ const ViewQrCodeHistory: React.FC = () => {
 
       <IonContent fullscreen className="ion-padding">
         {data && <ShowQrHistoryInfo item={data} />}
-        <IonRow>
-          <IonCol size="12">Print Count</IonCol>
-          <IonCol className="ion-margin-start ion-margin-bottom">111</IonCol>
-        </IonRow>
       </IonContent>
     </IonPage>
   );

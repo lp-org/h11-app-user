@@ -71,7 +71,7 @@ const EditProductStep2: FC = () => {
               <Fragment key={i}>
                 {key !== SERVING && (
                   <IonCol size="12">
-                    <IonLabel position="floating" className="required ">
+                    <IonLabel position="floating">
                       {key.replace(/_/g, " ")}:
                     </IonLabel>
                     <IonItem fill="outline" className="ion-margin-bottom">
@@ -93,9 +93,7 @@ const EditProductStep2: FC = () => {
                 <IonCol size="12">
                   <IonLabel position="floating">
                     <IonRow>
-                      <div className="required">
-                        Nutrition Fact Type {index + 1}:
-                      </div>
+                      <div>Nutrition Fact Type {index + 1}:</div>
                       <IonIcon
                         style={{
                           marginLeft: "auto",
@@ -124,7 +122,7 @@ const EditProductStep2: FC = () => {
                   </IonItem>
                 </IonCol>
                 <IonCol size="12">
-                  <IonLabel position="floating" className="required">
+                  <IonLabel position="floating">
                     {SERVING.replace(/_/g, " ")}:
                   </IonLabel>
                   <IonItem

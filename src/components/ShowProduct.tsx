@@ -1,4 +1,4 @@
-import { IonCol, IonGrid, IonRow } from "@ionic/react";
+import { IonCol, IonGrid, IonImg, IonRow } from "@ionic/react";
 import { Fragment } from "react";
 import { Product } from "../types/product";
 
@@ -11,7 +11,7 @@ const ShowProduct: React.FC<ShowProductProps> = ({ item }) => {
     <Fragment>
       <IonGrid>
         <IonRow style={{ justifyContent: "center" }}>
-          <img alt="Food" src={"/assets/products/chip.png"} />
+          {item?.prd_image && <IonImg alt="foodimage" src={item?.prd_image} />}
         </IonRow>
         <IonRow>
           <IonCol size="4">Product ID:</IonCol>
@@ -51,7 +51,6 @@ const ShowProduct: React.FC<ShowProductProps> = ({ item }) => {
 
         <IonRow>
           <div>
-            {" "}
             <pre>{JSON.stringify(item?.prd_nutrition_json, null, 2)}</pre>
           </div>
           <hr />

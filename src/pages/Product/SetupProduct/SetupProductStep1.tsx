@@ -6,19 +6,35 @@ import {
   IonInput,
   IonTextarea,
   IonButton,
+  IonIcon,
+  IonImg,
 } from "@ionic/react";
 import { useFormik } from "formik";
 import { useGetProductId } from "hooks/useProduct";
+import { cloudUpload } from "ionicons/icons";
 import { FC, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store";
 import { AddProductProps } from "types/product";
 import SetupProduct from ".";
-
+import { Camera, CameraResultType } from "@capacitor/camera";
 const SetupProductStep1: FC = () => {
   const history = useHistory();
   const { data: productId } = useGetProductId();
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
+
+  const takePicture = async () => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+    });
+    var imageUrl = image.webPath;
+
+    if (imageUrl) {
+      formik.setFieldValue("prd_image", imageUrl);
+    }
+  };
 
   const formik = useFormik<AddProductProps>({
     initialValues: tempProductSetup
@@ -34,6 +50,7 @@ const SetupProductStep1: FC = () => {
           prd_storage_instructions: "",
           prd_category: "",
           prd_type: "",
+          prd_image: "",
         },
     enableReinitialize: true,
     onSubmit: (values) => {
@@ -63,9 +80,7 @@ const SetupProductStep1: FC = () => {
             </IonItem>
           </IonCol>
           <IonCol size="12">
-            <IonLabel className="required" position="fixed">
-              Product Name
-            </IonLabel>
+            <IonLabel position="fixed">Product Name</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -78,9 +93,7 @@ const SetupProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Product Category
-            </IonLabel>
+            <IonLabel position="stacked">Product Category</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -93,9 +106,7 @@ const SetupProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Flavour
-            </IonLabel>
+            <IonLabel position="stacked">Flavour</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -108,9 +119,7 @@ const SetupProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Storage Instructions:{" "}
-            </IonLabel>
+            <IonLabel position="stacked">Storage Instructions: </IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -123,9 +132,7 @@ const SetupProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Ingredients
-            </IonLabel>
+            <IonLabel position="stacked">Ingredients</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -138,9 +145,7 @@ const SetupProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Expiry Period
-            </IonLabel>
+            <IonLabel position="stacked">Expiry Period</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -154,9 +159,7 @@ const SetupProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              How to keep product fresh:
-            </IonLabel>
+            <IonLabel position="stacked">How to keep product fresh:</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonTextarea
                 required
@@ -167,6 +170,17 @@ const SetupProductStep1: FC = () => {
               ></IonTextarea>
             </IonItem>
           </IonCol>
+
+          <IonCol size="12">
+            <IonButton onClick={() => takePicture()} color="gray">
+              <IonIcon icon={cloudUpload} className="ion-margin-end" />
+              Upload Product Photo
+            </IonButton>
+            {formik.values.prd_image && (
+              <IonImg src={formik.values.prd_image}></IonImg>
+            )}
+          </IonCol>
+
           <IonButton type="submit" expand="block" class="ion-margin-top">
             Next
           </IonButton>

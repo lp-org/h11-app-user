@@ -28,11 +28,10 @@ const EditProductStep1: FC = () => {
     (state) => state.setTempProductEdit
   );
   const formik = useFormik<AddProductProps>({
-    initialValues: data!,
+    initialValues: { ...data! },
     enableReinitialize: true,
     onSubmit: (values) => {
       history.push(`/product/edit-2/${code}`);
-
       dispatchProductEdit(values);
     },
   });
@@ -54,9 +53,7 @@ const EditProductStep1: FC = () => {
             </IonItem>
           </IonCol>
           <IonCol size="12">
-            <IonLabel className="required" position="fixed">
-              Product Name
-            </IonLabel>
+            <IonLabel position="fixed">Product Name</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -69,9 +66,7 @@ const EditProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Product Category
-            </IonLabel>
+            <IonLabel position="stacked">Product Category</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -84,9 +79,7 @@ const EditProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Flavour
-            </IonLabel>
+            <IonLabel position="stacked">Flavour</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -99,9 +92,7 @@ const EditProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Storage Instructions:{" "}
-            </IonLabel>
+            <IonLabel position="stacked">Storage Instructions: </IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -114,9 +105,7 @@ const EditProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Ingredients
-            </IonLabel>
+            <IonLabel position="stacked">Ingredients</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -129,9 +118,7 @@ const EditProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              Expiry Period
-            </IonLabel>
+            <IonLabel position="stacked">Expiry Period</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonInput
                 required
@@ -145,9 +132,7 @@ const EditProductStep1: FC = () => {
           </IonCol>
 
           <IonCol size="12">
-            <IonLabel position="stacked" className="required">
-              How to keep product fresh:
-            </IonLabel>
+            <IonLabel position="stacked">How to keep product fresh:</IonLabel>
             <IonItem fill="outline" className="ion-margin-bottom">
               <IonTextarea
                 required

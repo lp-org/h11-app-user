@@ -31,7 +31,6 @@ import "./theme/variables.css";
 
 import Product from "pages/Product";
 
-import Tab3 from "pages/Tab3";
 import ViewProduct from "pages/Product/ViewProduct";
 
 import Home from "pages/Home";
@@ -49,6 +48,15 @@ import ViewProductBatch from "pages/Product/ViewProductBatch";
 import QrCode from "pages/QrCode";
 import PrintQrCode from "pages/QrCode/PrintQrCode";
 import ViewQrCodeHistory from "pages/QrCode/ViewQrCodeHistory";
+import {
+  fastFoodOutline,
+  homeOutline,
+  personOutline,
+  scanOutline,
+} from "ionicons/icons";
+
+import MyScan from "pages/MyScan";
+import ScanProductInformation from "pages/MyScan/ScanProductInformation";
 
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
@@ -92,24 +100,25 @@ const App: React.FC = () => {
               path="/qrcodeHistory/:code"
               component={ViewQrCodeHistory}
             />
-
-            <Route path="/tab3">
-              <Tab3 />
-            </Route>
+            {/* My Scan  */}
+            <Route path="/scan" component={MyScan} />
+            <Route
+              path="/scanProductInformation"
+              component={ScanProductInformation}
+            />
           </IonRouterOutlet>
           <IonTabBar slot="bottom" color="primary">
             <IonTabButton tab="tab1" href="/">
-              <IonIcon src="/assets/icon/home.svg" />
+              <IonIcon icon={homeOutline} />
             </IonTabButton>
             <IonTabButton tab="tab2" href="/manageProduct">
-              <IonIcon src="/assets/icon/food.svg" />
-              {/* <img alt="food" src="/assets/icon/healthy-food 1.svg" /> */}
+              <IonIcon icon={fastFoodOutline} />
             </IonTabButton>
-            <IonTabButton tab="tab3" href="/history">
-              <IonIcon src="/assets/icon/history.svg" />
+            <IonTabButton tab="tab3" href="/scan">
+              <IonIcon icon={scanOutline} />
             </IonTabButton>
-            <IonTabButton tab="tab3" href="/profile">
-              <IonIcon src="/assets/icon/union.svg" />
+            <IonTabButton tab="tab4" href="/profile">
+              <IonIcon src={personOutline} />
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

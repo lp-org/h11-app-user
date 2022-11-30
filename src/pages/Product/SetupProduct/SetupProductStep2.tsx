@@ -63,6 +63,7 @@ const SetupProductStep2: FC = () => {
             prd_nutrition_json: "",
             prd_storage_instructions: "",
             prd_type: "",
+            prd_image: "",
           }
     );
   }, [formik.values]);
@@ -80,7 +81,7 @@ const SetupProductStep2: FC = () => {
             <Fragment>
               {key !== "Serving" ? (
                 <IonCol size="12">
-                  <IonLabel position="floating" className="required ">
+                  <IonLabel position="floating">
                     {key.replace(/_/g, " ")}:
                   </IonLabel>
                   <IonItem fill="outline" className="ion-margin-bottom">
@@ -100,9 +101,7 @@ const SetupProductStep2: FC = () => {
                       <IonCol size="12">
                         <IonLabel position="floating">
                           <IonRow>
-                            <div className="required">
-                              Nutrition Fact Type {index + 1}:
-                            </div>
+                            <div>Nutrition Fact Type {index + 1}:</div>
                             <IonIcon
                               style={{
                                 marginLeft: "auto",
@@ -131,7 +130,7 @@ const SetupProductStep2: FC = () => {
                         </IonItem>
                       </IonCol>
                       <IonCol size="12">
-                        <IonLabel position="floating" className="required">
+                        <IonLabel position="floating">
                           {key.replace(/_/g, " ")}:
                         </IonLabel>
                         <IonItem

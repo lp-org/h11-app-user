@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useScanHistoryStore } from "store/useScanHistoryStore";
 import { request } from "utils/request";
 
 export interface QrInfo {
@@ -10,6 +11,12 @@ export interface QrInfo {
   bc_pbth_code: string;
   bc_pbth_manufactured_date: string;
   bc_pbth_expiry_date: string;
+  bc_prd_image: string;
+  bc_prd_category: string;
+  bc_prd_type: string;
+  bc_prd_instruction: string;
+  bc_prd_keep_it_fresh: string;
+  bc_nutrition_json: string;
 }
 
 export interface BlockchainQrInfo extends QrInfo {
@@ -51,5 +58,26 @@ export function useGetQrInfoByBatchId(code: string) {
   return useQuery({
     queryFn: async (): Promise<QrInfo> =>
       (await request.get(`/blockchain/getqrinfo/${code}`)).data.data,
+  });
+}
+
+export function useScanResult(code: string) {
+  const dispatchAddScanHistory = useScanHistoryStore(
+    (state) => state.addScanHistory
+  );
+  return useQuery({
+    queryKey: ["scanResult", code],
+    queryFn: async (): Promise<QrInfo | null> => {
+      if (code) {
+        const { data } = (await request.get(`/blockchain/verify/${code}`)).data;
+
+        return data;
+      }
+      return null;
+    },
+    onSuccess: (data) => {
+      if (data) dispatchAddScanHistory(data);
+    },
+    enabled: !!code,
   });
 }

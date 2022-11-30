@@ -9,6 +9,7 @@ export type Product = {
   prd_keep_it_fresh: string;
   prd_expiry_period: number | null;
   prd_nutrition_json: any | null;
+  prd_image: string | null;
 };
 
 export type AddProductProps = {
@@ -22,4 +23,5 @@ export type AddProductProps = {
   prd_keep_it_fresh: string;
   prd_expiry_period: number | null;
   prd_nutrition_json: any | null;
+  prd_image: string | null;
 };

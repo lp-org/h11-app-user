@@ -68,9 +68,7 @@ const SetupProductBatchStep1: FC = () => {
           </IonCol>
           <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
             <IonCol size="12">
-              <IonLabel position="fixed" className="required">
-                Select Product:
-              </IonLabel>
+              <IonLabel position="fixed">Select Product:</IonLabel>
               <IonSelect
                 hidden
                 name="pbth_name"
@@ -130,9 +128,7 @@ const SetupProductBatchStep1: FC = () => {
               </IonItem>
             </IonCol>
             <IonCol size="12">
-              <IonLabel position="stacked" className="required">
-                Manufactured Date:
-              </IonLabel>
+              <IonLabel position="stacked">Manufactured Date:</IonLabel>
               <IonItem fill="outline" className="ion-margin-bottom">
                 <IonDatetimeButton
                   datetime="pbth_manufactured_date"
@@ -157,9 +153,7 @@ const SetupProductBatchStep1: FC = () => {
               </IonItem>
             </IonCol>
             <IonCol size="12">
-              <IonLabel position="stacked" className="required">
-                Expiry Date:
-              </IonLabel>
+              <IonLabel position="stacked">Expiry Date:</IonLabel>
               <IonItem fill="outline" className="ion-margin-bottom">
                 <IonDatetimeButton datetime="pbth_expiry_date"></IonDatetimeButton>
 

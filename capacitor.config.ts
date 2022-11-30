@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
   webDir: "build",
   bundledWebRuntime: false,
   server: {
-    cleartext: true,
+    url: "http://localhost:8100", // if u wan to debug on real device (live reload)
   },
 };
 

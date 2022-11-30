@@ -23,9 +23,13 @@ const QrCode: React.FC = () => {
   const [tab, setTab] = useState("1");
   return (
     <IonPage>
-      <Toolbar title="Product Batch" defaultHref="/" />
+      <Toolbar title="QR Code" defaultHref="/" />
 
       <IonContent fullscreen>
+        <IonItem lines="none">
+          <b>Select The Batch to Print</b>
+        </IonItem>
+
         <IonSegment value={tab} onIonChange={(e) => setTab(e.target.value!)}>
           <IonSegmentButton value="1">
             <IonLabel className="ion-text-capitalize">
