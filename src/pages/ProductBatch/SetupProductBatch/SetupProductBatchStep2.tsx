@@ -1,11 +1,4 @@
-import {
-  IonRow,
-  IonContent,
-  IonPage,
-  IonCol,
-  IonLabel,
-  IonButton,
-} from "@ionic/react";
+import { IonContent, IonPage, IonCol, IonLabel, IonButton } from "@ionic/react";
 import ShowProductBatch from "components/ShowProductBatch";
 import Toolbar from "components/Toolbar.tsx";
 

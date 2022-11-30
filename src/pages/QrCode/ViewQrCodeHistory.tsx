@@ -1,14 +1,9 @@
-import { IonButton, IonCol, IonContent, IonPage, IonRow } from "@ionic/react";
+import { IonCol, IonContent, IonPage, IonRow } from "@ionic/react";
 import ShowQrHistoryInfo from "components/ShowQrHistoryInfo";
 
-import ShowQrInfo from "components/ShowQrInfo";
 import Toolbar from "components/Toolbar.tsx";
 
-import {
-  useAddBlockchainInfo,
-  useGetBlockchainInfo,
-  useGetQrInfoByBatchId,
-} from "hooks/useQrCode";
+import { useGetBlockchainInfo } from "hooks/useQrCode";
 
 import { useRouteMatch } from "react-router";
 
@@ -20,7 +15,7 @@ const ViewQrCodeHistory: React.FC = () => {
   const match = useRouteMatch<paramsProps>();
 
   const { code } = match.params;
-  const addBlockchainInfo = useAddBlockchainInfo();
+
   const { data } = useGetBlockchainInfo(code);
   return (
     <IonPage>

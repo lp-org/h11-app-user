@@ -1,8 +1,5 @@
 import {
   IonContent,
-  IonFab,
-  IonFabButton,
-  IonIcon,
   IonItem,
   IonLabel,
   IonList,

@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import { useHistory } from "react-router";
 import { ProductBatch } from "types/productBatch";
-import { Product } from "../types/product";
 
 interface ProductBatchBoxProps {
   item: ProductBatch;

@@ -1,5 +1,5 @@
 import { IonButton, IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
-import { BlockchainQrInfo, QrInfo } from "hooks/useQrCode";
+import { BlockchainQrInfo } from "hooks/useQrCode";
 import { Fragment } from "react";
 
 interface ShowQrHistoryInfoProps {
