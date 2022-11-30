@@ -17,7 +17,6 @@ import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 import { useProductBatchList } from "hooks/useProductBatch";
 import ProductBatchBox from "components/ProductBatchBox";
-import { useTestRequest } from "utils/request";
 
 const QuickAccessList = [
   { title: "Add New Product", path: "/product/add", icon: addCircle },
@@ -29,7 +28,7 @@ const Home: React.FC = () => {
   const { data: products } = useProductList();
   const { data: productBatch } = useProductBatchList();
   const history = useHistory();
-  const testRes = useTestRequest();
+
   return (
     <IonPage>
       <Toolbar title="My Home" />
@@ -135,9 +134,6 @@ const Home: React.FC = () => {
             ))}
           </IonRow>
         </IonGrid>
-
-        {/* Test Request */}
-        <pre>{testRes && JSON.stringify(testRes, null, 2)}</pre>
       </IonContent>
     </IonPage>
   );

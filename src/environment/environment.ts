@@ -1,3 +1,3 @@
 export const environment = {
-  baseUrl: "https://47.254.247.170/api",
+  baseUrl: "https://mokoo.greenootech.com/api",
 };
