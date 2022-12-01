@@ -18,6 +18,7 @@ import { useProductStore } from "store";
 import { AddProductProps } from "types/product";
 import SetupProduct from ".";
 import { Camera, CameraResultType } from "@capacitor/camera";
+import { FilePath, uploadFile } from "utils/supabase";
 const SetupProductStep1: FC = () => {
   const history = useHistory();
   const { data: productId } = useGetProductId();
@@ -32,7 +33,8 @@ const SetupProductStep1: FC = () => {
     var imageUrl = image.webPath;
 
     if (imageUrl) {
-      formik.setFieldValue("prd_image", imageUrl);
+      const result = await uploadFile(FilePath.PRODUCT, image);
+      formik.setFieldValue("prd_image", result?.data?.path);
     }
   };
 
@@ -63,7 +65,7 @@ const SetupProductStep1: FC = () => {
   );
   useEffect(() => {
     dispatchProductSetup(formik.values);
-  }, [formik.values]);
+  }, [dispatchProductSetup, formik.values]);
   return (
     <SetupProduct>
       <IonRow>
@@ -101,6 +103,19 @@ const SetupProductStep1: FC = () => {
                 name="prd_category"
                 onIonChange={formik.handleChange}
                 value={formik.values.prd_category}
+              ></IonInput>
+            </IonItem>
+          </IonCol>
+
+          <IonCol size="12">
+            <IonLabel position="stacked">Product Type</IonLabel>
+            <IonItem fill="outline" className="ion-margin-bottom">
+              <IonInput
+                required
+                placeholder="Enter food type"
+                name="prd_type"
+                onIonChange={formik.handleChange}
+                value={formik.values.prd_type}
               ></IonInput>
             </IonItem>
           </IonCol>
@@ -177,11 +192,18 @@ const SetupProductStep1: FC = () => {
               Upload Product Photo
             </IonButton>
             {formik.values.prd_image && (
-              <IonImg src={formik.values.prd_image}></IonImg>
+              <IonImg
+                src={`https://rahsbbkdktnewynpjomt.supabase.co/storage/v1/object/public/img/${formik.values.prd_image}`}
+              ></IonImg>
             )}
           </IonCol>
 
-          <IonButton type="submit" expand="block" class="ion-margin-top">
+          <IonButton
+            shape="round"
+            type="submit"
+            expand="block"
+            class="ion-margin-top"
+          >
             Next
           </IonButton>
         </form>

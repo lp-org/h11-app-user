@@ -9,6 +9,7 @@ export interface QrInfoWithKey extends QrInfo {
 
 interface scanHistoryState {
   scanHistoryList: QrInfoWithKey[];
+
   addScanHistory: (payload: QrInfo) => void;
   removeScanHistoryById: (key: number) => void;
   clearScanHistory: () => void;

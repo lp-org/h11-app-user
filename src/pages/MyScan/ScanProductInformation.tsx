@@ -43,11 +43,6 @@ const ScanProductInformation: React.FC = () => {
       <Toolbar title="Product Information" defaultHref="/scan" />
 
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
-          </IonToolbar>
-        </IonHeader>
         {isLoading ? (
           <IonSpinner name="circles"></IonSpinner>
         ) : (

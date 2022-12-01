@@ -7,9 +7,12 @@ import {
   IonLabel,
   IonList,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonSearchbar,
   IonSegment,
   IonSegmentButton,
+  RefresherEventDetail,
 } from "@ionic/react";
 
 import Toolbar from "components/Toolbar.tsx";
@@ -19,14 +22,22 @@ import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 
 const ProductList: React.FC = () => {
-  const { data: products } = useProductList();
+  const { data: products, refetch } = useProductList();
   const history = useHistory();
 
+  async function handleRefresh(event: CustomEvent<RefresherEventDetail>) {
+    await refetch();
+    event.detail.complete();
+  }
   return (
     <IonPage>
       <Toolbar title="Product" defaultHref="/" />
 
       <IonContent fullscreen>
+        <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
+
         <IonSegment value="default">
           <IonSegmentButton value="default">
             <IonLabel className="ion-text-capitalize">Active Products</IonLabel>
@@ -51,10 +62,9 @@ const ProductList: React.FC = () => {
               >
                 <b>{product.prd_name}</b>
                 <div>Product ID: {product.prd_code} </div>
-                <div>Category: {product.prd_code} </div>
-                <div>Type: {product.prd_code} </div>
+                <div>Category: {product.prd_category} </div>
+                <div>Type: {product.prd_type} </div>
                 <div>Flavour: {product.prd_flavour} </div>
-                <div>Batch Information: {product.prd_code} </div>
               </IonLabel>
             </IonItem>
           ))}

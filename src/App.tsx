@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Route, useHistory } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -57,10 +57,23 @@ import {
 
 import MyScan from "pages/MyScan";
 import ScanProductInformation from "pages/MyScan/ScanProductInformation";
-
+import MyScanProductDetail from "pages/MyScan/MyScanProductDetail";
+import { App as CapApp } from "@capacitor/app";
+import { Capacitor, Plugin } from "@capacitor/core";
+import { useEffect } from "react";
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
 const App: React.FC = () => {
+  // const history = useHistory();
+  useEffect(() => {
+    CapApp.addListener("backButton", ({ canGoBack }) => {
+      if (canGoBack) window.history.back();
+      else CapApp.exitApp();
+    });
+    return () => {
+      CapApp.removeAllListeners();
+    };
+  }, []);
   return (
     <IonApp>
       <IonReactRouter>
@@ -105,6 +118,10 @@ const App: React.FC = () => {
             <Route
               path="/scanProductInformation"
               component={ScanProductInformation}
+            />
+            <Route
+              path="/scanProductHistory/:key"
+              component={MyScanProductDetail}
             />
           </IonRouterOutlet>
           <IonTabBar slot="bottom" color="primary">

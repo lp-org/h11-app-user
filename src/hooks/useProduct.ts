@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useHistory } from "react-router";
 import { useProductStore } from "store";
 import { AddProductProps, Product } from "types/product";
@@ -10,6 +10,7 @@ export function useProductList() {
     queryKey: ["products"],
     queryFn: async (): Promise<Product[]> =>
       (await request.get("/product/showall")).data.data,
+    cacheTime: 0.5 * 60 * 1000,
   });
 }
 
@@ -32,7 +33,7 @@ export function useAddProduct() {
     },
     {
       onSuccess: () => {
-        history.push("/product");
+        history.replace("/product");
         dispatchClearTempProductSetup();
       },
     }
@@ -41,11 +42,15 @@ export function useAddProduct() {
 
 export function useEditProduct() {
   const history = useHistory();
+  const queryClient = useQueryClient();
   const popUpMsg = usePopUpMessage();
+
   return useMutation(
     async ({ id, payload }: { id: string; payload: AddProductProps }) => {
       const res = await request.post(`/product/edit/${id}`, payload);
       if (res.data.code === 200) {
+        queryClient.invalidateQueries(["products"]);
+        queryClient.invalidateQueries(["product", id]);
         popUpMsg("Product have been successfully updated!", "success");
         return res;
       } else {
@@ -55,7 +60,7 @@ export function useEditProduct() {
     },
     {
       onSuccess: () => {
-        history.push("/product");
+        history.replace("/product");
       },
     }
   );
@@ -63,6 +68,7 @@ export function useEditProduct() {
 
 export function useGetProductById(code: string) {
   return useQuery({
+    queryKey: ["product", code],
     queryFn: async (): Promise<Product> =>
       (await request.get(`/product/show/${code}`)).data.data,
   });

@@ -29,7 +29,7 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
             <IonLabel>Batch ID:</IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
-            {item?.bc_prd_name}
+            {item?.bc_pbth_code}
           </IonCol>
         </IonRow>
         <IonRow>

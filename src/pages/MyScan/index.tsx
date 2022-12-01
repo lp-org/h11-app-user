@@ -6,16 +6,11 @@ import {
   IonItem,
   IonLabel,
   IonPage,
-  IonRefresher,
-  IonRefresherContent,
   IonSearchbar,
-  RefresherEventDetail,
 } from "@ionic/react";
 import Toolbar from "components/Toolbar.tsx";
 
-import { useScanHistoryList } from "hooks/useScanHistory";
 import { scan } from "ionicons/icons";
-import { useEffect } from "react";
 
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
@@ -39,7 +34,11 @@ const MyScan: React.FC = () => {
                   alt="Silhouette of mountains"
                   src={"/assets/products/chip.png"}
                 />
-                <IonLabel onClick={() => {}}>
+                <IonLabel
+                  onClick={() => {
+                    history.push(`/scanProductHistory/${product.key}`);
+                  }}
+                >
                   <b>{product.bc_prd_name}</b>
                   <div>Product ID: {product.bc_prd_code} </div>
                   <div>Batch ID: {product.bc_pbth_code} </div>

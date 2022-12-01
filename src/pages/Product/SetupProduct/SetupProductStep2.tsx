@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import {
   IonRow,
   IonCol,
@@ -71,7 +70,7 @@ const SetupProductStep2: FC = () => {
     if (!tempProductSetup || !tempProductSetup.prd_name) {
       history.push("/product/add");
     }
-  }, []);
+  }, [history, tempProductSetup]);
 
   return (
     <SetupProduct>
@@ -190,6 +189,7 @@ const SetupProductStep2: FC = () => {
 
           <IonButton
             expand="block"
+            shape="round"
             color="light"
             class="ion-margin-top add-row-button"
             onClick={() =>
@@ -209,7 +209,12 @@ const SetupProductStep2: FC = () => {
           >
             Add Row
           </IonButton>
-          <IonButton type="submit" expand="block" class="ion-margin-top">
+          <IonButton
+            shape="round"
+            type="submit"
+            expand="block"
+            class="ion-margin-top"
+          >
             Preview
           </IonButton>
         </form>

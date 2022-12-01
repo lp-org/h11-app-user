@@ -17,6 +17,8 @@ const SetupProductStep3: FC = () => {
       )}
 
       <IonButton
+        shape="round"
+        expand="full"
         onClick={() => {
           if (productPreview) {
             productAdd.mutate(processNutritionInfoPayload(productPreview));

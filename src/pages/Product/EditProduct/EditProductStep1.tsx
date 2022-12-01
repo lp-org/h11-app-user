@@ -6,14 +6,17 @@ import {
   IonInput,
   IonTextarea,
   IonButton,
+  IonPage,
+  IonContent,
+  IonGrid,
 } from "@ionic/react";
+import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { useGetProductById } from "hooks/useProduct";
 import { FC } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store";
 import { AddProductProps } from "types/product";
-import SetupProduct from ".";
 
 interface paramsProps {
   code: string;
@@ -38,117 +41,146 @@ const EditProductStep1: FC = () => {
 
   if (!formik.values) return <></>;
   return (
-    <SetupProduct>
-      <IonRow>
-        <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
-          <IonCol size="12">
-            <IonLabel position="fixed">Product ID</IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonInput
-                disabled
-                name="prd_code"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_code}
-              ></IonInput>
-            </IonItem>
-          </IonCol>
-          <IonCol size="12">
-            <IonLabel position="fixed">Product Name</IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonInput
-                required
-                placeholder="Enter Product Name"
-                name="prd_name"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_name}
-              ></IonInput>
-            </IonItem>
-          </IonCol>
+    <IonPage>
+      <Toolbar title="Edit Product" defaultHref={`/product/${code}`} />
+      <IonContent fullscreen className="ion-padding">
+        <IonGrid fixed={true}>
+          <div className="ion-margin-bottom">
+            <b>Food Product Information ( 1 of 2 )</b>
+          </div>
 
-          <IonCol size="12">
-            <IonLabel position="stacked">Product Category</IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonInput
-                required
-                placeholder="Enter food category"
-                name="prd_category"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_category}
-              ></IonInput>
-            </IonItem>
-          </IonCol>
+          <IonRow>
+            <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
+              <IonCol size="12">
+                <IonLabel position="fixed">Product ID</IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    disabled
+                    name="prd_code"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_code}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
+              <IonCol size="12">
+                <IonLabel position="fixed">Product Name</IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    required
+                    placeholder="Enter Product Name"
+                    name="prd_name"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_name}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
 
-          <IonCol size="12">
-            <IonLabel position="stacked">Flavour</IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonInput
-                required
-                placeholder="Enter flavour"
-                name="prd_flavour"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_flavour}
-              ></IonInput>
-            </IonItem>
-          </IonCol>
+              <IonCol size="12">
+                <IonLabel position="stacked">Product Category</IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    required
+                    placeholder="Enter food category"
+                    name="prd_category"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_category}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
 
-          <IonCol size="12">
-            <IonLabel position="stacked">Storage Instructions: </IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonInput
-                required
-                placeholder="Enter instructions"
-                name="prd_storage_instructions"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_storage_instructions}
-              ></IonInput>
-            </IonItem>
-          </IonCol>
+              <IonCol size="12">
+                <IonLabel position="stacked">Product Type</IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    required
+                    placeholder="Enter food type"
+                    name="prd_type"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_type}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
 
-          <IonCol size="12">
-            <IonLabel position="stacked">Ingredients</IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonInput
-                required
-                placeholder="Enter ingredients in yoour food products"
-                name="prd_ingredients"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_ingredients}
-              ></IonInput>
-            </IonItem>
-          </IonCol>
+              <IonCol size="12">
+                <IonLabel position="stacked">Flavour</IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    required
+                    placeholder="Enter flavour"
+                    name="prd_flavour"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_flavour}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
 
-          <IonCol size="12">
-            <IonLabel position="stacked">Expiry Period</IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonInput
-                required
-                type="number"
-                placeholder="Enter Period"
-                name="prd_expiry_period"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_expiry_period}
-              ></IonInput>
-            </IonItem>
-          </IonCol>
+              <IonCol size="12">
+                <IonLabel position="stacked">Storage Instructions: </IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    required
+                    placeholder="Enter instructions"
+                    name="prd_storage_instructions"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_storage_instructions}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
 
-          <IonCol size="12">
-            <IonLabel position="stacked">How to keep product fresh:</IonLabel>
-            <IonItem fill="outline" className="ion-margin-bottom">
-              <IonTextarea
-                required
-                placeholder="Enter instructions for keeping the food product"
-                name="prd_keep_it_fresh"
-                onIonChange={formik.handleChange}
-                value={formik.values.prd_keep_it_fresh}
-              ></IonTextarea>
-            </IonItem>
-          </IonCol>
-          <IonButton type="submit" expand="block" class="ion-margin-top">
-            Next
-          </IonButton>
-        </form>
-      </IonRow>
-    </SetupProduct>
+              <IonCol size="12">
+                <IonLabel position="stacked">Ingredients</IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    required
+                    placeholder="Enter ingredients in yoour food products"
+                    name="prd_ingredients"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_ingredients}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
+
+              <IonCol size="12">
+                <IonLabel position="stacked">Expiry Period</IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonInput
+                    required
+                    type="number"
+                    placeholder="Enter Period"
+                    name="prd_expiry_period"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_expiry_period}
+                  ></IonInput>
+                </IonItem>
+              </IonCol>
+
+              <IonCol size="12">
+                <IonLabel position="stacked">
+                  How to keep product fresh:
+                </IonLabel>
+                <IonItem fill="outline" className="ion-margin-bottom">
+                  <IonTextarea
+                    required
+                    placeholder="Enter instructions for keeping the food product"
+                    name="prd_keep_it_fresh"
+                    onIonChange={formik.handleChange}
+                    value={formik.values.prd_keep_it_fresh}
+                  ></IonTextarea>
+                </IonItem>
+              </IonCol>
+              <IonButton
+                shape="round"
+                type="submit"
+                expand="block"
+                class="ion-margin-top"
+              >
+                Next
+              </IonButton>
+            </form>
+          </IonRow>
+        </IonGrid>
+      </IonContent>
+    </IonPage>
   );
 };
 

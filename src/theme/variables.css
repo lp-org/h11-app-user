@@ -266,8 +266,11 @@ http://ionicframework.com/docs/theming/ */
   border-width: 2px;
   border-color: #dcdcdc;
   border-radius: 10px;
-
   width: 100%;
+}
+
+ion-button[shape="round"] {
+  --border-radius: 20px;
 }
 
 ion-item {

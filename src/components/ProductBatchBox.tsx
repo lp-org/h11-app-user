@@ -10,7 +10,7 @@ const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
   const history = useHistory();
   return (
     <div
-      onClick={() => history.push(`/product/${item.pbth_code}`)}
+      onClick={() => history.push(`/productBatch/${item.pbth_code}`)}
       style={{
         borderColor: "#999999",
         border: "solid 1px",
@@ -34,7 +34,7 @@ const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
         </div>
         <div className="wrap-text">
           <small>
-            Manufactured Date:{" "}
+            Manufactured Date:
             {dayjs(item.pbth_manufactured_date).format("DD/MM/YYYY")}{" "}
           </small>
         </div>

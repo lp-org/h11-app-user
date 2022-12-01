@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import { request } from "utils/request";
+import { usePopUpMessage } from "./notification";
 
 export interface QrInfo {
   bc_qr_code: string;
@@ -44,14 +45,17 @@ export function useGetBlockchainInfo(code: string) {
 }
 
 export function useAddBlockchainInfo() {
-  return useMutation(
-    async (payload: QrInfo) => await request.post(`/blockchain/add`, payload),
-    {
-      onSuccess: () => {
-        console.log("printed");
-      },
+  const popUpMsg = usePopUpMessage();
+  return useMutation(async (payload: QrInfo) => {
+    const res = await request.post(`/blockchain/add`, payload);
+    if (res.data.code === 200) {
+      popUpMsg("Print request has successfully been sent!", "success");
+      return res;
+    } else {
+      popUpMsg(res.data.message, "error");
+      throw new Error(res.data.message);
     }
-  );
+  });
 }
 
 export function useGetQrInfoByBatchId(code: string) {
