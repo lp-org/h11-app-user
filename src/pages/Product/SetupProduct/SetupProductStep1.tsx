@@ -7,7 +7,6 @@ import {
   IonTextarea,
   IonButton,
   IonIcon,
-  IonImg,
 } from "@ionic/react";
 import { useFormik } from "formik";
 import { useGetProductId } from "hooks/useProduct";
@@ -19,6 +18,7 @@ import { AddProductProps } from "types/product";
 import SetupProduct from ".";
 import { Camera, CameraResultType } from "@capacitor/camera";
 import { FilePath, uploadFile } from "utils/supabase";
+import Image from "components/Image";
 const SetupProductStep1: FC = () => {
   const history = useHistory();
   const { data: productId } = useGetProductId();
@@ -191,11 +191,7 @@ const SetupProductStep1: FC = () => {
               <IonIcon icon={cloudUpload} className="ion-margin-end" />
               Upload Product Photo
             </IonButton>
-            {formik.values.prd_image && (
-              <IonImg
-                src={`https://rahsbbkdktnewynpjomt.supabase.co/storage/v1/object/public/img/${formik.values.prd_image}`}
-              ></IonImg>
-            )}
+            {formik.values.prd_image && <Image src={formik.values.prd_image} />}
           </IonCol>
 
           <IonButton

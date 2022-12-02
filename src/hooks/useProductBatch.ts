@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useHistory } from "react-router";
 import { AddProductBatchProps, ProductBatch } from "types/productBatch";
 import { request } from "utils/request";
@@ -20,12 +20,14 @@ export function useProductBatchList() {
 
 export function useAddProductBatch() {
   const history = useHistory();
+  const queryClient = useQueryClient();
   const popUpMsg = usePopUpMessage();
   return useMutation(
     async (payload: AddProductBatchProps) => {
       const res = await request.post("/product_batch/add", payload);
       if (res.data.code === 200) {
         popUpMsg("Product batch have been successfully created!", "success");
+        queryClient.invalidateQueries(["productBatchList"]);
         return res;
       } else {
         popUpMsg(res.data.message, "error");

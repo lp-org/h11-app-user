@@ -27,7 +27,7 @@ const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
       </div>
       <div style={{ padding: 8, textAlign: "left" }}>
         <div className="wrap-text">
-          <small>Product Name: {item.pbth_prd_code} </small>
+          <small>Product Name: {item.pbth_prd_name} </small>
         </div>
         <div className="wrap-text">
           <small>Product ID: {item.pbth_prd_code} </small>

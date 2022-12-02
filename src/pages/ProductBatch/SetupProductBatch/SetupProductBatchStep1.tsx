@@ -34,7 +34,7 @@ const SetupProductBatchStep1: FC = () => {
   };
   const formik = useFormik<AddProductBatchProps>({
     initialValues: {
-      pbth_name: "",
+      pbth_prd_name: "",
       pbth_code: "",
       pbth_expiry_date: "",
       pbth_manufactured_date: "",
@@ -71,7 +71,7 @@ const SetupProductBatchStep1: FC = () => {
               <IonLabel position="fixed">Select Product:</IonLabel>
               <IonSelect
                 hidden
-                name="pbth_name"
+                name="pbth_prd_name"
                 onBlur={() => formik.setFieldTouched("pbth_name", true)}
               ></IonSelect>
               <IonItem fill="outline" className="ion-margin-bottom ion-invalid">
@@ -79,7 +79,7 @@ const SetupProductBatchStep1: FC = () => {
                   onIonChange={(e) => {
                     formik.setFieldValue("pbth_prd_code", e.target.value);
                     formik.setFieldValue(
-                      "pbth_name",
+                      "pbth_prd_name",
                       productList?.find((el) => el.prd_code === e.target.value)
                         ?.prd_name
                     );
@@ -94,7 +94,7 @@ const SetupProductBatchStep1: FC = () => {
                       {product.prd_name}
                     </IonSelectOption>
                   ))}
-                  <>{formik.values.pbth_name}</>
+                  <>{formik.values.pbth_prd_name}</>
                 </IonSelect>
                 <IonNote slot="error">
                   {formik.errors.pbth_prd_code

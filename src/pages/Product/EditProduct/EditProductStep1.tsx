@@ -1,3 +1,4 @@
+import { Camera, CameraResultType } from "@capacitor/camera";
 import {
   IonRow,
   IonCol,
@@ -9,14 +10,18 @@ import {
   IonPage,
   IonContent,
   IonGrid,
+  IonIcon,
 } from "@ionic/react";
+import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { useGetProductById } from "hooks/useProduct";
+import { cloudUpload } from "ionicons/icons";
 import { FC } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store";
 import { AddProductProps } from "types/product";
+import { uploadFile, FilePath } from "utils/supabase";
 
 interface paramsProps {
   code: string;
@@ -30,6 +35,20 @@ const EditProductStep1: FC = () => {
   const dispatchProductEdit = useProductWithoutLsStore(
     (state) => state.setTempProductEdit
   );
+
+  const takePicture = async () => {
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: true,
+      resultType: CameraResultType.Uri,
+    });
+    var imageUrl = image.webPath;
+
+    if (imageUrl) {
+      const result = await uploadFile(FilePath.PRODUCT, image);
+      formik.setFieldValue("prd_image", result?.data?.path);
+    }
+  };
   const formik = useFormik<AddProductProps>({
     initialValues: { ...data! },
     enableReinitialize: true,
@@ -168,6 +187,17 @@ const EditProductStep1: FC = () => {
                   ></IonTextarea>
                 </IonItem>
               </IonCol>
+
+              <IonCol size="12">
+                <IonButton onClick={() => takePicture()} color="gray">
+                  <IonIcon icon={cloudUpload} className="ion-margin-end" />
+                  Upload Product Photo
+                </IonButton>
+                {formik.values.prd_image && (
+                  <Image src={formik.values.prd_image} />
+                )}
+              </IonCol>
+
               <IonButton
                 shape="round"
                 type="submit"

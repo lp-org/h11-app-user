@@ -1,4 +1,4 @@
-import { Route, useHistory } from "react-router-dom";
+import { Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -59,8 +59,8 @@ import MyScan from "pages/MyScan";
 import ScanProductInformation from "pages/MyScan/ScanProductInformation";
 import MyScanProductDetail from "pages/MyScan/MyScanProductDetail";
 import { App as CapApp } from "@capacitor/app";
-import { Capacitor, Plugin } from "@capacitor/core";
 import { useEffect } from "react";
+import Profile from "pages/Profile";
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
 const App: React.FC = () => {
@@ -123,6 +123,9 @@ const App: React.FC = () => {
               path="/scanProductHistory/:key"
               component={MyScanProductDetail}
             />
+
+            {/* Profile  */}
+            <Route path="/profile" component={Profile} />
           </IonRouterOutlet>
           <IonTabBar slot="bottom" color="primary">
             <IonTabButton tab="tab1" href="/">

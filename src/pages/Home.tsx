@@ -21,7 +21,7 @@ import ProductBatchBox from "components/ProductBatchBox";
 const QuickAccessList = [
   { title: "Add New Product", path: "/product/add", icon: addCircle },
   { title: "Scan QR Code", path: "/scan", icon: scanCircle },
-  { title: "My Profile", path: "", icon: personCircle },
+  { title: "My Profile", path: "/profile", icon: personCircle },
 ];
 
 const Home: React.FC = () => {

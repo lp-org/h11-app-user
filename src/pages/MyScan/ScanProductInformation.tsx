@@ -2,12 +2,9 @@ import {
   IonContent,
   IonFab,
   IonFabButton,
-  IonHeader,
   IonIcon,
   IonPage,
   IonSpinner,
-  IonTitle,
-  IonToolbar,
 } from "@ionic/react";
 import Toolbar from "components/Toolbar.tsx";
 import { scan } from "ionicons/icons";

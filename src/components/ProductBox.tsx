@@ -1,5 +1,6 @@
 import { useHistory } from "react-router";
 import { Product } from "../types/product";
+import Image from "./Image";
 
 interface ProductBoxProps {
   item: Product;
@@ -21,8 +22,12 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
         width: 150,
       }}
     >
-      <img alt="Food" src={"/assets/products/chip.png"} />
-
+      <div style={{ padding: 8, textAlign: "center", height: "130px" }}>
+        <Image
+          src={item.prd_image}
+          style={{ marginLeft: "auto", marginRight: "auto", height: 120 }}
+        />
+      </div>
       <div style={{ padding: 8, textAlign: "left" }}>
         <div className="wrap-text">
           <b>{item.prd_name}</b>

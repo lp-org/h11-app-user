@@ -7,6 +7,7 @@ interface ShowProductBatchProps {
 }
 
 const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
+  console.log(item);
   return (
     <Fragment>
       <IonGrid>
@@ -15,7 +16,7 @@ const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
             <IonLabel>Product Name:</IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
-            {item?.pbth_name}
+            {item?.pbth_prd_name}
           </IonCol>
           <IonCol size="12">
             <IonLabel>Product ID: </IonLabel>

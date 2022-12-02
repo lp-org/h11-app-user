@@ -15,9 +15,9 @@ export interface QrInfo {
   bc_prd_image: string;
   bc_prd_category: string;
   bc_prd_type: string;
-  bc_prd_instruction: string;
+  bc_prd_storage_instructions: string;
   bc_prd_keep_it_fresh: string;
-  bc_nutrition_json: string;
+  bc_prd_nutrition_json: string;
 }
 
 export interface BlockchainQrInfo extends QrInfo {

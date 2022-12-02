@@ -15,7 +15,10 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
 
   return (
     <Fragment>
-      <IonGrid style={{ border: "solid 1px" }} className="ion-grid-padding-xs">
+      <IonGrid
+        style={{ border: "solid 1px", maxWidth: "300px", margin: "auto" }}
+        className="ion-grid-padding-xs"
+      >
         <IonRow>
           <IonCol className="ion-text-center" style={{ padding: 0 }}>
             <b>Nutrition Facts</b>

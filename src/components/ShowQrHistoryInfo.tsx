@@ -1,6 +1,7 @@
 import { IonButton, IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
 import { BlockchainQrInfo } from "hooks/useQrCode";
 import { Fragment } from "react";
+import NutritionFacts from "./NutritionFacts";
 
 interface ShowQrHistoryInfoProps {
   item: BlockchainQrInfo | undefined;
@@ -75,14 +76,14 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           <IonCol size="5" class="ion-text-right">
             <IonLabel>Food Category:</IonLabel>
           </IonCol>
-          <IonCol className="ion-margin-start">{}</IonCol>
+          <IonCol className="ion-margin-start">{item?.bc_prd_category}</IonCol>
         </IonRow>
 
         <IonRow>
           <IonCol size="5" class="ion-text-right">
             <IonLabel>Food Type:</IonLabel>
           </IonCol>
-          <IonCol className="ion-margin-start">{}</IonCol>
+          <IonCol className="ion-margin-start">{item?.bc_prd_type}</IonCol>
         </IonRow>
 
         <IonRow>
@@ -105,14 +106,18 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           <IonCol size="5" class="ion-text-right">
             <IonLabel>Instruction: </IonLabel>
           </IonCol>
-          <IonCol className="ion-margin-start">{}</IonCol>
+          <IonCol className="ion-margin-start">
+            {item?.bc_prd_storage_instructions}
+          </IonCol>
         </IonRow>
 
         <IonRow>
           <IonCol size="5" class="ion-text-right">
             <IonLabel>How to keep fresh:</IonLabel>
           </IonCol>
-          <IonCol className="ion-margin-start">{}</IonCol>
+          <IonCol className="ion-margin-start">
+            {item?.bc_prd_keep_it_fresh}
+          </IonCol>
         </IonRow>
 
         <IonRow>
@@ -121,7 +126,7 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonCol>
         </IonRow>
         <IonRow>
-          <pre>{}</pre>
+          <NutritionFacts json={item?.bc_prd_nutrition_json} />
         </IonRow>
       </IonGrid>
     </Fragment>

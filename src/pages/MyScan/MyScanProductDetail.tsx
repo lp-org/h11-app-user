@@ -14,7 +14,7 @@ const MyScanProductDetail: React.FC = () => {
     <IonPage>
       <Toolbar title="Product Information" defaultHref="/scan" />
 
-      <IonContent fullscreen>
+      <IonContent fullscreen className="ion-padding">
         {data && <ShowQrScanInformation item={data} />}
       </IonContent>
     </IonPage>

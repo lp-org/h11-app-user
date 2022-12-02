@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { QrInfo } from "hooks/useQrCode";
 
 import create from "zustand";
@@ -5,13 +6,14 @@ import { devtools, persist } from "zustand/middleware";
 
 export interface QrInfoWithKey extends QrInfo {
   key: number;
+  timestamp: number;
 }
 
 interface scanHistoryState {
   scanHistoryList: QrInfoWithKey[];
 
   addScanHistory: (payload: QrInfo) => void;
-  removeScanHistoryById: (key: number) => void;
+  removeScanHistoryById: (keys: number[]) => void;
   clearScanHistory: () => void;
 }
 
@@ -24,13 +26,17 @@ export const useScanHistoryStore = create<scanHistoryState>()(
           set((state) => ({
             scanHistoryList: [
               ...state.scanHistoryList,
-              { ...payload, key: state.scanHistoryList.length },
+              {
+                ...payload,
+                key: state.scanHistoryList.length,
+                timestamp: dayjs().unix(),
+              },
             ],
           })),
-        removeScanHistoryById: (key) =>
+        removeScanHistoryById: (keys) =>
           set((state) => ({
             scanHistoryList: state.scanHistoryList.filter(
-              (el) => el.key !== key
+              (el) => !keys.includes(el.key)
             ),
           })),
         clearScanHistory: () =>

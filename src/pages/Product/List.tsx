@@ -20,6 +20,7 @@ import { add } from "ionicons/icons";
 
 import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
+import Image from "components/Image";
 
 const ProductList: React.FC = () => {
   const { data: products, refetch } = useProductList();
@@ -53,10 +54,7 @@ const ProductList: React.FC = () => {
           <IonSearchbar />
           {products?.map((product) => (
             <IonItem key={product.prd_code}>
-              <img
-                alt="Silhouette of mountains"
-                src={"/assets/products/chip.png"}
-              />
+              <Image src={product.prd_image} width={60} />
               <IonLabel
                 onClick={() => history.push(`/product/${product.prd_code}`)}
               >
