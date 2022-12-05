@@ -18,7 +18,7 @@ import { useGetProductById } from "hooks/useProduct";
 import { removeCircle } from "ionicons/icons";
 import { FC, Fragment } from "react";
 import { useHistory, useRouteMatch } from "react-router";
-import { useProductWithoutLsStore } from "store";
+import { useProductWithoutLsStore } from "store/useProductStore";
 import { processNutritionInfoToInputData } from "utils";
 import { SERVING } from "utils/enum";
 

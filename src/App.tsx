@@ -1,4 +1,4 @@
-import { Route } from "react-router-dom";
+import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
   IonIcon,
@@ -59,12 +59,16 @@ import MyScan from "pages/MyScan";
 import ScanProductInformation from "pages/MyScan/ScanProductInformation";
 import MyScanProductDetail from "pages/MyScan/MyScanProductDetail";
 import { App as CapApp } from "@capacitor/app";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import Profile from "pages/Profile";
+import Login from "pages/Auth/Login";
+import Register from "pages/Auth/Register";
+import { useSession } from "hooks/useAuth";
+import Loading from "components/Loading";
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
 const App: React.FC = () => {
-  // const history = useHistory();
+  const { isAuthed } = useSession();
   useEffect(() => {
     CapApp.addListener("backButton", ({ canGoBack }) => {
       if (canGoBack) window.history.back();
@@ -77,71 +81,99 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        <IonTabs>
+        {isAuthed ? (
+          <Fragment>
+            <IonTabs>
+              <IonRouterOutlet>
+                <Route exact path="/" component={Home} />
+                {/* Product  */}
+                <Route exact path="/manageProduct" component={Product} />
+                <Route exact path="/product" component={ProductList} />
+                <Route exact path="/product/:code" component={ViewProduct} />
+                <Route path="/product/add" component={SetupProductStep1} />
+                <Route path="/product/add-2" component={SetupProductStep2} />
+                <Route path="/product/add-3" component={SetupProductStep3} />
+
+                {/* Edit Product */}
+                <Route
+                  path="/product/edit/:code"
+                  component={EditProductStep1}
+                />
+                <Route
+                  path="/product/edit-2/:code"
+                  component={EditProductStep2}
+                />
+                <Route
+                  path="/product/edit-3/:code"
+                  component={EditProductStep3}
+                />
+                <Route
+                  path="/productBatch/:code"
+                  component={ViewProductBatch}
+                />
+
+                {/* Product Batch */}
+                <Route exact path="/productBatch" component={ProductBatch} />
+                <Route
+                  path="/productBatch/add"
+                  component={SetupProductBatchStep1}
+                />
+                <Route
+                  path="/productBatch/add-2"
+                  component={SetupProductBatchStep2}
+                />
+
+                {/* QR code */}
+                <Route exact path="/qrcode" component={QrCode} />
+                <Route
+                  exact
+                  path="/qrcode/:batchCode"
+                  component={PrintQrCode}
+                />
+                <Route
+                  exact
+                  path="/qrcodeHistory/:code"
+                  component={ViewQrCodeHistory}
+                />
+                {/* My Scan  */}
+                <Route path="/scan" component={MyScan} />
+                <Route
+                  path="/scanProductInformation"
+                  component={ScanProductInformation}
+                />
+                <Route
+                  path="/scanProductHistory/:key"
+                  component={MyScanProductDetail}
+                />
+
+                {/* Profile  */}
+                <Route path="/profile" component={Profile} />
+              </IonRouterOutlet>
+
+              <IonTabBar slot="bottom" color="primary">
+                <IonTabButton tab="tab1" href="/">
+                  <IonIcon icon={homeOutline} />
+                </IonTabButton>
+                <IonTabButton tab="tab2" href="/manageProduct">
+                  <IonIcon icon={fastFoodOutline} />
+                </IonTabButton>
+                <IonTabButton tab="tab3" href="/scan">
+                  <IonIcon icon={scanOutline} />
+                </IonTabButton>
+                <IonTabButton tab="tab4" href="/profile">
+                  <IonIcon src={personOutline} />
+                </IonTabButton>
+              </IonTabBar>
+            </IonTabs>
+          </Fragment>
+        ) : (
           <IonRouterOutlet>
-            <Route exact path="/" component={Home} />
-            {/* Product  */}
-            <Route exact path="/manageProduct" component={Product} />
-            <Route exact path="/product" component={ProductList} />
-            <Route exact path="/product/:code" component={ViewProduct} />
-            <Route path="/product/add" component={SetupProductStep1} />
-            <Route path="/product/add-2" component={SetupProductStep2} />
-            <Route path="/product/add-3" component={SetupProductStep3} />
-
-            {/* Edit Product */}
-            <Route path="/product/edit/:code" component={EditProductStep1} />
-            <Route path="/product/edit-2/:code" component={EditProductStep2} />
-            <Route path="/product/edit-3/:code" component={EditProductStep3} />
-            <Route path="/productBatch/:code" component={ViewProductBatch} />
-
-            {/* Product Batch */}
-            <Route exact path="/productBatch" component={ProductBatch} />
-            <Route
-              path="/productBatch/add"
-              component={SetupProductBatchStep1}
-            />
-            <Route
-              path="/productBatch/add-2"
-              component={SetupProductBatchStep2}
-            />
-
-            {/* QR code */}
-            <Route exact path="/qrcode" component={QrCode} />
-            <Route exact path="/qrcode/:batchCode" component={PrintQrCode} />
-            <Route
-              exact
-              path="/qrcodeHistory/:code"
-              component={ViewQrCodeHistory}
-            />
-            {/* My Scan  */}
-            <Route path="/scan" component={MyScan} />
-            <Route
-              path="/scanProductInformation"
-              component={ScanProductInformation}
-            />
-            <Route
-              path="/scanProductHistory/:key"
-              component={MyScanProductDetail}
-            />
-
-            {/* Profile  */}
-            <Route path="/profile" component={Profile} />
+            <Route exact path="/" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route render={() => <Redirect to="/" />} />
           </IonRouterOutlet>
-          <IonTabBar slot="bottom" color="primary">
-            <IonTabButton tab="tab1" href="/">
-              <IonIcon icon={homeOutline} />
-            </IonTabButton>
-            <IonTabButton tab="tab2" href="/manageProduct">
-              <IonIcon icon={fastFoodOutline} />
-            </IonTabButton>
-            <IonTabButton tab="tab3" href="/scan">
-              <IonIcon icon={scanOutline} />
-            </IonTabButton>
-            <IonTabButton tab="tab4" href="/profile">
-              <IonIcon src={personOutline} />
-            </IonTabButton>
-          </IonTabBar>
-        </IonTabs>
+        )}
+        <Loading />
       </IonReactRouter>
     </IonApp>
   );

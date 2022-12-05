@@ -16,7 +16,7 @@ import { useGetProductId } from "hooks/useProduct";
 import { cloudUpload } from "ionicons/icons";
 import { FC, useEffect } from "react";
 import { useHistory } from "react-router";
-import { useProductStore } from "store";
+import { useProductStore } from "store/useProductStore";
 import { AddProductProps } from "types/product";
 
 import { Camera, CameraResultType } from "@capacitor/camera";

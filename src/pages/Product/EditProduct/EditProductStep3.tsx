@@ -4,7 +4,7 @@ import Toolbar from "components/Toolbar.tsx";
 import { useEditProduct } from "hooks/useProduct";
 import { code } from "ionicons/icons";
 import { FC } from "react";
-import { useProductWithoutLsStore } from "store";
+import { useProductWithoutLsStore } from "store/useProductStore";
 import { processNutritionInfoPayload } from "utils";
 
 const EditProductStep3: FC = () => {

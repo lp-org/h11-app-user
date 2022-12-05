@@ -17,7 +17,7 @@ import { useFormik } from "formik";
 import { removeCircle } from "ionicons/icons";
 import { FC, Fragment, useEffect } from "react";
 import { useHistory } from "react-router";
-import { useProductStore } from "store";
+import { useProductStore } from "store/useProductStore";
 
 const templatePayload = {
   Serving_Size: "",

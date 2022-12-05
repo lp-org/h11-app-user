@@ -20,7 +20,7 @@ import { useGetProductById } from "hooks/useProduct";
 import { cloudUpload } from "ionicons/icons";
 import { FC } from "react";
 import { useHistory, useRouteMatch } from "react-router";
-import { useProductWithoutLsStore } from "store";
+import { useProductWithoutLsStore } from "store/useProductStore";
 import { AddProductProps } from "types/product";
 import { checkFile } from "utils";
 

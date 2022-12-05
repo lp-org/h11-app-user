@@ -15,12 +15,16 @@ import { useFormik } from "formik";
 import { checkmark, cloudUpload, pencil, personCircle } from "ionicons/icons";
 import { FC, Fragment, useState } from "react";
 
+import { useAuthStore } from "store/useAuthStore";
+
 const Profile: React.FC = () => {
+  const removeToken = useAuthStore((state) => state.removeToken);
   const formik = useFormik<{}>({
     initialValues: {},
     enableReinitialize: true,
     onSubmit: (values) => {},
   });
+
   return (
     <IonPage>
       <Toolbar title="My Profile" defaultHref="/" />
@@ -72,6 +76,13 @@ const Profile: React.FC = () => {
               </IonCol>
             </form>
           </IonRow>
+          <IonButton
+            onClick={() => {
+              removeToken();
+            }}
+          >
+            Sign Out
+          </IonButton>
         </IonGrid>
       </IonContent>
     </IonPage>

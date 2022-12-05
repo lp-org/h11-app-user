@@ -3,7 +3,7 @@ import ShowProduct from "components/ShowProduct";
 import Toolbar from "components/Toolbar.tsx";
 import { useAddProduct } from "hooks/useProduct";
 import { FC } from "react";
-import { useProductStore } from "store";
+import { useProductStore } from "store/useProductStore";
 import { processNutritionInfoPayload } from "utils";
 
 const SetupProductStep3: FC = () => {

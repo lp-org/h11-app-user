@@ -2,7 +2,7 @@ import { Photo } from "@capacitor/camera";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { environment } from "environment/environment";
 import { useHistory } from "react-router";
-import { useProductStore } from "store";
+import { useProductStore } from "store/useProductStore";
 import { AddProductProps, Product } from "types/product";
 import { request } from "utils/request";
 import { usePopUpMessage } from "./notification";
