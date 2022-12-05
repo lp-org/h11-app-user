@@ -15,7 +15,11 @@ const Image: React.FC<
 > = ({ height, width, src, ...rest }) => {
   if (src) {
     return (
-      <IonImg src={src} style={{ ...rest.style, height, width }} {...rest} />
+      <IonImg
+        src={src.replace("http", "https")}
+        style={{ ...rest.style, height, width }}
+        {...rest}
+      />
     );
   } else {
     return (
