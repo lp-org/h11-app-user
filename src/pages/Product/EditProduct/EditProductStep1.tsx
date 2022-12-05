@@ -15,13 +15,14 @@ import {
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
+import { usePopUpMessage } from "hooks/notification";
 import { useGetProductById } from "hooks/useProduct";
 import { cloudUpload } from "ionicons/icons";
 import { FC } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store";
 import { AddProductProps } from "types/product";
-import { uploadFile, FilePath } from "utils/supabase";
+import { checkFile } from "utils";
 
 interface paramsProps {
   code: string;
@@ -36,17 +37,24 @@ const EditProductStep1: FC = () => {
     (state) => state.setTempProductEdit
   );
 
+  const popUpMsg = usePopUpMessage();
   const takePicture = async () => {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Uri,
-    });
-    var imageUrl = image.webPath;
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.Uri,
+      });
+      await checkFile(image);
+      var imageUrl = image.webPath;
 
-    if (imageUrl) {
-      const result = await uploadFile(FilePath.PRODUCT, image);
-      formik.setFieldValue("prd_image", result?.data?.path);
+      if (imageUrl) {
+        formik.setFieldValue("prd_image", imageUrl);
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        popUpMsg(error.message, "error");
+      }
     }
   };
   const formik = useFormik<AddProductProps>({

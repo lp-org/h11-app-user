@@ -1,5 +1,5 @@
 import { IonImg } from "@ionic/react";
-import { environment } from "environment/environment";
+
 import { fastFood } from "ionicons/icons";
 import { HTMLAttributes } from "react";
 
@@ -15,11 +15,7 @@ const Image: React.FC<
 > = ({ height, width, src, ...rest }) => {
   if (src) {
     return (
-      <IonImg
-        src={environment.supabaseImageSrc + src}
-        style={{ ...rest.style, height, width }}
-        {...rest}
-      />
+      <IonImg src={src} style={{ ...rest.style, height, width }} {...rest} />
     );
   } else {
     return (

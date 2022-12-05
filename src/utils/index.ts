@@ -1,3 +1,5 @@
+import { Photo } from "@capacitor/camera";
+import { environment } from "environment/environment";
 import { AddProductProps } from "types/product";
 
 export function processNutritionInfoPayload(
@@ -46,4 +48,23 @@ export function processNutritionInfoToInputData(
     }),
   };
   return input;
+}
+
+export async function checkFile(image: Photo) {
+  const allowFormat = ["image/png", "image/jpeg"];
+  const { fileLimit } = environment;
+  var imageUrl = image.webPath;
+
+  if (imageUrl) {
+    const res = await fetch(imageUrl);
+    const blob = await res.blob();
+
+    if (!allowFormat.includes(blob.type)) {
+      throw new Error(`Only ${allowFormat} are allowed`);
+    }
+    if (blob.size > fileLimit) {
+      throw new Error("File size exceeded");
+    }
+    return true;
+  }
 }
