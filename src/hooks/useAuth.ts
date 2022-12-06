@@ -9,7 +9,7 @@ export function useLogin() {
   const setToken = useAuthStore((state) => state.setToken);
   const popUpMsg = usePopUpMessage();
   return useMutation(async (payload: AuthLogin) => {
-    if (payload.email === "merchant" && payload.password === "merchant123") {
+    if (payload.email === "user" && payload.password === "user123") {
       setToken("thisisamocktoken");
 
       return true;

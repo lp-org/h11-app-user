@@ -18,8 +18,8 @@ const Login: React.FC = () => {
   const login = useLogin();
   const formik = useFormik<AuthLogin>({
     initialValues: {
-      email: "merchant",
-      password: "merchant123",
+      email: "user",
+      password: "user123",
     },
     enableReinitialize: true,
     onSubmit: (values) => {

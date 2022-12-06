@@ -12,14 +12,13 @@ import {
 import ProductBox from "components/ProductBox";
 
 import Toolbar from "components/Toolbar.tsx";
-import { addCircle, scanCircle, personCircle } from "ionicons/icons";
+import { scanCircle, personCircle } from "ionicons/icons";
 import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 import { useProductBatchList } from "hooks/useProductBatch";
 import ProductBatchBox from "components/ProductBatchBox";
 
 const QuickAccessList = [
-  { title: "Add New Product", path: "/product/add", icon: addCircle },
   { title: "Scan QR Code", path: "/scan", icon: scanCircle },
   { title: "My Profile", path: "/profile", icon: personCircle },
 ];
@@ -99,37 +98,6 @@ const Home: React.FC = () => {
             {products?.map((product, i) => (
               <IonCol key={i}>
                 <ProductBox item={product} />
-              </IonCol>
-            ))}
-          </IonRow>
-        </IonGrid>
-
-        {/* Product Batch */}
-        <IonGrid fixed={true} style={{ marginLeft: 0 }}>
-          <IonRow style={{ alignItems: "baseline" }}>
-            <IonText>
-              <h2>Product Batch</h2>
-            </IonText>
-
-            <IonButton
-              onClick={() => history.push("/productBatch")}
-              style={{ marginLeft: "auto" }}
-              fill="clear"
-              size="small"
-            >
-              View all
-            </IonButton>
-          </IonRow>
-          <IonRow
-            style={{
-              flexWrap: "nowrap",
-              overflowX: "scroll!important",
-              overflowY: "hidden",
-            }}
-          >
-            {productBatch?.map((productBatch, i) => (
-              <IonCol key={i}>
-                <ProductBatchBox item={productBatch} />
               </IonCol>
             ))}
           </IonRow>
