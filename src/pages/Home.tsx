@@ -8,6 +8,8 @@ import {
   IonIcon,
   IonButton,
   IonLabel,
+  IonCheckbox,
+  IonItem,
 } from "@ionic/react";
 import ProductBox from "components/ProductBox";
 
@@ -17,6 +19,8 @@ import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 import { useProductBatchList } from "hooks/useProductBatch";
 import ProductBatchBox from "components/ProductBatchBox";
+import { useScanHistoryStore } from "store/useScanHistoryStore";
+import Image from "components/Image";
 
 const QuickAccessList = [
   { title: "Scan QR Code", path: "/scan", icon: scanCircle },
@@ -24,8 +28,7 @@ const QuickAccessList = [
 ];
 
 const Home: React.FC = () => {
-  const { data: products } = useProductList();
-  const { data: productBatch } = useProductBatchList();
+  const historyList = useScanHistoryStore((state) => state.scanHistoryList);
   const history = useHistory();
 
   return (
@@ -76,11 +79,11 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h2>My Products</h2>
+              <h2>Recently Scanned Products</h2>
             </IonText>
 
             <IonButton
-              onClick={() => history.push("/product")}
+              onClick={() => history.push("/scan")}
               style={{ marginLeft: "auto" }}
               fill="clear"
               size="small"
@@ -88,19 +91,34 @@ const Home: React.FC = () => {
               View all
             </IonButton>
           </IonRow>
-          <IonRow
-            style={{
-              flexWrap: "nowrap",
-              overflowX: "scroll!important",
-              overflowY: "hidden",
-            }}
-          >
-            {products?.map((product, i) => (
-              <IonCol key={i}>
-                <ProductBox item={product} />
-              </IonCol>
-            ))}
-          </IonRow>
+          {historyList &&
+            historyList
+              .sort((el, elj) => (el.key < elj.key ? 1 : -1))
+              ?.map((product) => (
+                <IonItem key={product.key}>
+                  <Image src={product.bc_prd_image} width={80} />
+                  <IonLabel
+                    onClick={() => {
+                      history.push(`/scanProductHistory/${product.key}`);
+                    }}
+                  >
+                    <b className="wrap-text">{product.bc_prd_name}</b>
+                    <div className="wrap-text">
+                      Product ID: {product.bc_prd_code}
+                    </div>
+                    <div className="wrap-text">
+                      Batch ID: {product.bc_pbth_code}
+                    </div>
+                    <div className="wrap-text">
+                      Unique ID: {product.bc_qr_code}
+                    </div>
+                    <div>
+                      Manufactured Date: {product.bc_pbth_manufactured_date}
+                    </div>
+                    <div>Expiry Date: {product.bc_pbth_expiry_date} </div>
+                  </IonLabel>
+                </IonItem>
+              ))}
         </IonGrid>
       </IonContent>
     </IonPage>

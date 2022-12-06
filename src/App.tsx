@@ -34,21 +34,15 @@ import Product from "pages/Product";
 import ViewProduct from "pages/Product/ViewProduct";
 
 import Home from "pages/Home";
-import ProductList from "pages/Product/List";
 
 import ProductBatch from "pages/ProductBatch";
 import SetupProductBatchStep1 from "pages/ProductBatch/SetupProductBatch/SetupProductBatchStep1";
 import SetupProductBatchStep2 from "pages/ProductBatch/SetupProductBatch/SetupProductBatchStep2";
-import ViewProductBatch from "pages/Product/ViewProductBatch";
+
 import QrCode from "pages/QrCode";
 import PrintQrCode from "pages/QrCode/PrintQrCode";
 import ViewQrCodeHistory from "pages/QrCode/ViewQrCodeHistory";
-import {
-  fastFoodOutline,
-  homeOutline,
-  personOutline,
-  scanOutline,
-} from "ionicons/icons";
+import { homeOutline, personOutline, scanOutline } from "ionicons/icons";
 
 import MyScan from "pages/MyScan";
 import ScanProductInformation from "pages/MyScan/ScanProductInformation";
@@ -83,7 +77,7 @@ const App: React.FC = () => {
                 <Route exact path="/" component={Home} />
                 {/* Product  */}
                 <Route exact path="/manageProduct" component={Product} />
-                <Route exact path="/product" component={ProductList} />
+
                 <Route exact path="/product/:code" component={ViewProduct} />
 
                 {/* Product Batch */}
