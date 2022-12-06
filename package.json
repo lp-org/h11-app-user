@@ -60,8 +60,8 @@
     "eject": "react-scripts eject",
     "add:android": "capacitor add android",
     "add:ios": "capacitor add ios",
-    "dev:android": "ionic cap run android -l --external",
-    "dev:ios": "ionic cap run ios -l --external",
+    "dev:android": "ionic cap run android -l --address=127.0.0.1",
+    "dev:ios": "ionic cap run ios -l --address=127.0.0.1",
     "build:android": "ionic capacitor build android",
     "build:ios": "ionic capacitor build ios"
   },

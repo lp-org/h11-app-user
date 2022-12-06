@@ -7,7 +7,6 @@ interface ShowProductBatchProps {
 }
 
 const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
-  console.log(item);
   return (
     <Fragment>
       <IonGrid>

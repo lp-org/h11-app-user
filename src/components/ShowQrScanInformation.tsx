@@ -97,7 +97,7 @@ const ShowQrScanInformation: React.FC<ShowQrScanInformationProps> = ({
             </IonCol>
           </IonRow>
 
-          <IonRow>
+          <IonRow className="ion-margin-bottom">
             <NutritionFacts json={item?.bc_prd_nutrition_json} />
           </IonRow>
         </IonGrid>
