@@ -82,6 +82,8 @@ export function useScanResult(code: string) {
           throw new Error(res.data.message);
         }
         return res.data.data;
+      } else {
+        popUpMsg("Url not available", "error");
       }
       return null;
     },

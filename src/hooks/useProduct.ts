@@ -11,7 +11,6 @@ export function useProductList() {
     queryKey: ["products"],
     queryFn: async (): Promise<Product[]> =>
       (await request.get("/product/showall")).data.data,
-    cacheTime: 0.5 * 60 * 1000,
   });
 }
 
