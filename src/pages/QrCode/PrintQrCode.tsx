@@ -1,19 +1,12 @@
-import {
-  IonButton,
-  IonCol,
-  IonContent,
-  IonLoading,
-  IonPage,
-  IonRow,
-} from "@ionic/react";
+import { IonButton, IonCol, IonContent, IonPage, IonRow } from "@ionic/react";
 
 import ShowQrInfo from "components/ShowQrInfo";
 import Toolbar from "components/Toolbar.tsx";
 
 import { useAddBlockchainInfo, useGetQrInfoByBatchId } from "hooks/useQrCode";
-import { useState } from "react";
 
 import { useRouteMatch } from "react-router";
+import { useAppState } from "store";
 
 interface paramsProps {
   batchCode: string;
@@ -25,8 +18,8 @@ const PrintQrCode: React.FC = () => {
   const { batchCode } = match.params;
   const addBlockchainInfo = useAddBlockchainInfo();
   const { data } = useGetQrInfoByBatchId(batchCode);
+  const setLoading = useAppState((state) => state.setLoading);
 
-  const [showLoading, setShowLoading] = useState(false);
   return (
     <IonPage>
       <Toolbar title="View Product" defaultHref="/qrcode" />
@@ -40,21 +33,14 @@ const PrintQrCode: React.FC = () => {
         <IonButton
           expand="full"
           onClick={() => {
-            setShowLoading(true);
+            setLoading(true);
             addBlockchainInfo.mutate(data!, {
-              onSuccess: () => setShowLoading(false),
+              onSuccess: () => setLoading(false),
             });
           }}
         >
           Print QR Code
         </IonButton>
-        <IonLoading
-          cssClass="my-custom-class"
-          isOpen={showLoading}
-          onDidDismiss={() => setShowLoading(false)}
-          message={"Please wait..."}
-          duration={5000}
-        />
       </IonContent>
     </IonPage>
   );
