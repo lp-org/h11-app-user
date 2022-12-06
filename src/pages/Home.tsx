@@ -8,17 +8,12 @@ import {
   IonIcon,
   IonButton,
   IonLabel,
-  IonCheckbox,
   IonItem,
 } from "@ionic/react";
-import ProductBox from "components/ProductBox";
 
 import Toolbar from "components/Toolbar.tsx";
 import { scanCircle, personCircle } from "ionicons/icons";
-import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
-import { useProductBatchList } from "hooks/useProductBatch";
-import ProductBatchBox from "components/ProductBatchBox";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import Image from "components/Image";
 

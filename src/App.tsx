@@ -35,13 +35,6 @@ import ViewProduct from "pages/Product/ViewProduct";
 
 import Home from "pages/Home";
 
-import ProductBatch from "pages/ProductBatch";
-import SetupProductBatchStep1 from "pages/ProductBatch/SetupProductBatch/SetupProductBatchStep1";
-import SetupProductBatchStep2 from "pages/ProductBatch/SetupProductBatch/SetupProductBatchStep2";
-
-import QrCode from "pages/QrCode";
-import PrintQrCode from "pages/QrCode/PrintQrCode";
-import ViewQrCodeHistory from "pages/QrCode/ViewQrCodeHistory";
 import { homeOutline, personOutline, scanOutline } from "ionicons/icons";
 
 import MyScan from "pages/MyScan";
@@ -80,29 +73,6 @@ const App: React.FC = () => {
 
                 <Route exact path="/product/:code" component={ViewProduct} />
 
-                {/* Product Batch */}
-                <Route exact path="/productBatch" component={ProductBatch} />
-                <Route
-                  path="/productBatch/add"
-                  component={SetupProductBatchStep1}
-                />
-                <Route
-                  path="/productBatch/add-2"
-                  component={SetupProductBatchStep2}
-                />
-
-                {/* QR code */}
-                <Route exact path="/qrcode" component={QrCode} />
-                <Route
-                  exact
-                  path="/qrcode/:batchCode"
-                  component={PrintQrCode}
-                />
-                <Route
-                  exact
-                  path="/qrcodeHistory/:code"
-                  component={ViewQrCodeHistory}
-                />
                 {/* My Scan  */}
                 <Route path="/scan" component={MyScan} />
                 <Route
