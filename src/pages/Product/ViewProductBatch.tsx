@@ -18,12 +18,9 @@ const ViewProductBatch: React.FC = () => {
   const { data } = useGetProductBatchById(code);
   return (
     <IonPage>
-      <Toolbar title="View Product" defaultHref="/productBatch" />
+      <Toolbar title="View Product Batch" defaultHref="/productBatch" />
 
       <IonContent fullscreen className="ion-padding">
-        <IonItem lines="none">
-          <b>{data?.pbth_code}</b>
-        </IonItem>
         <ShowProductBatch item={data!} />
       </IonContent>
     </IonPage>

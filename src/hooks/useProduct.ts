@@ -57,7 +57,6 @@ export function useEditProduct() {
   const uploadImage = useUploadProductImage();
   return useMutation(
     async ({ id, payload }: { id: string; payload: AddProductProps }) => {
-      console.log(payload.prd_image?.substring(0, 3));
       if (payload.prd_image?.substring(0, 4) === "blob") {
         uploadImage.mutate({ id, filebody: payload.prd_image });
         //@ts-ignore

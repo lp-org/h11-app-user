@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import { request } from "utils/request";
 import { usePopUpMessage } from "./notification";
@@ -66,21 +66,30 @@ export function useGetQrInfoByBatchId(code: string) {
 }
 
 export function useScanResult(code: string) {
+  const popUpMsg = usePopUpMessage();
   const dispatchAddScanHistory = useScanHistoryStore(
     (state) => state.addScanHistory
   );
+  const queryClient = new QueryClient();
   return useQuery({
     queryKey: ["scanResult", code],
     queryFn: async (): Promise<QrInfo | null> => {
       if (code) {
-        const { data } = (await request.get(`/blockchain/verify/${code}`)).data;
+        const res = await request.get(`/blockchain/verify/${code}`);
 
-        return data;
+        if (res.data.code !== 200) {
+          popUpMsg(res.data.message, "error");
+          throw new Error(res.data.message);
+        }
+        return res.data.data;
       }
       return null;
     },
     onSuccess: (data) => {
-      if (data) dispatchAddScanHistory(data);
+      if (data) {
+        queryClient.removeQueries({ queryKey: ["scanHistory"] });
+        dispatchAddScanHistory(data);
+      }
     },
     enabled: !!code,
   });

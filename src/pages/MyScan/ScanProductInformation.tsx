@@ -27,7 +27,6 @@ const ScanProductInformation: React.FC = () => {
       // temp because no fix url
       var verifyValue = data.text.match(/verify\/([\s\S]*)$/);
       if (verifyValue) {
-        console.log(verifyValue[1]);
         setUrl(verifyValue[1]);
       }
     } else {
@@ -41,7 +40,9 @@ const ScanProductInformation: React.FC = () => {
 
       <IonContent fullscreen>
         {isLoading ? (
-          <IonSpinner name="circles"></IonSpinner>
+          <div className="fullheight xc">
+            <IonSpinner name="circles" className="ion-text-center"></IonSpinner>
+          </div>
         ) : (
           data && <ShowQrScanInformation item={data} />
         )}

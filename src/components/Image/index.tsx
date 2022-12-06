@@ -7,7 +7,6 @@ interface ProductBatchBoxProps {
   height?: number;
   width?: number;
   src: string | null;
-  rest?: HTMLAttributes<HTMLIonImgElement>;
 }
 
 const Image: React.FC<
@@ -16,17 +15,17 @@ const Image: React.FC<
   if (src) {
     return (
       <IonImg
-        src={src.replace("http", "https")}
-        style={{ ...rest.style, height, width }}
+        src={src.replace("http://", "https://")}
         {...rest}
+        style={{ ...rest.style, height, width }}
       />
     );
   } else {
     return (
       <IonImg
         src={fastFood}
-        style={{ ...rest.style, height, width }}
         {...rest}
+        style={{ ...rest.style, height, width }}
       />
     );
   }

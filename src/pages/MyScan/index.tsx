@@ -17,13 +17,24 @@ import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 
 import { scan } from "ionicons/icons";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 const MyScan: React.FC = () => {
   const history = useHistory();
+  const [queryName, setQueryName] = useState("");
   const historyList = useScanHistoryStore((state) => state.scanHistoryList);
+
+  const historyFilteredList = useMemo(() => {
+    return historyList.filter((el) => {
+      if (queryName) {
+        return (
+          el.bc_prd_name.toLowerCase().search(queryName.toLowerCase()) >= 0
+        );
+      } else return true;
+    });
+  }, [historyList, queryName]);
   const dispatchDeleteHistoryById = useScanHistoryStore(
     (state) => state.removeScanHistoryById
   );
@@ -36,8 +47,12 @@ const MyScan: React.FC = () => {
       <Toolbar title="My Scans" defaultHref="/" />
 
       <IonContent fullscreen>
-        <IonSearchbar placeholder="Search Product Name" />
-        {historyList.length > 0 && (
+        <IonSearchbar
+          placeholder="Search Product Name"
+          value={queryName}
+          onIonChange={(e) => setQueryName(e.target.value!)}
+        />
+        {historyFilteredList && historyFilteredList?.length > 0 && (
           <IonGrid fixed={true} style={{ marginLeft: 0 }}>
             <IonRow>
               <IonCol size="6" className="ion-text-left">
@@ -92,8 +107,8 @@ const MyScan: React.FC = () => {
                 )}
               </IonCol>
             </IonRow>
-            {historyList &&
-              historyList
+            {historyFilteredList &&
+              historyFilteredList
                 .sort((el, elj) => (el.key < elj.key ? 1 : -1))
                 ?.map((product) => (
                   <IonItem key={product.key}>
