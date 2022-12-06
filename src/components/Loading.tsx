@@ -1,6 +1,6 @@
-import { IonButton, IonLoading } from "@ionic/react";
+import { IonLoading } from "@ionic/react";
 
-import { Fragment, useCallback, useState } from "react";
+import { Fragment, useCallback } from "react";
 import { useAppState } from "store";
 
 const Loading: React.FC = () => {

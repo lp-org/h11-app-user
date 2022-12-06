@@ -3,8 +3,6 @@ import {
   IonCol,
   IonContent,
   IonGrid,
-  IonIcon,
-  IonImg,
   IonInput,
   IonItem,
   IonLabel,
@@ -14,8 +12,6 @@ import {
 } from "@ionic/react";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
-import { checkmark, cloudUpload, pencil, personCircle } from "ionicons/icons";
-import { FC, Fragment, useState } from "react";
 
 const Register: React.FC = () => {
   const formik = useFormik<{}>({

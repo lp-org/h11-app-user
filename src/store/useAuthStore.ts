@@ -1,6 +1,3 @@
-import dayjs from "dayjs";
-import { QrInfo } from "hooks/useQrCode";
-
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
@@ -31,7 +28,7 @@ export const useAuthStore = create<authStoreState>()(
           })),
       }),
       {
-        name: "auth ",
+        name: "auth-storage",
       }
     )
   )

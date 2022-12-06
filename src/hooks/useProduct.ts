@@ -1,4 +1,3 @@
-import { Photo } from "@capacitor/camera";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { environment } from "environment/environment";
 import { useHistory } from "react-router";
