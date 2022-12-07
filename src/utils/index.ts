@@ -40,7 +40,7 @@ export function processNutritionInfoToInputData(
       const unit = nutritionInfo.Serving[key].Size.replace(Size, "");
       const Daily_Value = parseFloat(nutritionInfo.Serving[key].Daily_Value);
       return {
-        Nutrition_type: key,
+        Nutrition_type: key.replace(/_/g, " "),
         Size,
         unit,
         Daily_Value,

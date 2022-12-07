@@ -16,7 +16,7 @@ import { scanCircle, personCircle } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import Image from "components/Image";
-
+import { Trans } from "@lingui/macro";
 const QuickAccessList = [
   { title: "Scan QR Code", path: "/scan", icon: scanCircle },
   { title: "My Profile", path: "/profile", icon: personCircle },
@@ -34,7 +34,9 @@ const Home: React.FC = () => {
         {/* Quick Access */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonText>
-            <h2>Quick Access</h2>
+            <h2>
+              <Trans>Quick Access</Trans>
+            </h2>
           </IonText>
           <IonRow>
             {QuickAccessList.map((el, i) => (

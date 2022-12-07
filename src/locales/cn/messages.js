@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:{"Quick Access":"快速访问"}};

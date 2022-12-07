@@ -47,6 +47,14 @@ import Login from "pages/Auth/Login";
 import Register from "pages/Auth/Register";
 import { useSession } from "hooks/useAuth";
 import Loading from "components/Loading";
+import { I18nProvider } from "components/i18n/I18nProvider";
+
+/**
+ * Load messages for requested locale and activate it.
+ * This function isn't part of the LinguiJS library because there are
+ * many ways how to load messages — from REST API, from file, from cache, etc.
+ */
+
 setupIonicReact({ rippleEffect: true, mode: "md" });
 
 const App: React.FC = () => {
@@ -63,52 +71,54 @@ const App: React.FC = () => {
   return (
     <IonApp>
       <IonReactRouter>
-        {isAuthed ? (
-          <Fragment>
-            <IonTabs>
-              <IonRouterOutlet>
-                <Route exact path="/" component={Home} />
-                {/* Product  */}
-                <Route exact path="/manageProduct" component={Product} />
+        <I18nProvider>
+          {isAuthed ? (
+            <Fragment>
+              <IonTabs>
+                <IonRouterOutlet>
+                  <Route exact path="/" component={Home} />
+                  {/* Product  */}
+                  <Route exact path="/manageProduct" component={Product} />
 
-                <Route exact path="/product/:code" component={ViewProduct} />
+                  <Route exact path="/product/:code" component={ViewProduct} />
 
-                {/* My Scan  */}
-                <Route path="/scan" component={MyScan} />
-                <Route
-                  path="/scanProductInformation"
-                  component={ScanProductInformation}
-                />
-                <Route
-                  path="/scanProductHistory/:key"
-                  component={MyScanProductDetail}
-                />
+                  {/* My Scan  */}
+                  <Route path="/scan" component={MyScan} />
+                  <Route
+                    path="/scanProductInformation"
+                    component={ScanProductInformation}
+                  />
+                  <Route
+                    path="/scanProductHistory/:key"
+                    component={MyScanProductDetail}
+                  />
 
-                {/* Profile  */}
-                <Route path="/profile" component={Profile} />
-              </IonRouterOutlet>
+                  {/* Profile  */}
+                  <Route path="/profile" component={Profile} />
+                </IonRouterOutlet>
 
-              <IonTabBar slot="bottom" color="primary">
-                <IonTabButton tab="tab1" href="/">
-                  <IonIcon icon={homeOutline} />
-                </IonTabButton>
-                <IonTabButton tab="tab3" href="/scan">
-                  <IonIcon icon={scanOutline} />
-                </IonTabButton>
-                <IonTabButton tab="tab4" href="/profile">
-                  <IonIcon src={personOutline} />
-                </IonTabButton>
-              </IonTabBar>
-            </IonTabs>
-          </Fragment>
-        ) : (
-          <IonRouterOutlet>
-            <Route exact path="/" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route render={() => <Redirect to="/" />} />
-          </IonRouterOutlet>
-        )}
-        <Loading />
+                <IonTabBar slot="bottom" color="primary">
+                  <IonTabButton tab="tab1" href="/">
+                    <IonIcon icon={homeOutline} />
+                  </IonTabButton>
+                  <IonTabButton tab="tab3" href="/scan">
+                    <IonIcon icon={scanOutline} />
+                  </IonTabButton>
+                  <IonTabButton tab="tab4" href="/profile">
+                    <IonIcon src={personOutline} />
+                  </IonTabButton>
+                </IonTabBar>
+              </IonTabs>
+            </Fragment>
+          ) : (
+            <IonRouterOutlet>
+              <Route exact path="/" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route render={() => <Redirect to="/" />} />
+            </IonRouterOutlet>
+          )}
+          <Loading />
+        </I18nProvider>
       </IonReactRouter>
     </IonApp>
   );

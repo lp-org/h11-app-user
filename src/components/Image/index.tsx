@@ -15,7 +15,11 @@ const Image: React.FC<
   if (src) {
     return (
       <IonImg
-        src={src.replace("http://", "https://")}
+        src={
+          src.substring(0, 7) === "http://"
+            ? src.replace("http://", "https://")
+            : src
+        }
         {...rest}
         style={{ ...rest.style, height, width }}
       />
