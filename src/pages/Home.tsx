@@ -17,7 +17,7 @@ import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 import { useProductBatchList } from "hooks/useProductBatch";
 import ProductBatchBox from "components/ProductBatchBox";
-
+import { Trans } from "@lingui/macro";
 const QuickAccessList = [
   { title: "Add New Product", path: "/product/add", icon: addCircle },
   { title: "Scan QR Code", path: "/scan", icon: scanCircle },
@@ -37,7 +37,9 @@ const Home: React.FC = () => {
         {/* Quick Access */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonText>
-            <h2>Quick Access</h2>
+            <h2>
+              <Trans>Quick Access</Trans>
+            </h2>
           </IonText>
           <IonRow>
             {QuickAccessList.map((el, i) => (
