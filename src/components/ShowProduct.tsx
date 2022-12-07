@@ -14,7 +14,7 @@ const ShowProduct: React.FC<ShowProductProps> = ({ item }) => {
       {item && (
         <IonGrid>
           <IonRow style={{ justifyContent: "center" }}>
-            <Image src={item.prd_image} width={200} />
+            {item.prd_image && <Image src={item.prd_image} width={200} />}
           </IonRow>
           <IonRow>
             <IonCol size="4" className="ion-text-right">

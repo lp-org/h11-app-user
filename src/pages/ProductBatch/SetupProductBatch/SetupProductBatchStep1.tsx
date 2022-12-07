@@ -13,6 +13,7 @@ import {
   IonDatetimeButton,
   IonModal,
   IonNote,
+  IonIcon,
 } from "@ionic/react";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
@@ -23,6 +24,8 @@ import { useHistory } from "react-router";
 import { AddProductBatchProps } from "types/productBatch";
 import dayjs from "dayjs";
 import { ProductBatchAddSchema } from "utils/validation";
+import "./index.css";
+import { calendar } from "ionicons/icons";
 const SetupProductBatchStep1: FC = () => {
   const history = useHistory();
 
@@ -76,6 +79,8 @@ const SetupProductBatchStep1: FC = () => {
               ></IonSelect>
               <IonItem fill="outline" className="ion-margin-bottom ion-invalid">
                 <IonSelect
+                  placeholder="Select Product"
+                  style={{ width: "95%" }}
                   onIonChange={(e) => {
                     formik.setFieldValue("pbth_prd_code", e.target.value);
                     formik.setFieldValue(
@@ -130,10 +135,7 @@ const SetupProductBatchStep1: FC = () => {
             <IonCol size="12">
               <IonLabel position="stacked">Manufactured Date:</IonLabel>
               <IonItem fill="outline" className="ion-margin-bottom">
-                <IonDatetimeButton
-                  datetime="pbth_manufactured_date"
-                  color={"dark"}
-                ></IonDatetimeButton>
+                <IonDatetimeButton datetime="pbth_manufactured_date"></IonDatetimeButton>
 
                 <IonModal keepContentsMounted={true}>
                   <IonDatetime
@@ -150,6 +152,13 @@ const SetupProductBatchStep1: FC = () => {
                     onIonChange={handleDateChange}
                   ></IonDatetime>
                 </IonModal>
+
+                <IonIcon
+                  slot="end"
+                  icon={calendar}
+                  color="gray"
+                  className="ion-margin-end"
+                />
               </IonItem>
             </IonCol>
             <IonCol size="12">
@@ -172,6 +181,13 @@ const SetupProductBatchStep1: FC = () => {
                     onIonChange={handleDateChange}
                   ></IonDatetime>
                 </IonModal>
+
+                <IonIcon
+                  slot="end"
+                  icon={calendar}
+                  className="ion-margin-end"
+                  color="gray"
+                />
               </IonItem>
             </IonCol>
             <IonButton type="submit" expand="block" class="ion-margin-top">

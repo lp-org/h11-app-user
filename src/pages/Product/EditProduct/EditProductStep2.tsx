@@ -16,7 +16,7 @@ import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { useGetProductById } from "hooks/useProduct";
 import { removeCircle } from "ionicons/icons";
-import { FC, Fragment } from "react";
+import { FC, Fragment, useMemo } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { processNutritionInfoToInputData } from "utils";
@@ -54,17 +54,20 @@ const EditProductStep2: FC = () => {
   const { data } = useGetProductById(code);
 
   const formik = useFormik<any>({
-    initialValues: data?.prd_nutrition_json
-      ? processNutritionInfoToInputData(data)
-      : templatePayload,
-    enableReinitialize: true,
+    initialValues: templatePayload,
     onSubmit: (values) => {
       dispatchProductEdit({ ...tempProductEdit!, prd_nutrition_json: values! });
 
       history.push(`/product/edit-3/${code}`);
     },
   });
-
+  useMemo(() => {
+    if (data?.prd_nutrition_json) {
+      formik.setValues(processNutritionInfoToInputData(data));
+    }
+  }, [data]);
+  console.log(data?.prd_nutrition_json);
+  console.log(formik.values);
   return (
     <IonPage>
       <Toolbar title="Edit Product" defaultHref={`/product/${code}`} />
@@ -113,11 +116,14 @@ const EditProductStep2: FC = () => {
                               icon={removeCircle}
                               color="gray"
                               onClick={() => {
-                                formik.values.Serving.splice(index, 1);
+                                console.log(index);
+                                formik.values[SERVING].splice(index, 1);
+
                                 formik.setValues({
                                   ...formik.values,
-                                  Serving: [...formik.values.Serving],
+                                  Serving: [...formik.values[SERVING]],
                                 });
+                                console.log(formik.values);
                               }}
                             />
                           </IonRow>
