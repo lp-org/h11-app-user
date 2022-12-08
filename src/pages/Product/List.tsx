@@ -54,7 +54,11 @@ const ProductList: React.FC = () => {
           <IonSearchbar />
           {products?.map((product) => (
             <IonItem key={product.prd_code}>
-              <Image src={product.prd_image} width={60} />
+              <Image
+                src={product.prd_image}
+                width={80}
+                className="ion-margin-end"
+              />
               <IonLabel
                 onClick={() => history.push(`/product/${product.prd_code}`)}
               >

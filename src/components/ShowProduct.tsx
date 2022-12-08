@@ -60,6 +60,18 @@ const ShowProduct: React.FC<ShowProductProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4" className="ion-text-right">
+              Expiry Period:
+            </IonCol>
+            <IonCol>
+              {item?.prd_expiry_period}
+              {" day"}
+              {item?.prd_expiry_period && item?.prd_expiry_period > 1
+                ? "s"
+                : ""}
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="4" className="ion-text-right">
               How to keep fresh:
             </IonCol>
             <IonCol>{item?.prd_keep_it_fresh}</IonCol>

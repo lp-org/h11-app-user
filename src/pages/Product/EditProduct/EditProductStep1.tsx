@@ -14,11 +14,13 @@ import {
 } from "@ionic/react";
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
+import { environment } from "environment/environment";
 import { useFormik } from "formik";
 import { usePopUpMessage } from "hooks/notification";
 import { useGetProductById } from "hooks/useProduct";
+import { useTakePicture } from "hooks/useTakePicture";
 import { cloudUpload } from "ionicons/icons";
-import { FC } from "react";
+import { FC, useMemo, useState } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { AddProductProps } from "types/product";
@@ -37,26 +39,6 @@ const EditProductStep1: FC = () => {
     (state) => state.setTempProductEdit
   );
 
-  const popUpMsg = usePopUpMessage();
-  const takePicture = async () => {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Uri,
-      });
-      await checkFile(image);
-      var imageUrl = image.webPath;
-
-      if (imageUrl) {
-        formik.setFieldValue("prd_image", imageUrl);
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        popUpMsg(error.message, "error");
-      }
-    }
-  };
   const formik = useFormik<AddProductProps>({
     initialValues: { ...data! },
     enableReinitialize: true,
@@ -65,7 +47,13 @@ const EditProductStep1: FC = () => {
       dispatchProductEdit(values);
     },
   });
-
+  const { takePicture, blob, photo } = useTakePicture();
+  useMemo(() => {
+    var imageUrl = photo?.webPath;
+    if (imageUrl) {
+      formik.setFieldValue("prd_image", photo?.webPath);
+    }
+  }, [photo]);
   if (!formik.values) return <></>;
   return (
     <IonPage>
@@ -201,6 +189,11 @@ const EditProductStep1: FC = () => {
                   <IonIcon icon={cloudUpload} className="ion-margin-end" />
                   Upload Product Photo
                 </IonButton>
+                <IonItem>
+                  <small>
+                    Max Size: {environment.fileLimit / 1_000_000} mb
+                  </small>
+                </IonItem>
                 {formik.values.prd_image && (
                   <Image src={formik.values.prd_image} />
                 )}

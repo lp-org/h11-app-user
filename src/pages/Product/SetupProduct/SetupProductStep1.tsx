@@ -14,42 +14,21 @@ import {
 import { useFormik } from "formik";
 import { useGetProductId } from "hooks/useProduct";
 import { cloudUpload } from "ionicons/icons";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
 import { AddProductProps } from "types/product";
 
-import { Camera, CameraResultType } from "@capacitor/camera";
-
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
-import { checkFile } from "utils";
-import { usePopUpMessage } from "hooks/notification";
+
+import { useTakePicture } from "hooks/useTakePicture";
+import { environment } from "environment/environment";
 
 const SetupProductStep1: FC = () => {
   const history = useHistory();
   const { data: productId } = useGetProductId();
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
-  const popUpMsg = usePopUpMessage();
-  const takePicture = async () => {
-    try {
-      const image = await Camera.getPhoto({
-        quality: 90,
-        allowEditing: true,
-        resultType: CameraResultType.Uri,
-      });
-      await checkFile(image);
-      var imageUrl = image.webPath;
-
-      if (imageUrl) {
-        formik.setFieldValue("prd_image", imageUrl);
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        popUpMsg(error.message, "error");
-      }
-    }
-  };
 
   const formik = useFormik<AddProductProps>({
     initialValues: tempProductSetup
@@ -72,6 +51,13 @@ const SetupProductStep1: FC = () => {
       history.push("/product/add-2");
     },
   });
+  const { takePicture, blob, photo } = useTakePicture();
+  useMemo(() => {
+    var imageUrl = photo?.webPath;
+    if (imageUrl) {
+      formik.setFieldValue("prd_image", photo?.webPath);
+    }
+  }, [photo]);
 
   const dispatchProductSetup = useProductStore(
     (state) => state.setTempProductSetup
@@ -213,6 +199,11 @@ const SetupProductStep1: FC = () => {
                   <IonIcon icon={cloudUpload} className="ion-margin-end" />
                   Upload Product Photo
                 </IonButton>
+                <IonItem>
+                  <small>
+                    Max Size: {environment.fileLimit / 1_000_000} mb
+                  </small>
+                </IonItem>
                 {formik.values.prd_image && (
                   <Image src={formik.values.prd_image} />
                 )}
