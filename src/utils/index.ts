@@ -65,6 +65,6 @@ export async function checkFile(image: Photo) {
     if (blob.size > fileLimit) {
       throw new Error("File size exceeded");
     }
-    return true;
+    return blob;
   }
 }

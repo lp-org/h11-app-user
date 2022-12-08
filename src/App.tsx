@@ -61,8 +61,7 @@ const App: React.FC = () => {
   const { isAuthed } = useSession();
   useEffect(() => {
     CapApp.addListener("backButton", ({ canGoBack }) => {
-      if (canGoBack) window.history.back();
-      else CapApp.exitApp();
+      if (!canGoBack) CapApp.exitApp();
     });
     return () => {
       CapApp.removeAllListeners();

@@ -115,7 +115,7 @@ const MyScan: React.FC = () => {
                     {isSelection && (
                       <IonCheckbox
                         slot="start"
-                        style={{ margin: 0 }}
+                        style={{ margin: 0, marginRight: 8 }}
                         checked={selectRows.includes(product.key)}
                         onIonChange={(e) => {
                           if (e.target.checked) {
@@ -128,7 +128,11 @@ const MyScan: React.FC = () => {
                         }}
                       ></IonCheckbox>
                     )}
-                    <Image src={product.bc_prd_image} width={80} />
+                    <Image
+                      src={product.bc_prd_image}
+                      width={80}
+                      className="ion-margin-end"
+                    />
                     <IonLabel
                       onClick={() => {
                         history.push(`/scanProductHistory/${product.key}`);
