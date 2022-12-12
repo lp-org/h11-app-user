@@ -11,12 +11,13 @@ import {
   IonContent,
   IonGrid,
   IonPage,
+  IonNote,
 } from "@ionic/react";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { useGetProductById } from "hooks/useProduct";
 import { removeCircle } from "ionicons/icons";
-import { FC, Fragment, useMemo } from "react";
+import { FC, Fragment, useCallback, useMemo } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { processNutritionInfoToInputData } from "utils";
@@ -56,9 +57,14 @@ const EditProductStep2: FC = () => {
   const formik = useFormik<any>({
     initialValues: templatePayload,
     onSubmit: (values) => {
-      dispatchProductEdit({ ...tempProductEdit!, prd_nutrition_json: values! });
+      if (errorMessage()) {
+        dispatchProductEdit({
+          ...tempProductEdit!,
+          prd_nutrition_json: values!,
+        });
 
-      history.push(`/product/edit-3/${code}`);
+        history.push(`/product/edit-3/${code}`);
+      }
     },
   });
   useMemo(() => {
@@ -66,8 +72,26 @@ const EditProductStep2: FC = () => {
       formik.setValues(processNutritionInfoToInputData(data));
     }
   }, [data]);
-  console.log(data?.prd_nutrition_json);
-  console.log(formik.values);
+  const errorMessage = useCallback(
+    (num?: number) => {
+      const names: string[] = [];
+      let valid = true;
+      formik.values.Serving.forEach(
+        (el: { Nutrition_type: string }, index: number) => {
+          if (!names.includes(el.Nutrition_type)) {
+            names.push(el.Nutrition_type);
+          } else if (index === num) {
+            valid = false;
+          } else if (num === undefined) {
+            valid = false;
+          }
+        }
+      );
+
+      return valid;
+    },
+    [formik.values]
+  );
   return (
     <IonPage>
       <Toolbar title="Edit Product" defaultHref={`/product/${code}`} />
@@ -129,7 +153,12 @@ const EditProductStep2: FC = () => {
                           </IonRow>
                         </IonLabel>
 
-                        <IonItem fill="outline" className="ion-margin-bottom">
+                        <IonItem
+                          fill="outline"
+                          className={`ion-margin-bottom ${
+                            !errorMessage(index) && "ion-invalid"
+                          }`}
+                        >
                           <IonInput
                             required
                             name={`${SERVING}[${index}]["Nutrition_type"]`}
@@ -138,6 +167,15 @@ const EditProductStep2: FC = () => {
                               formik.values[SERVING][index]["Nutrition_type"]
                             }
                           ></IonInput>
+                          <IonNote slot="error">
+                            {(function () {
+                              if (!errorMessage(index)) {
+                                return "Duplicate Nutrition Type";
+                              } else {
+                                return "";
+                              }
+                            })()}
+                          </IonNote>
                         </IonItem>
                       </IonCol>
                       <IonCol size="12">
@@ -153,6 +191,7 @@ const EditProductStep2: FC = () => {
                             required
                             placeholder="Amount"
                             type="number"
+                            step="0.01"
                             name={`${SERVING}[${index}]["Size"]`}
                             onIonChange={formik.handleChange}
                             value={formik.values[SERVING][index]["Size"]}

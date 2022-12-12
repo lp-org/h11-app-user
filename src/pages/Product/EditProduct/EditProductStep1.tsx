@@ -1,4 +1,3 @@
-import { Camera, CameraResultType } from "@capacitor/camera";
 import {
   IonRow,
   IonCol,
@@ -11,20 +10,20 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
+  IonNote,
 } from "@ionic/react";
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 import { environment } from "environment/environment";
 import { useFormik } from "formik";
-import { usePopUpMessage } from "hooks/notification";
 import { useGetProductById } from "hooks/useProduct";
 import { useTakePicture } from "hooks/useTakePicture";
 import { cloudUpload } from "ionicons/icons";
-import { FC, useMemo, useState } from "react";
+import { FC, useMemo } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { AddProductProps } from "types/product";
-import { checkFile } from "utils";
+import { ProductAddSchema } from "utils/validation";
 
 interface paramsProps {
   code: string;
@@ -42,6 +41,7 @@ const EditProductStep1: FC = () => {
   const formik = useFormik<AddProductProps>({
     initialValues: { ...data! },
     enableReinitialize: true,
+    validationSchema: ProductAddSchema,
     onSubmit: (values) => {
       history.push(`/product/edit-2/${code}`);
       dispatchProductEdit(values);
@@ -157,7 +157,12 @@ const EditProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonLabel position="stacked">Expiry Period</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem
+                  fill="outline"
+                  className={`ion-margin-bottom ${
+                    formik.errors.prd_expiry_period && "ion-invalid"
+                  }`}
+                >
                   <IonInput
                     required
                     type="number"
@@ -166,6 +171,9 @@ const EditProductStep1: FC = () => {
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_expiry_period}
                   ></IonInput>
+                  <IonNote slot="error">
+                    {formik.errors.prd_expiry_period}
+                  </IonNote>
                 </IonItem>
               </IonCol>
 

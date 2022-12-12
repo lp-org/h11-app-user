@@ -142,12 +142,9 @@ const SetupProductBatchStep1: FC = () => {
                     id="pbth_manufactured_date"
                     name="pbth_manufactured_date"
                     presentation="date"
-                    value={
-                      formik.values.pbth_manufactured_date ||
-                      dayjs(
-                        selectedProductBatch?.pbth_manufactured_date
-                      ).format("YYYY-MM-DDTHH:mmZ")
-                    }
+                    value={dayjs(
+                      selectedProductBatch?.pbth_manufactured_date
+                    ).format("YYYY-MM-DDTHH:mmZ")}
                     max={dayjs().add(100, "years").year().toString()}
                     onIonChange={handleDateChange}
                   ></IonDatetime>
@@ -171,12 +168,9 @@ const SetupProductBatchStep1: FC = () => {
                     id="pbth_expiry_date"
                     name="pbth_expiry_date"
                     presentation="date"
-                    value={
-                      formik.values.pbth_expiry_date ||
-                      dayjs(selectedProductBatch?.pbth_expiry_date).format(
-                        "YYYY-MM-DDTHH:mmZ"
-                      )
-                    }
+                    value={dayjs(selectedProductBatch?.pbth_expiry_date).format(
+                      "YYYY-MM-DDTHH:mmZ"
+                    )}
                     max={dayjs().add(100, "years").year().toString()}
                     onIonChange={handleDateChange}
                   ></IonDatetime>

@@ -6,7 +6,7 @@ export function processNutritionInfoPayload(
   payload: AddProductProps
 ): AddProductProps {
   const Serving = {} as any;
-  if (payload.prd_nutrition_json.Serving)
+  if (payload.prd_nutrition_json?.Serving)
     payload.prd_nutrition_json.Serving.forEach((el: any) => {
       Serving[el.Nutrition_type] = {
         Size: el.Size + el.unit,

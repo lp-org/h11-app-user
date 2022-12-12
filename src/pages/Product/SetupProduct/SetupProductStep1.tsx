@@ -10,6 +10,7 @@ import {
   IonContent,
   IonGrid,
   IonPage,
+  IonNote,
 } from "@ionic/react";
 import { useFormik } from "formik";
 import { useGetProductId } from "hooks/useProduct";
@@ -24,6 +25,7 @@ import Toolbar from "components/Toolbar.tsx";
 
 import { useTakePicture } from "hooks/useTakePicture";
 import { environment } from "environment/environment";
+import { ProductAddSchema } from "utils/validation";
 
 const SetupProductStep1: FC = () => {
   const history = useHistory();
@@ -31,26 +33,33 @@ const SetupProductStep1: FC = () => {
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
 
   const formik = useFormik<AddProductProps>({
-    initialValues: tempProductSetup
-      ? { ...tempProductSetup, prd_code: productId! }
-      : {
-          prd_code: productId!,
-          prd_expiry_period: null,
-          prd_flavour: "",
-          prd_ingredients: "",
-          prd_name: "",
-          prd_keep_it_fresh: "",
-          prd_nutrition_json: null,
-          prd_storage_instructions: "",
-          prd_category: "",
-          prd_type: "",
-          prd_image: "",
-        },
+    initialValues: {
+      prd_code: "",
+      prd_expiry_period: null,
+      prd_flavour: "",
+      prd_ingredients: "",
+      prd_name: "",
+      prd_keep_it_fresh: "",
+      prd_nutrition_json: null,
+      prd_storage_instructions: "",
+      prd_category: "",
+      prd_type: "",
+      prd_image: "",
+    },
     enableReinitialize: true,
+    validationSchema: ProductAddSchema,
+
     onSubmit: (values) => {
       history.push("/product/add-2");
     },
   });
+  useEffect(() => {
+    if (tempProductSetup) {
+      formik.setValues(tempProductSetup);
+    }
+    formik.setFieldValue("prd_code", productId);
+  }, [productId]);
+
   const { takePicture, blob, photo } = useTakePicture();
   useMemo(() => {
     var imageUrl = photo?.webPath;
@@ -167,7 +176,12 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonLabel position="stacked">Expiry Period</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem
+                  fill="outline"
+                  className={`ion-margin-bottom ${
+                    formik.errors.prd_expiry_period && "ion-invalid"
+                  }`}
+                >
                   <IonInput
                     required
                     type="number"
@@ -176,6 +190,9 @@ const SetupProductStep1: FC = () => {
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_expiry_period}
                   ></IonInput>
+                  <IonNote slot="error">
+                    {formik.errors.prd_expiry_period}
+                  </IonNote>
                 </IonItem>
               </IonCol>
 
@@ -189,6 +206,7 @@ const SetupProductStep1: FC = () => {
                     placeholder="Enter instructions for keeping the food product"
                     name="prd_keep_it_fresh"
                     onIonChange={formik.handleChange}
+                    autoGrow
                     value={formik.values.prd_keep_it_fresh}
                   ></IonTextarea>
                 </IonItem>
