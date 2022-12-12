@@ -35,7 +35,7 @@ const SetupProductStep1: FC = () => {
   const formik = useFormik<AddProductProps>({
     initialValues: {
       prd_code: "",
-      prd_expiry_period: null,
+      prd_expiry_period: 0,
       prd_flavour: "",
       prd_ingredients: "",
       prd_name: "",
