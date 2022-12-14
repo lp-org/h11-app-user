@@ -1,3 +1,4 @@
+import { IonCard } from "@ionic/react";
 import { useHistory } from "react-router";
 import { Product } from "../types/product";
 import Image from "./Image";
@@ -9,11 +10,9 @@ interface ProductBoxProps {
 const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
   const history = useHistory();
   return (
-    <div
+    <IonCard
       onClick={() => history.push(`/product/${item.prd_code}`)}
       style={{
-        borderColor: "#999999",
-        border: "solid 1px",
         position: "relative",
         margin: 0,
         borderRadius: 10,
@@ -43,7 +42,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
           <small>Batch: {item.prd_name} </small>
         </div>
       </div>
-    </div>
+    </IonCard>
   );
 };
 

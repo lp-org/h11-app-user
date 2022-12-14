@@ -11,7 +11,7 @@ import Toolbar from "components/Toolbar.tsx";
 import { chevronForward } from "ionicons/icons";
 import { useHistory } from "react-router";
 
-const Products: React.FC = () => {
+const Manage: React.FC = () => {
   const history = useHistory();
   return (
     <IonPage>
@@ -40,4 +40,4 @@ const Products: React.FC = () => {
   );
 };
 
-export default Products;
+export default Manage;

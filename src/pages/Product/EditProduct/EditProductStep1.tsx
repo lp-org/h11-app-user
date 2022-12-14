@@ -184,6 +184,7 @@ const EditProductStep1: FC = () => {
                 <IonItem fill="outline" className="ion-margin-bottom">
                   <IonTextarea
                     required
+                    autoGrow
                     placeholder="Enter instructions for keeping the food product"
                     name="prd_keep_it_fresh"
                     onIonChange={formik.handleChange}

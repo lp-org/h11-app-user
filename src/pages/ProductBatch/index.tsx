@@ -24,8 +24,8 @@ const ProductBatch: React.FC = () => {
     <IonPage>
       <Toolbar title="Product Batch" defaultHref="/" />
 
-      <IonContent fullscreen>
-        <IonList lines="full" className="ion-padding">
+      <IonContent fullscreen className="ion-padding">
+        <IonList lines="full" style={{ background: "transparent" }}>
           <IonSearchbar />
           {products?.map((product) => (
             <IonItem key={product.pbth_code}>

@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonContent,
   IonFab,
   IonFabButton,
@@ -32,7 +33,15 @@ const ProductList: React.FC = () => {
   }
   return (
     <IonPage>
-      <Toolbar title="Product" defaultHref="/" />
+      <Toolbar
+        title="Product List"
+        defaultHref="/"
+        action={
+          <IonButton fill="solid">
+            <IonIcon slot="end" icon={add} style={{ color: "#fff" }} />
+          </IonButton>
+        }
+      />
 
       <IonContent fullscreen>
         <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>

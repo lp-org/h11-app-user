@@ -3,6 +3,7 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-background-color: #fffdfa;
   /** primary **/
   --ion-color-primary: #fcaf3c;
   --ion-color-primary-rgb: 252, 175, 60;
@@ -12,12 +13,12 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-primary-tint: #fcb750;
 
   /** secondary **/
-  --ion-color-secondary: #3dc2ff;
-  --ion-color-secondary-rgb: 61, 194, 255;
+  --ion-color-secondary: #1890ff;
+  --ion-color-secondary-rgb: 24, 144, 255;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #36abe0;
-  --ion-color-secondary-tint: #50c8ff;
+  --ion-color-secondary-shade: #157fe0;
+  --ion-color-secondary-tint: #2f9bff;
 
   /** tertiary **/
   --ion-color-tertiary: #5260ff;
@@ -109,6 +110,10 @@ http://ionicframework.com/docs/theming/ */
   border-color: #dcdcdc;
   border-radius: 10px;
   width: 100%;
+}
+
+ion-toolbar {
+  --background: #fffdfa;
 }
 
 ion-button[shape="round"] {
