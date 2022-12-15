@@ -19,6 +19,7 @@ import { useHistory } from "react-router";
 import { useProductBatchList } from "hooks/useProductBatch";
 import ProductBatchBox from "components/ProductBatchBox";
 import { Trans } from "@lingui/macro";
+
 const QuickAccessList = [
   { title: "Add New Product", path: "/product/add", icon: addCircle },
   { title: "Scan QR Code", path: "/scan", icon: scanCircle },
@@ -109,8 +110,8 @@ const Home: React.FC = () => {
                     <IonRow>
                       <IonCol size="12">
                         <IonIcon
-                          icon={scanCircle}
-                          style={{ fontSize: "50px" }}
+                          src="/assets/icon/scan.svg"
+                          style={{ fontSize: "40px", marginTop: 8 }}
                           color="primary"
                         />
                       </IonCol>

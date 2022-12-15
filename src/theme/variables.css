@@ -3,6 +3,7 @@ http://ionicframework.com/docs/theming/ */
 
 /** Ionic CSS Variables **/
 :root {
+  --ion-text-color: #0e314c;
   --ion-background-color: #fffdfa;
   /** primary **/
   --ion-color-primary: #fcaf3c;
@@ -76,7 +77,7 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 
-  --ion-color-gray: #dcdcdc;
+  --ion-color-gray: #f8f8f8;
   --ion-color-gray-rgb: 220, 220, 220;
   --ion-color-gray-contrast: #000000;
   --ion-color-gray-contrast-rgb: 0, 0, 0;
@@ -97,6 +98,10 @@ http://ionicframework.com/docs/theming/ */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.text-white {
+  color: #fff;
 }
 
 .required:after {
@@ -120,16 +125,6 @@ ion-button[shape="round"] {
   --border-radius: 20px;
 }
 
-ion-item {
-  --inner-padding-end: 0px;
-  --height: 100%;
-  /* --padding-right: 0px; */
-}
-
-ion-searchbar input {
-  --border-radius: 35px;
-}
-
 .fullheight {
   height: 100%;
 }
@@ -138,4 +133,23 @@ ion-searchbar input {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+ion-searchbar input {
+  --background: #f4f4f4;
+  --border-radius: 4px;
+}
+
+ion-input.custom,
+ion-textarea.custom {
+  --background: #f4f4f4;
+  --padding-start: 10px;
+  --placeholder-color: #999999;
+  --placeholder-opacity: 0.8;
+}
+.item-label-stacked.sc-ion-input-ios-h,
+.item-label-stacked .sc-ion-input-ios-h,
+.item-label-floating.sc-ion-input-ios-h,
+.item-label-floating .sc-ion-input-ios-h {
+  --padding-start: 8px;
 }

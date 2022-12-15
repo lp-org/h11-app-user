@@ -17,20 +17,20 @@ const Manage: React.FC = () => {
     <IonPage>
       <Toolbar title="Product" defaultHref="/" />
       <IonContent fullscreen>
-        <IonList lines="full">
-          <IonItem>
+        <IonList>
+          <IonItem class="ion-margin">
             <IonLabel onClick={() => history.push("/product")}>
               Product List
             </IonLabel>
             <IonIcon icon={chevronForward} />
           </IonItem>
-          <IonItem>
+          <IonItem class="ion-margin">
             <IonLabel onClick={() => history.push("/productBatch")}>
               Product Batch
             </IonLabel>
             <IonIcon icon={chevronForward} />
           </IonItem>
-          <IonItem>
+          <IonItem class="ion-margin">
             <IonLabel onClick={() => history.push("/qrcode")}>QR Code</IonLabel>
             <IonIcon icon={chevronForward} />
           </IonItem>

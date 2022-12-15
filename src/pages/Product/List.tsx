@@ -1,8 +1,6 @@
 import {
   IonButton,
   IonContent,
-  IonFab,
-  IonFabButton,
   IonIcon,
   IonItem,
   IonLabel,
@@ -37,8 +35,8 @@ const ProductList: React.FC = () => {
         title="Product List"
         defaultHref="/"
         action={
-          <IonButton fill="solid">
-            <IonIcon slot="end" icon={add} style={{ color: "#fff" }} />
+          <IonButton fill="solid" onClick={() => history.push("/product/add")}>
+            <IonIcon icon={add} style={{ color: "#fff" }} />
           </IonButton>
         }
       />
@@ -48,7 +46,7 @@ const ProductList: React.FC = () => {
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
 
-        <IonSegment value="default">
+        <IonSegment value="default" color="primary">
           <IonSegmentButton value="default">
             <IonLabel className="ion-text-capitalize">Active Products</IonLabel>
           </IonSegmentButton>
@@ -81,16 +79,6 @@ const ProductList: React.FC = () => {
           ))}
         </IonList>
       </IonContent>
-      <IonFab
-        slot="fixed"
-        vertical="bottom"
-        horizontal="end"
-        onClick={() => history.push("/product/add")}
-      >
-        <IonFabButton>
-          <IonIcon icon={add}></IonIcon>
-        </IonFabButton>
-      </IonFab>
     </IonPage>
   );
 };

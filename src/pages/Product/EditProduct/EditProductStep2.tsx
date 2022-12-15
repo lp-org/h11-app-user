@@ -22,6 +22,7 @@ import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { processNutritionInfoToInputData } from "utils";
 import { SERVING } from "utils/enum";
+import EditSteppers from "./EditSteppers";
 
 interface paramsProps {
   code: string;
@@ -94,13 +95,21 @@ const EditProductStep2: FC = () => {
   );
   return (
     <IonPage>
-      <Toolbar title="Edit Product" defaultHref={`/product/${code}`} />
+      <Toolbar
+        title="Edit Product"
+        defaultHref={`/product/${code}`}
+        action={
+          <IonButton onClick={() => history.push(`/product/${code}`)}>
+            <IonIcon src={"/assets/icon/manage.svg"} />
+          </IonButton>
+        }
+      />
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div className="ion-margin-bottom">
-            <b>Nutrition Facts Edit ( 2 of 2 )</b>
+            <b>Nutrition Facts Setup </b>
           </div>
-
+          <EditSteppers step={2} />
           <IonRow>
             {formik.values && (
               <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>

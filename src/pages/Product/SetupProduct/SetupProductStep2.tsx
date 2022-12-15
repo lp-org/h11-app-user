@@ -19,6 +19,7 @@ import { removeCircle } from "ionicons/icons";
 import { FC, Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
+import SteupSteppers from "./SteupSteppers";
 
 const templatePayload = {
   Serving_Size: "",
@@ -97,13 +98,21 @@ const SetupProductStep2: FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Setup Product" defaultHref="/product" />
+      <Toolbar
+        title="Setup Product"
+        defaultHref="/product"
+        action={
+          <IonButton onClick={() => history.push("/product")}>
+            <IonIcon src={"/assets/icon/manage.svg"} />
+          </IonButton>
+        }
+      />
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div className="ion-margin-bottom">
-            <b>Nutrition Facts ( 2 of 2 )</b>
+            <b>Nutrition Facts Setup </b>
           </div>
-
+          <SteupSteppers step={2} />
           <IonRow>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
               {Object.entries(formik.values).map(([key]) => (

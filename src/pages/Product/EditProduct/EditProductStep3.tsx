@@ -1,25 +1,37 @@
-import { IonButton, IonContent, IonGrid, IonPage } from "@ionic/react";
+import { IonButton, IonContent, IonGrid, IonIcon, IonPage } from "@ionic/react";
 import ShowProduct from "components/ShowProduct";
 import Toolbar from "components/Toolbar.tsx";
 import { useEditProduct } from "hooks/useProduct";
 import { code } from "ionicons/icons";
 import { FC } from "react";
+import { useHistory } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { processNutritionInfoPayload } from "utils";
+import EditSteppers from "./EditSteppers";
 
 const EditProductStep3: FC = () => {
   const productPreview = useProductWithoutLsStore(
     (state) => state.tempProductEdit
   );
   const productAdd = useEditProduct();
+  const history = useHistory();
   return (
     <IonPage>
-      <Toolbar title="Edit Product" defaultHref={`/product/${code}`} />
+      <Toolbar
+        title="Edit Product"
+        defaultHref={`/product/${code}`}
+        action={
+          <IonButton onClick={() => history.push(`/product/${code}`)}>
+            <IonIcon src={"/assets/icon/manage.svg"} />
+          </IonButton>
+        }
+      />
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div className="ion-margin-bottom">
-            <b>Food Product Information ( 1 of 2 )</b>
+            <b>Preview</b>
           </div>
+          <EditSteppers step={3} />
           {productPreview && (
             <ShowProduct item={processNutritionInfoPayload(productPreview)} />
           )}

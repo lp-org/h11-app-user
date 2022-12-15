@@ -19,11 +19,12 @@ import { useFormik } from "formik";
 import { useGetProductById } from "hooks/useProduct";
 import { useTakePicture } from "hooks/useTakePicture";
 import { cloudUpload } from "ionicons/icons";
-import { FC, useMemo } from "react";
+import { FC, Fragment, useMemo } from "react";
 import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { AddProductProps } from "types/product";
 import { ProductAddSchema } from "utils/validation";
+import EditSteppers from "./EditSteppers";
 
 interface paramsProps {
   code: string;
@@ -57,19 +58,28 @@ const EditProductStep1: FC = () => {
   if (!formik.values) return <></>;
   return (
     <IonPage>
-      <Toolbar title="Edit Product" defaultHref={`/product/${code}`} />
+      <Toolbar
+        title="Edit Product"
+        defaultHref={`/product/${code}`}
+        action={
+          <IonButton onClick={() => history.push(`/product/${code}`)}>
+            <IonIcon src={"/assets/icon/manage.svg"} />
+          </IonButton>
+        }
+      />
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
-          <div className="ion-margin-bottom">
-            <b>Food Product Information ( 1 of 2 )</b>
+          <div className="ion-no-padding">
+            <b>Product Information Setup </b>
           </div>
-
+          <EditSteppers step={1} />
           <IonRow>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
               <IonCol size="12">
-                <IonLabel position="fixed">Product ID</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Product ID</IonLabel>
                   <IonInput
+                    className="custom"
                     disabled
                     name="prd_code"
                     onIonChange={formik.handleChange}
@@ -78,9 +88,10 @@ const EditProductStep1: FC = () => {
                 </IonItem>
               </IonCol>
               <IonCol size="12">
-                <IonLabel position="fixed">Product Name</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Product Name</IonLabel>
                   <IonInput
+                    className="custom"
                     required
                     placeholder="Enter Product Name"
                     name="prd_name"
@@ -91,9 +102,10 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonLabel position="stacked">Product Category</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Product Category</IonLabel>
                   <IonInput
+                    className="custom"
                     required
                     placeholder="Enter food category"
                     name="prd_category"
@@ -104,9 +116,10 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonLabel position="stacked">Product Type</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Product Type</IonLabel>
                   <IonInput
+                    className="custom"
                     required
                     placeholder="Enter food type"
                     name="prd_type"
@@ -117,9 +130,10 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonLabel position="stacked">Flavour</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Flavour</IonLabel>
                   <IonInput
+                    className="custom"
                     required
                     placeholder="Enter flavour"
                     name="prd_flavour"
@@ -130,9 +144,10 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonLabel position="stacked">Storage Instructions: </IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Storage Instructions: </IonLabel>
                   <IonInput
+                    className="custom"
                     required
                     placeholder="Enter instructions"
                     name="prd_storage_instructions"
@@ -143,9 +158,10 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonLabel position="stacked">Ingredients</IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Ingredients</IonLabel>
                   <IonInput
+                    className="custom"
                     required
                     placeholder="Enter ingredients in yoour food products"
                     name="prd_ingredients"
@@ -156,14 +172,15 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonLabel position="stacked">Expiry Period</IonLabel>
                 <IonItem
-                  fill="outline"
-                  className={`ion-margin-bottom ${
+                  lines="none"
+                  className={`ion-no-padding ${
                     formik.errors.prd_expiry_period && "ion-invalid"
                   }`}
                 >
+                  <IonLabel position="stacked">Expiry Period</IonLabel>
                   <IonInput
+                    className="custom"
                     required
                     type="number"
                     placeholder="Enter Period"
@@ -178,11 +195,12 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonLabel position="stacked">
-                  How to keep product fresh:
-                </IonLabel>
-                <IonItem fill="outline" className="ion-margin-bottom">
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">
+                    How to keep product fresh:
+                  </IonLabel>
                   <IonTextarea
+                    className="custom"
                     required
                     autoGrow
                     placeholder="Enter instructions for keeping the food product"
@@ -194,25 +212,46 @@ const EditProductStep1: FC = () => {
               </IonCol>
 
               <IonCol size="12">
-                <IonButton onClick={() => takePicture()} color="gray">
-                  <IonIcon icon={cloudUpload} className="ion-margin-end" />
-                  Upload Product Photo
-                </IonButton>
-                <IonItem>
-                  <small>
-                    Max Size: {environment.fileLimit / 1_000_000} mb
-                  </small>
+                <IonItem lines="none" className="ion-no-padding">
+                  <IonLabel position="stacked">Upload Product Photo</IonLabel>
+                  {!formik.values.prd_image ? (
+                    <Fragment>
+                      <IonButton
+                        onClick={() => takePicture()}
+                        color="light"
+                        style={{ height: "160px", width: "160px" }}
+                      >
+                        <IonIcon
+                          icon={cloudUpload}
+                          className="ion-margin-end"
+                          style={{
+                            fontSize: "100px",
+
+                            margin: "auto",
+                            color: "gray",
+                          }}
+                        />
+                        {/* <small style={{ color: "gray" }}>
+                      Max Size: {environment.fileLimit / 1_000_000} mb
+                    </small> */}
+                      </IonButton>
+                      <small style={{ color: "#999999" }}>
+                        Optional: Upload product photo to showcase the product
+                      </small>
+                    </Fragment>
+                  ) : (
+                    <Image
+                      src={formik.values.prd_image}
+                      onClick={() => takePicture()}
+                    />
+                  )}
                 </IonItem>
-                {formik.values.prd_image && (
-                  <Image src={formik.values.prd_image} />
-                )}
               </IonCol>
 
               <IonButton
-                shape="round"
                 type="submit"
                 expand="block"
-                class="ion-margin-top"
+                className="ion-margin-top text-white"
               >
                 Next
               </IonButton>
