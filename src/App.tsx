@@ -35,7 +35,7 @@ import ViewProduct from "pages/Product/ViewProduct";
 
 import Home from "pages/Home";
 
-import { homeOutline, personOutline, scanOutline } from "ionicons/icons";
+import { home, person, scan } from "ionicons/icons";
 
 import MyScan from "pages/MyScan";
 import ScanProductInformation from "pages/MyScan/ScanProductInformation";
@@ -48,6 +48,8 @@ import Register from "pages/Auth/Register";
 import { useSession } from "hooks/useAuth";
 import Loading from "components/Loading";
 import { I18nProvider } from "components/i18n/I18nProvider";
+import CheckRoute from "components/CheckRoute";
+import { useAppState } from "store";
 
 /**
  * Load messages for requested locale and activate it.
@@ -55,10 +57,11 @@ import { I18nProvider } from "components/i18n/I18nProvider";
  * many ways how to load messages — from REST API, from file, from cache, etc.
  */
 
-setupIonicReact({ rippleEffect: true, mode: "md" });
+setupIonicReact({ rippleEffect: true, mode: "ios" });
 
 const App: React.FC = () => {
   const { isAuthed } = useSession();
+  const showTab = useAppState((state) => state.showTab);
   useEffect(() => {
     CapApp.addListener("backButton", ({ canGoBack }) => {
       if (!canGoBack) CapApp.exitApp();
@@ -69,13 +72,14 @@ const App: React.FC = () => {
   }, []);
   return (
     <IonApp>
-      <IonReactRouter>
-        <I18nProvider>
+      <I18nProvider>
+        <IonReactRouter>
+          <CheckRoute />
           {isAuthed ? (
             <Fragment>
               <IonTabs>
                 <IonRouterOutlet>
-                  <Route exact path="/" component={Home} />
+                  <Route exact path="/home" component={Home} />
                   {/* Product  */}
                   <Route exact path="/manageProduct" component={Product} />
 
@@ -94,17 +98,22 @@ const App: React.FC = () => {
 
                   {/* Profile  */}
                   <Route path="/profile" component={Profile} />
+
+                  <Route exact path="/">
+                    <Redirect to="/home" />
+                  </Route>
                 </IonRouterOutlet>
 
-                <IonTabBar slot="bottom" color="primary">
-                  <IonTabButton tab="tab1" href="/">
-                    <IonIcon icon={homeOutline} />
+                <IonTabBar slot={showTab ? "bottom" : undefined}>
+                  <IonTabButton tab="tab1" href="/home">
+                    <IonIcon icon={home} />
                   </IonTabButton>
+
                   <IonTabButton tab="tab3" href="/scan">
-                    <IonIcon icon={scanOutline} />
+                    <IonIcon icon={scan} />
                   </IonTabButton>
                   <IonTabButton tab="tab4" href="/profile">
-                    <IonIcon src={personOutline} />
+                    <IonIcon src={person} />
                   </IonTabButton>
                 </IonTabBar>
               </IonTabs>
@@ -117,8 +126,8 @@ const App: React.FC = () => {
             </IonRouterOutlet>
           )}
           <Loading />
-        </I18nProvider>
-      </IonReactRouter>
+        </IonReactRouter>
+      </I18nProvider>
     </IonApp>
   );
 };

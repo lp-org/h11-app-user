@@ -1,3 +1,4 @@
+import { IonCard } from "@ionic/react";
 import dayjs from "dayjs";
 import { useHistory } from "react-router";
 import { ProductBatch } from "types/productBatch";
@@ -9,11 +10,9 @@ interface ProductBatchBoxProps {
 const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
   const history = useHistory();
   return (
-    <div
+    <IonCard
       onClick={() => history.push(`/productBatch/${item.pbth_code}`)}
       style={{
-        borderColor: "#999999",
-        border: "solid 1px",
         position: "relative",
         margin: 0,
         borderRadius: 10,
@@ -44,7 +43,7 @@ const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
           </small>
         </div>
       </div>
-    </div>
+    </IonCard>
   );
 };
 

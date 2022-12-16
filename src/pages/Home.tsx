@@ -9,18 +9,15 @@ import {
   IonButton,
   IonLabel,
   IonItem,
+  IonCard,
 } from "@ionic/react";
 
 import Toolbar from "components/Toolbar.tsx";
-import { scanCircle, personCircle } from "ionicons/icons";
+import { personCircleOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import Image from "components/Image";
 import { Trans } from "@lingui/macro";
-const QuickAccessList = [
-  { title: "Scan QR Code", path: "/scan", icon: scanCircle },
-  { title: "My Profile", path: "/profile", icon: personCircle },
-];
 
 const Home: React.FC = () => {
   const historyList = useScanHistoryStore((state) => state.scanHistoryList);
@@ -29,7 +26,6 @@ const Home: React.FC = () => {
   return (
     <IonPage>
       <Toolbar title="My Home" />
-
       <IonContent fullscreen className="ion-padding">
         {/* Quick Access */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
@@ -39,37 +35,68 @@ const Home: React.FC = () => {
             </h2>
           </IonText>
           <IonRow>
-            {QuickAccessList.map((el, i) => (
-              <IonCol key={i}>
-                <div
-                  style={{
-                    borderColor: "#999999",
-                    border: "solid 1px",
-                    borderRadius: 10,
-                    padding: 8,
-                    textAlign: "center",
+            <IonCol size="6">
+              <IonRow style={{ height: "100%" }}>
+                <IonCol size="12">
+                  <IonCard
+                    style={{
+                      borderRadius: 10,
 
-                    height: "100%",
-                  }}
-                  onClick={() => history.push(el.path)}
-                >
-                  <IonRow>
-                    <IonCol size="12">
-                      <IonIcon
-                        icon={el.icon}
-                        style={{ fontSize: "70px" }}
-                        color="primary"
-                      />
-                    </IonCol>
-                    <IonCol size="12">
-                      <IonLabel>
-                        <small>{el.title}</small>
-                      </IonLabel>
-                    </IonCol>
-                  </IonRow>
-                </div>
-              </IonCol>
-            ))}
+                      textAlign: "center",
+                      height: "100%",
+                      margin: 0,
+                    }}
+                    onClick={() => history.push("/scan")}
+                  >
+                    <IonRow>
+                      <IonCol size="12">
+                        <IonIcon
+                          src="/assets/icon/scan.svg"
+                          style={{ fontSize: "40px", marginTop: 14 }}
+                          color="primary"
+                        />
+                      </IonCol>
+                      <IonCol size="12">
+                        <IonLabel>
+                          <p>QR code</p>
+                        </IonLabel>
+                      </IonCol>
+                    </IonRow>
+                  </IonCard>
+                </IonCol>
+              </IonRow>
+            </IonCol>
+            <IonCol size="6">
+              <IonRow style={{ height: "100%" }}>
+                <IonCol size="12">
+                  <IonCard
+                    style={{
+                      borderRadius: 10,
+
+                      textAlign: "center",
+                      height: "100%",
+                      margin: 0,
+                    }}
+                    onClick={() => history.push("/profile")}
+                  >
+                    <IonRow>
+                      <IonCol size="12">
+                        <IonIcon
+                          icon={personCircleOutline}
+                          style={{ fontSize: "50px", marginTop: 10 }}
+                          color="primary"
+                        />
+                      </IonCol>
+                      <IonCol size="12">
+                        <IonLabel>
+                          <p>QR code</p>
+                        </IonLabel>
+                      </IonCol>
+                    </IonRow>
+                  </IonCard>
+                </IonCol>
+              </IonRow>
+            </IonCol>
           </IonRow>
         </IonGrid>
         {/* Products */}
@@ -84,6 +111,7 @@ const Home: React.FC = () => {
               style={{ marginLeft: "auto" }}
               fill="clear"
               size="small"
+              color="secondary"
             >
               View all
             </IonButton>
