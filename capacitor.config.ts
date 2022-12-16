@@ -1,8 +1,8 @@
 import { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "com.mokoocode.mysafecodemerchant",
-  appName: "MySafeCodeMerchant",
+  appId: "com.greenootech.greenoocodemerchant",
+  appName: "Greenoo Code - Merchant",
   webDir: "build",
   bundledWebRuntime: false,
   // server: {
