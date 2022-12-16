@@ -16,7 +16,7 @@ import {
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { removeCircle } from "ionicons/icons";
-import { FC, Fragment, useCallback, useEffect, useMemo, useState } from "react";
+import { FC, Fragment, useCallback, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
 import SteupSteppers from "./SteupSteppers";
@@ -119,11 +119,12 @@ const SetupProductStep2: FC = () => {
                 <Fragment>
                   {key !== "Serving" ? (
                     <IonCol size="12">
-                      <IonLabel position="floating">
-                        {key.replace(/_/g, " ")}:
-                      </IonLabel>
-                      <IonItem fill="outline" className="ion-margin-bottom">
+                      <IonItem lines="none" className="ion-no-padding">
+                        <IonLabel position="stacked">
+                          {key.replace(/_/g, " ")}:
+                        </IonLabel>
                         <IonInput
+                          className="custom"
                           required
                           name={key}
                           onIonChange={formik.handleChange}
@@ -138,35 +139,35 @@ const SetupProductStep2: FC = () => {
                           <Fragment>
                             <hr />
                             <IonCol size="12">
-                              <IonLabel position="floating">
-                                <IonRow>
-                                  <div>Nutrition Fact Type {index + 1}:</div>
-                                  <IonIcon
-                                    style={{
-                                      marginLeft: "auto",
-                                      fontSize: "1.2rem",
-                                    }}
-                                    icon={removeCircle}
-                                    color="gray"
-                                    onClick={() => {
-                                      formik.values.Serving.splice(index, 1);
-                                      formik.setValues({
-                                        ...formik.values,
-                                        Serving: [...formik.values.Serving],
-                                      });
-                                    }}
-                                  />
-                                </IonRow>
-                              </IonLabel>
-
                               <IonItem
-                                fill="outline"
-                                className={`ion-margin-bottom ${
+                                lines="none"
+                                className={`ion-no-padding ${
                                   !errorMessage(index) && "ion-invalid"
                                 }`}
                               >
+                                <IonLabel position="stacked">
+                                  <IonRow>
+                                    <div>Nutrition Fact Type {index + 1}:</div>
+                                    <IonIcon
+                                      style={{
+                                        marginLeft: "auto",
+                                        fontSize: "1.2rem",
+                                      }}
+                                      icon={removeCircle}
+                                      color="gray"
+                                      onClick={() => {
+                                        formik.values.Serving.splice(index, 1);
+                                        formik.setValues({
+                                          ...formik.values,
+                                          Serving: [...formik.values.Serving],
+                                        });
+                                      }}
+                                    />
+                                  </IonRow>
+                                </IonLabel>
                                 <IonInput
                                   required
+                                  className="custom"
                                   name={`${key}[${index}]["Nutrition_type"]`}
                                   onIonChange={formik.handleChange}
                                   value={
@@ -185,63 +186,72 @@ const SetupProductStep2: FC = () => {
                               </IonItem>
                             </IonCol>
                             <IonCol size="12">
-                              <IonLabel position="floating">
-                                {key.replace(/_/g, " ")}:
-                              </IonLabel>
                               <IonItem
-                                fill="outline"
+                                lines="none"
+                                className="ion-no-padding"
                                 style={{ paddingRight: 0 }}
-                                className="ion-margin-bottom"
                               >
-                                <IonInput
-                                  required
-                                  placeholder="Amount"
-                                  type="number"
-                                  step="0.01"
-                                  name={`${key}[${index}]["Size"]`}
-                                  onIonChange={formik.handleChange}
-                                  value={formik.values[key][index]["Size"]}
-                                ></IonInput>
-                                <IonItem color={"gray"}>
-                                  <IonSelect
-                                    value={formik.values[key][index].unit}
-                                    name={`${key}[${index}].unit`}
-                                    onIonChange={(e) => {
-                                      formik.values.Serving[index].unit =
-                                        e.target.value;
-                                      formik.setValues({
-                                        ...formik.values,
-                                        Serving: formik.values.Serving,
-                                      });
-                                      // formik.handleChange(e);
-                                    }}
-                                  >
-                                    <IonSelectOption value="g">
-                                      g
-                                    </IonSelectOption>
-                                    <IonSelectOption value="mg">
-                                      mg
-                                    </IonSelectOption>
-                                  </IonSelect>
-                                </IonItem>
-
-                                <IonInput
-                                  required
-                                  placeholder="Daily Value"
-                                  type="number"
-                                  name={`${key}[${index}]["Daily_Value"]`}
-                                  onIonChange={formik.handleChange}
-                                  value={
-                                    formik.values[key][index]["Daily_Value"]
-                                  }
-                                  style={{ marginLeft: 14 }}
-                                ></IonInput>
-
+                                <IonLabel position="stacked">
+                                  {key.replace(/_/g, " ")}:
+                                </IonLabel>
                                 <IonItem
-                                  color={"gray"}
-                                  style={{ height: "100%" }}
+                                  lines="none"
+                                  className="ion-no-padding ion-no-margin"
                                 >
-                                  <span style={{ paddingRight: 14 }}> % </span>
+                                  <IonInput
+                                    required
+                                    placeholder="Amount"
+                                    type="number"
+                                    step="0.01"
+                                    name={`${key}[${index}]["Size"]`}
+                                    onIonChange={formik.handleChange}
+                                    value={formik.values[key][index]["Size"]}
+                                  ></IonInput>
+                                  <IonItem lines="none" color={"gray"}>
+                                    <IonSelect
+                                      value={formik.values[key][index].unit}
+                                      name={`${key}[${index}].unit`}
+                                      onIonChange={(e) => {
+                                        formik.values.Serving[index].unit =
+                                          e.target.value;
+                                        formik.setValues({
+                                          ...formik.values,
+                                          Serving: formik.values.Serving,
+                                        });
+                                        // formik.handleChange(e);
+                                      }}
+                                    >
+                                      <IonSelectOption value="g">
+                                        g
+                                      </IonSelectOption>
+                                      <IonSelectOption value="mg">
+                                        mg
+                                      </IonSelectOption>
+                                    </IonSelect>
+                                  </IonItem>
+
+                                  <IonInput
+                                    required
+                                    placeholder="Daily Value"
+                                    type="number"
+                                    name={`${key}[${index}]["Daily_Value"]`}
+                                    onIonChange={formik.handleChange}
+                                    value={
+                                      formik.values[key][index]["Daily_Value"]
+                                    }
+                                    style={{ marginLeft: 14 }}
+                                  ></IonInput>
+
+                                  <IonItem
+                                    lines="none"
+                                    color={"gray"}
+                                    style={{ height: "100%" }}
+                                  >
+                                    <span style={{ paddingRight: 14 }}>
+                                      {" "}
+                                      %{" "}
+                                    </span>
+                                  </IonItem>
                                 </IonItem>
                               </IonItem>
                             </IonCol>
