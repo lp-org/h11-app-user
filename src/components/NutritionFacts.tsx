@@ -38,7 +38,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
             </IonCol>
           </IonRow>
         ))}
-        <hr style={{ border: "solid 5px", height: 0 }} />
+        <hr style={{ border: "solid 4px", height: 0 }} />
         <IonRow className="ion-justify-content-end">
           <small>
             <b>% Daily Value*</b>

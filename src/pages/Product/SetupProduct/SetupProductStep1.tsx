@@ -15,7 +15,7 @@ import {
 import { useFormik } from "formik";
 import { useGetProductId } from "hooks/useProduct";
 import { cloudUpload } from "ionicons/icons";
-import { FC, useEffect, useMemo } from "react";
+import { FC, Fragment, useEffect, useMemo } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
 import { AddProductProps } from "types/product";
@@ -231,32 +231,39 @@ const SetupProductStep1: FC = () => {
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
                   <IonLabel position="stacked">Upload Product Photo</IonLabel>
-                  <IonButton
-                    onClick={() => takePicture()}
-                    color="light"
-                    style={{ height: "160px", width: "160px" }}
-                  >
-                    <IonIcon
-                      icon={cloudUpload}
-                      className="ion-margin-end"
-                      style={{
-                        fontSize: "100px",
 
-                        margin: "auto",
-                        color: "gray",
-                      }}
-                    />
-                    {/* <small style={{ color: "gray" }}>
+                  {!formik.values.prd_image ? (
+                    <Fragment>
+                      <IonButton
+                        onClick={() => takePicture()}
+                        color="light"
+                        style={{ height: "160px", width: "160px" }}
+                      >
+                        <IonIcon
+                          icon={cloudUpload}
+                          className="ion-margin-end"
+                          style={{
+                            fontSize: "100px",
+
+                            margin: "auto",
+                            color: "gray",
+                          }}
+                        />
+                        {/* <small style={{ color: "gray" }}>
                       Max Size: {environment.fileLimit / 1_000_000} mb
                     </small> */}
-                  </IonButton>
-                  <small style={{ color: "#999999" }}>
-                    Optional: Upload product photo to showcase the product
-                  </small>
+                      </IonButton>
+                      <small style={{ color: "#999999" }}>
+                        Optional: Upload product photo to showcase the product
+                      </small>
+                    </Fragment>
+                  ) : (
+                    <Image
+                      src={formik.values.prd_image}
+                      onClick={() => takePicture()}
+                    />
+                  )}
                 </IonItem>
-                {formik.values.prd_image && (
-                  <Image src={formik.values.prd_image} />
-                )}
               </IonCol>
 
               <IonButton

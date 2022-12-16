@@ -37,7 +37,7 @@ const EditProductStep3: FC = () => {
           )}
 
           <IonButton
-            shape="round"
+            className="text-white ion-margin-top"
             expand="full"
             onClick={() => {
               if (productPreview) {

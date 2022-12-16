@@ -15,7 +15,7 @@ import {
 } from "@ionic/react";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
-import { removeCircle } from "ionicons/icons";
+import { removeCircle, trash } from "ionicons/icons";
 import { FC, Fragment, useCallback, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
@@ -40,7 +40,7 @@ const SetupProductStep2: FC = () => {
 
   const formik = useFormik<any>({
     initialValues: tempProductSetup?.prd_nutrition_json || templatePayload,
-    enableReinitialize: true,
+    // enableReinitialize: true,
     onSubmit: (values) => {
       if (errorMessage()) {
         history.push("/product/add-3");
@@ -54,9 +54,9 @@ const SetupProductStep2: FC = () => {
       let valid = true;
       formik.values.Serving.forEach(
         (el: { Nutrition_type: string }, index: number) => {
-          if (!names.includes(el.Nutrition_type)) {
+          if (el.Nutrition_type !== "" && !names.includes(el.Nutrition_type)) {
             names.push(el.Nutrition_type);
-          } else if (index === num) {
+          } else if (el.Nutrition_type && index === num) {
             valid = false;
           } else if (num === undefined) {
             valid = false;
@@ -145,16 +145,18 @@ const SetupProductStep2: FC = () => {
                                   !errorMessage(index) && "ion-invalid"
                                 }`}
                               >
-                                <IonLabel position="stacked">
-                                  <IonRow>
-                                    <div>Nutrition Fact Type {index + 1}:</div>
+                                <div style={{ display: "flex", width: "100%" }}>
+                                  <IonLabel position="stacked">
+                                    Nutrition Fact Type {index + 1}:
+                                  </IonLabel>
+                                  <div style={{ marginLeft: "auto" }}>
                                     <IonIcon
                                       style={{
                                         marginLeft: "auto",
                                         fontSize: "1.2rem",
                                       }}
-                                      icon={removeCircle}
-                                      color="gray"
+                                      icon={trash}
+                                      color="primary"
                                       onClick={() => {
                                         formik.values.Serving.splice(index, 1);
                                         formik.setValues({
@@ -163,8 +165,8 @@ const SetupProductStep2: FC = () => {
                                         });
                                       }}
                                     />
-                                  </IonRow>
-                                </IonLabel>
+                                  </div>
+                                </div>
                                 <IonInput
                                   required
                                   className="custom"
@@ -200,14 +202,15 @@ const SetupProductStep2: FC = () => {
                                 >
                                   <IonInput
                                     required
-                                    placeholder="Amount"
+                                    className="custom-1"
+                                    placeholder="0"
                                     type="number"
                                     step="0.01"
                                     name={`${key}[${index}]["Size"]`}
                                     onIonChange={formik.handleChange}
                                     value={formik.values[key][index]["Size"]}
                                   ></IonInput>
-                                  <IonItem lines="none" color={"gray"}>
+                                  <IonItem lines="none" color={"light"}>
                                     <IonSelect
                                       value={formik.values[key][index].unit}
                                       name={`${key}[${index}].unit`}
@@ -232,7 +235,8 @@ const SetupProductStep2: FC = () => {
 
                                   <IonInput
                                     required
-                                    placeholder="Daily Value"
+                                    className="custom-1"
+                                    placeholder="0"
                                     type="number"
                                     name={`${key}[${index}]["Daily_Value"]`}
                                     onIonChange={formik.handleChange}
@@ -244,13 +248,10 @@ const SetupProductStep2: FC = () => {
 
                                   <IonItem
                                     lines="none"
-                                    color={"gray"}
+                                    color={"light"}
                                     style={{ height: "100%" }}
                                   >
-                                    <span style={{ paddingRight: 14 }}>
-                                      {" "}
-                                      %{" "}
-                                    </span>
+                                    <span style={{ paddingRight: 14 }}>% </span>
                                   </IonItem>
                                 </IonItem>
                               </IonItem>
@@ -267,7 +268,6 @@ const SetupProductStep2: FC = () => {
               <IonButton
                 expand="block"
                 shape="round"
-                color="light"
                 class="ion-margin-top add-row-button"
                 onClick={() =>
                   formik.setValues({
@@ -287,10 +287,9 @@ const SetupProductStep2: FC = () => {
                 Add Row
               </IonButton>
               <IonButton
-                shape="round"
                 type="submit"
                 expand="block"
-                class="ion-margin-top"
+                class="ion-margin-top text-white"
               >
                 Preview
               </IonButton>

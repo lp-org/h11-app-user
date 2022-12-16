@@ -24,18 +24,18 @@ const SetupProductStep3: FC = () => {
         }
       />
       <IonContent fullscreen className="ion-padding">
-        <SteupSteppers step={3} />
         <IonGrid fixed={true}>
           <div className="ion-margin-bottom">
             <b>Preview</b>
           </div>
+          <SteupSteppers step={3} />
           {productPreview && (
             <ShowProduct item={processNutritionInfoPayload(productPreview)} />
           )}
 
           <IonButton
-            shape="round"
             expand="full"
+            className="text-white ion-margin-top"
             onClick={() => {
               if (productPreview) {
                 productAdd.mutate(processNutritionInfoPayload(productPreview));
