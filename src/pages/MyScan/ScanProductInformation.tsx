@@ -38,7 +38,7 @@ const ScanProductInformation: React.FC = () => {
     <IonPage>
       <Toolbar title="Product Information" defaultHref="/scan" />
 
-      <IonContent fullscreen>
+      <IonContent fullscreen className="ion-padding">
         {isLoading ? (
           <div className="fullheight xc">
             <IonSpinner name="circles" className="ion-text-center"></IonSpinner>
@@ -54,7 +54,7 @@ const ScanProductInformation: React.FC = () => {
         onClick={openScanner}
       >
         <IonFabButton>
-          <IonIcon icon={scan}></IonIcon>
+          <IonIcon src="/assets/icon/scan.svg"></IonIcon>
         </IonFabButton>
       </IonFab>
     </IonPage>

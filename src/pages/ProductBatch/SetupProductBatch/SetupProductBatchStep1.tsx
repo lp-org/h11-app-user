@@ -71,16 +71,16 @@ const SetupProductBatchStep1: FC = () => {
           </IonCol>
           <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
             <IonCol size="12">
-              <IonLabel position="fixed">Select Product:</IonLabel>
               <IonSelect
                 hidden
                 name="pbth_prd_name"
                 onBlur={() => formik.setFieldTouched("pbth_name", true)}
               ></IonSelect>
-              <IonItem fill="outline" className="ion-margin-bottom ion-invalid">
+              <IonItem className="ion-no-padding ion-invalid" lines="none">
+                <IonLabel position="stacked">Select Product:</IonLabel>
                 <IonSelect
                   placeholder="Select Product"
-                  style={{ width: "95%" }}
+                  className="custom ion-no-margin"
                   onIonChange={(e) => {
                     formik.setFieldValue("pbth_prd_code", e.target.value);
                     formik.setFieldValue(
@@ -109,9 +109,10 @@ const SetupProductBatchStep1: FC = () => {
               </IonItem>
             </IonCol>
             <IonCol size="12">
-              <IonLabel position="fixed">Product ID:</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom">
+              <IonItem className="ion-no-padding" lines="none">
+                <IonLabel position="stacked">Product ID:</IonLabel>
                 <IonInput
+                  className="custom"
                   disabled
                   placeholder="Product ID will be auto filled once product is selected"
                   name="pbth_prd_code"
@@ -121,9 +122,10 @@ const SetupProductBatchStep1: FC = () => {
               </IonItem>
             </IonCol>
             <IonCol size="12">
-              <IonLabel position="stacked">Product Batch ID:</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom">
+              <IonItem className="ion-no-padding" lines="none">
+                <IonLabel position="stacked">Product Batch ID:</IonLabel>
                 <IonInput
+                  className="custom"
                   disabled
                   name="pbth_code"
                   placeholder="Batch ID will be auto generated"
@@ -133,58 +135,78 @@ const SetupProductBatchStep1: FC = () => {
               </IonItem>
             </IonCol>
             <IonCol size="12">
-              <IonLabel position="stacked">Manufactured Date:</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom">
-                <IonDatetimeButton datetime="pbth_manufactured_date"></IonDatetimeButton>
-
-                <IonModal keepContentsMounted={true}>
-                  <IonDatetime
-                    id="pbth_manufactured_date"
-                    name="pbth_manufactured_date"
-                    presentation="date"
-                    value={dayjs(
-                      selectedProductBatch?.pbth_manufactured_date
-                    ).format("YYYY-MM-DDTHH:mmZ")}
-                    max={dayjs().add(100, "years").year().toString()}
-                    onIonChange={handleDateChange}
-                  ></IonDatetime>
-                </IonModal>
-
-                <IonIcon
-                  slot="end"
-                  icon={calendar}
+              <IonItem className="ion-no-padding" lines="none">
+                <IonLabel position="stacked">Manufactured Date:</IonLabel>
+                <IonItem
+                  lines="none"
+                  style={{ width: "100%" }}
                   color="gray"
-                  className="ion-margin-end"
-                />
+                  class="ion-no-padding"
+                >
+                  <IonDatetimeButton datetime="pbth_manufactured_date"></IonDatetimeButton>
+                  <IonModal keepContentsMounted={true}>
+                    <IonDatetime
+                      id="pbth_manufactured_date"
+                      name="pbth_manufactured_date"
+                      presentation="date"
+                      value={dayjs(
+                        selectedProductBatch?.pbth_manufactured_date
+                      ).format("YYYY-MM-DDTHH:mmZ")}
+                      max={dayjs().add(100, "years").year().toString()}
+                      onIonChange={handleDateChange}
+                    ></IonDatetime>
+                  </IonModal>
+
+                  <IonIcon
+                    slot="end"
+                    icon={calendar}
+                    color="dark"
+                    className="ion-margin-end"
+                  />
+                </IonItem>
               </IonItem>
             </IonCol>
             <IonCol size="12">
-              <IonLabel position="stacked">Expiry Date:</IonLabel>
-              <IonItem fill="outline" className="ion-margin-bottom">
-                <IonDatetimeButton datetime="pbth_expiry_date"></IonDatetimeButton>
-
-                <IonModal keepContentsMounted={true}>
-                  <IonDatetime
-                    id="pbth_expiry_date"
-                    name="pbth_expiry_date"
-                    presentation="date"
-                    value={dayjs(selectedProductBatch?.pbth_expiry_date).format(
-                      "YYYY-MM-DDTHH:mmZ"
-                    )}
-                    max={dayjs().add(100, "years").year().toString()}
-                    onIonChange={handleDateChange}
-                  ></IonDatetime>
-                </IonModal>
-
-                <IonIcon
-                  slot="end"
-                  icon={calendar}
-                  className="ion-margin-end"
+              <IonItem
+                className="ion-no-padding ion-margin-bottom"
+                lines="none"
+              >
+                <IonLabel position="stacked">Expiry Date:</IonLabel>
+                <IonItem
+                  style={{ width: "100%" }}
                   color="gray"
-                />
+                  class="ion-no-padding"
+                  lines="none"
+                >
+                  <IonDatetimeButton datetime="pbth_expiry_date"></IonDatetimeButton>
+
+                  <IonModal keepContentsMounted={true}>
+                    <IonDatetime
+                      id="pbth_expiry_date"
+                      name="pbth_expiry_date"
+                      presentation="date"
+                      value={dayjs(
+                        selectedProductBatch?.pbth_expiry_date
+                      ).format("YYYY-MM-DDTHH:mmZ")}
+                      max={dayjs().add(100, "years").year().toString()}
+                      onIonChange={handleDateChange}
+                    ></IonDatetime>
+                  </IonModal>
+
+                  <IonIcon
+                    slot="end"
+                    icon={calendar}
+                    className="ion-margin-end"
+                    color="dark"
+                  />
+                </IonItem>
               </IonItem>
             </IonCol>
-            <IonButton type="submit" expand="block" class="ion-margin-top">
+            <IonButton
+              type="submit"
+              expand="block"
+              class="ion-margin-top text-white"
+            >
               Next
             </IonButton>
           </form>

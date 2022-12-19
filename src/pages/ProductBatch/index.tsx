@@ -1,4 +1,5 @@
 import {
+  IonButton,
   IonContent,
   IonFab,
   IonFabButton,
@@ -22,7 +23,18 @@ const ProductBatch: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Product Batch" defaultHref="/" />
+      <Toolbar
+        title="Product Batch"
+        defaultHref="/"
+        action={
+          <IonButton
+            fill="solid"
+            onClick={() => history.push("/productBatch/add")}
+          >
+            <IonIcon icon={add} style={{ color: "#fff" }} />
+          </IonButton>
+        }
+      />
 
       <IonContent fullscreen className="ion-padding">
         <IonList lines="full" style={{ background: "transparent" }}>
@@ -35,25 +47,25 @@ const ProductBatch: React.FC = () => {
                 }
               >
                 <b>Batch ID: {product.pbth_code} </b>
-                <div>Product ID: {product.pbth_prd_code} </div>
-                <div>Product Name: {product.pbth_prd_name} </div>
-                <div>Manufactured Date: {product.pbth_manufactured_date} </div>
-                <div>Expiry Date: {product.pbth_expiry_date} </div>
+                <div>
+                  <small>Product Name: {product.pbth_prd_name} </small>
+                </div>
+                <div>
+                  <small>Product ID: {product.pbth_prd_code} </small>
+                </div>
+                <div>
+                  <small>
+                    Manufactured Date: {product.pbth_manufactured_date}
+                  </small>
+                </div>
+                <div>
+                  <small>Expiry Date: {product.pbth_expiry_date} </small>
+                </div>
               </IonLabel>
             </IonItem>
           ))}
         </IonList>
       </IonContent>
-      <IonFab
-        slot="fixed"
-        vertical="bottom"
-        horizontal="end"
-        onClick={() => history.push("/productBatch/add")}
-      >
-        <IonFabButton>
-          <IonIcon icon={add}></IonIcon>
-        </IonFabButton>
-      </IonFab>
     </IonPage>
   );
 };

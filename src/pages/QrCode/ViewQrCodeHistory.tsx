@@ -19,7 +19,7 @@ const ViewQrCodeHistory: React.FC = () => {
   const { data } = useGetBlockchainInfo(code);
   return (
     <IonPage>
-      <Toolbar title="View Product" defaultHref="/qrcode" />
+      <Toolbar title="View QR Code" defaultHref="/qrcode" />
 
       <IonContent fullscreen className="ion-padding">
         {data && <ShowQrHistoryInfo item={data} />}

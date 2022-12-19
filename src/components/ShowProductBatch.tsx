@@ -9,39 +9,42 @@ interface ShowProductBatchProps {
 const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
   return (
     <Fragment>
-      <IonGrid>
+      <IonGrid style={{ fontSize: 14 }}>
         <IonRow>
-          <IonCol size="12">
+          <IonCol size="5">
             <IonLabel>Product Name:</IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_prd_name}
           </IonCol>
-          <IonCol size="12">
+        </IonRow>
+        <IonRow>
+          <IonCol size="5">
             <IonLabel>Product ID: </IonLabel>
           </IonCol>
 
           <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_prd_code}
           </IonCol>
-          <IonCol size="12">
+        </IonRow>
+        <IonRow>
+          <IonCol size="5">
             <IonLabel>Product Batch ID:</IonLabel>
           </IonCol>
-          <IonCol size="12" className="ion-margin-start">
+          <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_code}
           </IonCol>
-          <IonCol size="12" className="ion-margin-bottom">
-            <small style={{ opacity: 0.4 }}>
-              The Product Batch ID is auto generated and cannot be changed.
-            </small>
-          </IonCol>
-          <IonCol size="12">
+        </IonRow>
+        <IonRow>
+          <IonCol size="5">
             <IonLabel>Manufactured Date:</IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_manufactured_date}
           </IonCol>
-          <IonCol size="12">
+        </IonRow>
+        <IonRow>
+          <IonCol size="5">
             <IonLabel>Expiry Date:</IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">

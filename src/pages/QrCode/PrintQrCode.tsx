@@ -22,7 +22,7 @@ const PrintQrCode: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="View Product" defaultHref="/qrcode" />
+      <Toolbar title="View Product Information" defaultHref="/qrcode" />
 
       <IonContent fullscreen className="ion-padding">
         <ShowQrInfo item={data!} />

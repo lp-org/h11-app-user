@@ -141,8 +141,10 @@ ion-searchbar input {
 }
 
 ion-input.custom,
-ion-textarea.custom {
+ion-textarea.custom,
+ion-select.custom {
   --background: #f4f4f4;
+  background: #f4f4f4;
   --padding-start: 10px;
   --placeholder-color: #999999;
   --placeholder-opacity: 0.8;

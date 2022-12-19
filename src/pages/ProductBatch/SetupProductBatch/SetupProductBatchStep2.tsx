@@ -31,13 +31,18 @@ const SetupProductBatchStep2: FC = () => {
     <IonPage>
       <Toolbar title="Product Batch Setup" defaultHref="/productBatch" />
       <IonContent fullscreen className="ion-padding">
-        <IonCol size="12" className="ion-margin-bottom">
-          <IonLabel>
-            <b>Previw Product Batch Information Setup</b>
+        <IonCol size="12">
+          <IonLabel className="ion-padding-bottom">
+            <b>Preview</b>
           </IonLabel>
         </IonCol>
         <ShowProductBatch item={state?.values} />
-        <IonButton type="submit" expand="full" onClick={() => handleSubmit()}>
+        <IonButton
+          type="submit"
+          expand="full"
+          className="text-white"
+          onClick={() => handleSubmit()}
+        >
           Confirm
         </IonButton>
       </IonContent>
