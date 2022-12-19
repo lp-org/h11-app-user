@@ -110,11 +110,11 @@ http://ionicframework.com/docs/theming/ */
 }
 
 .add-row-button {
-  border-style: dotted;
-  border-width: 2px;
-  border-color: #dcdcdc;
-  border-radius: 10px;
-  width: 100%;
+  --border-style: dotted;
+  --border: 1px;
+  --border-color: #1890ff;
+  --color: #1890ff;
+  --background: #fffdfa;
 }
 
 ion-toolbar {
@@ -141,12 +141,22 @@ ion-searchbar input {
 }
 
 ion-input.custom,
-ion-textarea.custom {
+ion-textarea.custom,
+ion-select.custom {
   --background: #f4f4f4;
+  background: #f4f4f4;
   --padding-start: 10px;
   --placeholder-color: #999999;
   --placeholder-opacity: 0.8;
 }
+
+ion-input.custom-1,
+ion-textarea.custom-1 {
+  --background: #ffffff;
+  border: solid 1px#f4f4f4;
+  --padding-start: 10px !important;
+}
+
 .item-label-stacked.sc-ion-input-ios-h,
 .item-label-stacked .sc-ion-input-ios-h,
 .item-label-floating.sc-ion-input-ios-h,

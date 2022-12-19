@@ -57,7 +57,7 @@ import { useAppState } from "store";
  * many ways how to load messages — from REST API, from file, from cache, etc.
  */
 
-setupIonicReact({ rippleEffect: true, mode: "ios" });
+setupIonicReact({ mode: "ios" });
 
 const App: React.FC = () => {
   const { isAuthed } = useSession();
@@ -108,9 +108,8 @@ const App: React.FC = () => {
                   <IonTabButton tab="tab1" href="/home">
                     <IonIcon icon={home} />
                   </IonTabButton>
-
                   <IonTabButton tab="tab3" href="/scan">
-                    <IonIcon icon={scan} />
+                    <IonIcon src="/assets/icon/scan.svg" />
                   </IonTabButton>
                   <IonTabButton tab="tab4" href="/profile">
                     <IonIcon src={person} />

@@ -3,8 +3,6 @@ import {
   IonCheckbox,
   IonCol,
   IonContent,
-  IonFab,
-  IonFabButton,
   IonGrid,
   IonIcon,
   IonItem,
@@ -44,7 +42,15 @@ const MyScan: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="My Scans" defaultHref="/" />
+      <Toolbar
+        title="My Scans"
+        defaultHref="/"
+        action={
+          <IonButton onClick={() => history.push("/scanProductInformation")}>
+            <IonIcon src="/assets/icon/scan.svg" color="primary" />
+          </IonButton>
+        }
+      />
 
       <IonContent fullscreen>
         <IonSearchbar
@@ -58,7 +64,7 @@ const MyScan: React.FC = () => {
               <IonCol size="6" className="ion-text-left">
                 <IonRow>
                   {isSelection && (
-                    <IonCol size="3" style={{ paddingLeft: 0 }}>
+                    <IonCol size="4" style={{ paddingLeft: 0 }}>
                       <IonItem lines="none">
                         <IonCheckbox
                           indeterminate={selectRows.length > 0}
@@ -74,9 +80,9 @@ const MyScan: React.FC = () => {
                     </IonCol>
                   )}
                   <IonCol>
-                    <IonItem lines="none">
+                    <IonItem lines="none" className="ion-no-margin">
                       <IonButton
-                        color={!isSelection ? "" : "danger"}
+                        color="secondary"
                         onClick={() => {
                           setIsSelection((prev) => !prev);
                           setSelectRows([]);
@@ -94,7 +100,7 @@ const MyScan: React.FC = () => {
               <IonCol size="6" className="ion-text-right">
                 {isSelection && (
                   <IonButton
-                    color={isSelection ? "" : "danger"}
+                    color={isSelection ? "danger" : "danger"}
                     onClick={() => {
                       dispatchDeleteHistoryById(selectRows);
                       setIsSelection(false);
@@ -140,34 +146,31 @@ const MyScan: React.FC = () => {
                     >
                       <b className="wrap-text">{product.bc_prd_name}</b>
                       <div className="wrap-text">
-                        Product ID: {product.bc_prd_code}
+                        <small> Unique ID: {product.bc_qr_code}</small>
                       </div>
                       <div className="wrap-text">
-                        Batch ID: {product.bc_pbth_code}
+                        <small> Product ID: {product.bc_prd_code}</small>
                       </div>
                       <div className="wrap-text">
-                        Unique ID: {product.bc_qr_code}
+                        <small>Product Batch ID: {product.bc_pbth_code} </small>
+                      </div>
+
+                      <div>
+                        <small>
+                          Manufactured Date: {product.bc_pbth_manufactured_date}
+                        </small>
                       </div>
                       <div>
-                        Manufactured Date: {product.bc_pbth_manufactured_date}
+                        <small>
+                          Expiry Date: {product.bc_pbth_expiry_date}{" "}
+                        </small>
                       </div>
-                      <div>Expiry Date: {product.bc_pbth_expiry_date} </div>
                     </IonLabel>
                   </IonItem>
                 ))}
           </IonGrid>
         )}
       </IonContent>
-      <IonFab
-        slot="fixed"
-        vertical="bottom"
-        horizontal="end"
-        onClick={() => history.push("/scanProductInformation")}
-      >
-        <IonFabButton>
-          <IonIcon icon={scan}></IonIcon>
-        </IonFabButton>
-      </IonFab>
     </IonPage>
   );
 };
