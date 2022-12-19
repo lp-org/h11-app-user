@@ -83,13 +83,13 @@ const Home: React.FC = () => {
                       <IonCol size="12">
                         <IonIcon
                           icon={personCircleOutline}
-                          style={{ fontSize: "50px", marginTop: 10 }}
+                          style={{ fontSize: "48px", marginTop: 8 }}
                           color="primary"
                         />
                       </IonCol>
                       <IonCol size="12">
                         <IonLabel>
-                          <p>QR code</p>
+                          <p>Profile</p>
                         </IonLabel>
                       </IonCol>
                     </IonRow>
