@@ -11,10 +11,13 @@ export function useLogin() {
   return useMutation(async (payload: AuthLogin) => {
     if (payload.email === "merchant" && payload.password === "merchant123") {
       setToken("thisisamocktoken");
-
+      popUpMsg("Login Successful!", "success");
       return true;
     } else {
-      popUpMsg("Incorrect Credentials", "error");
+      popUpMsg(
+        "Email or Password is incorrect. Kindly enter the correct email or passsword.",
+        "error"
+      );
       throw new Error("Incorrect Credentials");
     }
   });
@@ -53,6 +56,6 @@ async function mockMeApi(token: string): Promise<boolean> {
     setTimeout(() => {
       if (token === "thisisamocktoken") resolve(true);
       else reject("Incorrect Credentials");
-    }, 1000);
+    }, 100);
   });
 }

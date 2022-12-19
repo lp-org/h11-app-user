@@ -64,6 +64,7 @@ import Loading from "components/Loading";
 import { I18nProvider } from "components/i18n/I18nProvider";
 import CheckRoute from "components/CheckRoute";
 import { useAppState } from "store";
+import EditProfile from "pages/Profile/EditProfile";
 
 /**
  * Load messages for requested locale and activate it.
@@ -156,6 +157,7 @@ const App: React.FC = () => {
 
                   {/* Profile  */}
                   <Route path="/profile" component={Profile} />
+                  <Route path="/editProfile" component={EditProfile} />
 
                   <Route exact path="/">
                     <Redirect to="/home" />

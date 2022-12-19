@@ -94,21 +94,12 @@ interface EditableInputProps {
 }
 
 const EditableInput: FC<EditableInputProps> = ({ label }) => {
-  const [editable, setEditable] = useState(false);
   return (
     <Fragment>
-      <IonLabel position="fixed">{label}</IonLabel>
-      <IonItem fill="outline" lines="none" className="ion-margin-bottom">
-        <IonItem lines="none">
-          <IonInput disabled={editable} name={label}></IonInput>
-        </IonItem>
-        <IonItem lines="none" slot="end" className="ion-margin-end">
-          {editable ? (
-            <IonIcon onClick={() => setEditable(false)} icon={checkmark} />
-          ) : (
-            <IonIcon onClick={() => setEditable(true)} icon={pencil} />
-          )}
-        </IonItem>
+      <IonItem lines="none" className="ion-no-padding">
+        <IonLabel position="stacked">{label}</IonLabel>
+
+        <IonInput name={label} className="custom"></IonInput>
       </IonItem>
     </Fragment>
   );

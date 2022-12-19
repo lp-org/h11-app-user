@@ -1,7 +1,7 @@
 import { useIonToast } from "@ionic/react";
-import { checkmarkCircle, closeCircle } from "ionicons/icons";
-import { useCallback } from "react";
 
+import { useCallback } from "react";
+import "./toast.css";
 type PopUpMessageType = "success" | "error";
 
 export function usePopUpMessage() {
@@ -11,11 +11,22 @@ export function usePopUpMessage() {
     (message: string, type: PopUpMessageType) =>
       present({
         message,
-        icon: type === "success" ? checkmarkCircle : closeCircle,
-        color: type === "success" ? "success" : "danger",
+
+        icon:
+          type === "success"
+            ? "/assets/icon/success.svg"
+            : "/assets/icon/error.svg",
+        color: type === "success" ? "tsuccess" : "tdanger",
         duration: 1500,
         position: "top",
-        cssClass: "margin-top:20px",
+        cssClass: "margin-top:40px",
+
+        buttons: [
+          {
+            text: "x",
+            role: "cancel",
+          },
+        ],
       }),
     [present]
   );
