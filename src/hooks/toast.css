@@ -1,0 +1,4 @@
+ion-toast::part(icon) {
+  fill: #e34d59;
+  color: #e34d59;
+}

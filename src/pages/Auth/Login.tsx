@@ -6,6 +6,7 @@ import {
   IonImg,
   IonInput,
   IonItem,
+  IonLabel,
   IonPage,
   IonRow,
 } from "@ionic/react";
@@ -34,47 +35,54 @@ const Login: React.FC = () => {
           <IonRow>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
               <IonRow className="ion-justify-content-center">
-                <IonImg src="/assets/logo.png" />
-                <IonCol size="12">
+                <IonImg src="/assets/logo.png" style={{ width: 200 }} />
+                <IonCol size="12" className="ion-text-center">
                   <h1>
-                    <b>Login</b>
+                    <b>Login Now</b>
                   </h1>
                   <h6>Please sign in to continue.</h6>
                 </IonCol>
                 <IonCol size="12" className="ion-text-center">
-                  <IonItem fill="outline">
+                  <IonItem lines="none" className="ion-no-padding">
+                    <IonLabel position="stacked"></IonLabel>
                     <IonInput
+                      className="custom"
                       value={formik.values.email}
                       onIonChange={formik.handleChange}
                       name="email"
                       required
-                      placeholder="Email"
+                      placeholder="Email Address"
                     ></IonInput>
                   </IonItem>
                 </IonCol>
                 <IonCol size="12" className="ion-text-center">
-                  <IonItem fill="outline">
+                  <IonItem lines="none" className="ion-no-padding">
+                    <IonLabel position="stacked"></IonLabel>
                     <IonInput
+                      className="custom"
                       value={formik.values.password}
                       onIonChange={formik.handleChange}
                       name="password"
+                      type="password"
                       required
                       placeholder="Password"
                     ></IonInput>
                   </IonItem>
                 </IonCol>
+                <IonCol size="12" className="ion-text-end">
+                  <Link to="/register" className="ion-margin-start">
+                    <small>Forgot Password?</small>
+                  </Link>
+                </IonCol>
                 <IonCol size="12" className="ion-text-center">
                   <IonButton
                     type="submit"
-                    shape="round"
-                    style={{ color: "white" }}
+                    expand="block"
+                    className="text-white"
                   >
                     Login
                   </IonButton>
                 </IonCol>
-                <Link to="/register" className="ion-margin-start">
-                  Forgot Password
-                </Link>
               </IonRow>
             </form>
           </IonRow>

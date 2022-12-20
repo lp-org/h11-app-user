@@ -13,10 +13,8 @@ import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 
 import { FC, Fragment } from "react";
-import { useHistory } from "react-router";
 
-const Register: React.FC = () => {
-  const history = useHistory();
+const EditProfile: React.FC = () => {
   const formik = useFormik<{}>({
     initialValues: {},
     enableReinitialize: true,
@@ -25,7 +23,7 @@ const Register: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar defaultHref="/" />
+      <Toolbar title="Edit Profile" defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>
@@ -34,11 +32,6 @@ const Register: React.FC = () => {
             style={{ display: "flex", flexFlow: "column", height: "100%" }}
           >
             <div style={{ flex: "0 1 auto" }}>
-              <IonRow className="ion-justify-content-center">
-                <h1>
-                  <b>Registration</b>
-                </h1>
-              </IonRow>
               <IonRow>
                 <IonCol size="6">
                   <EditableInput label="First Name" />
@@ -50,34 +43,22 @@ const Register: React.FC = () => {
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput
-                    label="Email Address"
-                    placeholder="Please enter your email address"
-                  />
+                  <EditableInput label="Email Address" />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput
-                    label="Mobile Number"
-                    placeholder="Please enter your phone number"
-                  />
+                  <EditableInput label="Mobile Number" />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput
-                    label="Company Name"
-                    placeholder="Please enter your company name"
-                  />
+                  <EditableInput label="Company Name" />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput
-                    label="Company Address"
-                    placeholder="Please enter your company address"
-                  />
+                  <EditableInput label="Company Address" />
                 </IonCol>
               </IonRow>
             </div>
@@ -86,9 +67,8 @@ const Register: React.FC = () => {
               expand="block"
               className="text-white"
               style={{ marginTop: "auto" }}
-              onClick={() => history.push("/register2")}
             >
-              Next
+              Done
             </IonButton>
           </form>
         </IonGrid>
@@ -99,23 +79,18 @@ const Register: React.FC = () => {
 
 interface EditableInputProps {
   label: string;
-  placeholder?: string;
 }
 
-const EditableInput: FC<EditableInputProps> = ({ label, placeholder }) => {
+const EditableInput: FC<EditableInputProps> = ({ label }) => {
   return (
     <Fragment>
       <IonItem lines="none" className="ion-no-padding">
         <IonLabel position="stacked">{label}</IonLabel>
 
-        <IonInput
-          name={label}
-          className="custom"
-          placeholder={placeholder || label}
-        ></IonInput>
+        <IonInput name={label} className="custom"></IonInput>
       </IonItem>
     </Fragment>
   );
 };
 
-export default Register;
+export default EditProfile;

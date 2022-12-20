@@ -4,20 +4,20 @@ import { useCallback } from "react";
 import "./toast.css";
 type PopUpMessageType = "success" | "error";
 
-export function usePopUpMessage() {
+export function useMessage() {
   const [present] = useIonToast();
 
   return useCallback(
-    (message: string, type: PopUpMessageType, header?: string) =>
+    (message: string, type: PopUpMessageType) =>
       present({
         message,
-        header,
+
         icon:
           type === "success"
             ? "/assets/icon/success.svg"
             : "/assets/icon/error.svg",
-
-        duration: 2000,
+        color: type === "success" ? "tsuccess" : "tdanger",
+        duration: 1500,
         position: "top",
         cssClass: "margin-top:40px",
 

@@ -83,6 +83,38 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-gray-contrast-rgb: 0, 0, 0;
   --ion-color-gray-shade: #c2c2c2;
   --ion-color-gray-tint: #e0e0e0;
+
+  --ion-color-tsuccess: #bcebdc;
+  --ion-color-tsuccess-rgb: 188, 235, 220;
+  --ion-color-tsuccess-contrast: #000000;
+  --ion-color-tsuccess-contrast-rgb: 0, 0, 0;
+  --ion-color-tsuccess-shade: #a5cfc2;
+  --ion-color-tsuccess-tint: #c3ede0;
+
+  --ion-color-tdanger: #f9d7d9;
+  --ion-color-tdanger-rgb: 249, 215, 217;
+  --ion-color-tdanger-contrast: #000000;
+  --ion-color-tdanger-contrast-rgb: 0, 0, 0;
+  --ion-color-tdanger-shade: #dbbdbf;
+  --ion-color-tdanger-tint: #fadbdd;
+}
+
+.ion-color-tsuccess {
+  --ion-color-base: var(--ion-color-tsuccess);
+  --ion-color-base-rgb: var(--ion-color-tsuccess-rgb);
+  --ion-color-contrast: var(--ion-color-tsuccess-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-tsuccess-contrast-rgb);
+  --ion-color-shade: var(--ion-color-tsuccess-shade);
+  --ion-color-tint: var(--ion-color-tsuccess-tint);
+}
+
+.ion-color-tdanger {
+  --ion-color-base: var(--ion-color-tdanger);
+  --ion-color-base-rgb: var(--ion-color-tdanger-rgb);
+  --ion-color-contrast: var(--ion-color-tdanger-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-tdanger-contrast-rgb);
+  --ion-color-shade: var(--ion-color-tdanger-shade);
+  --ion-color-tint: var(--ion-color-tdanger-tint);
 }
 
 .ion-color-gray {
@@ -162,4 +194,8 @@ ion-textarea.custom-1 {
 .item-label-floating.sc-ion-input-ios-h,
 .item-label-floating .sc-ion-input-ios-h {
   --padding-start: 8px;
+}
+
+hr.solid {
+  border-top: 1px solid #bbb;
 }
