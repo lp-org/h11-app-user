@@ -65,6 +65,12 @@ import { I18nProvider } from "components/i18n/I18nProvider";
 import CheckRoute from "components/CheckRoute";
 import { useAppState } from "store";
 import EditProfile from "pages/Profile/EditProfile";
+import ChangePassword1 from "pages/Profile/ChangePassword1";
+import ChangePassword2 from "pages/Profile/ChangePassword2";
+import ChangePassword3 from "pages/Profile/ChangePassword3";
+import ChangePassword4 from "pages/Profile/ChangePassword4";
+import Register2 from "pages/Auth/Register2";
+import Register3 from "pages/Auth/Register3";
 
 /**
  * Load messages for requested locale and activate it.
@@ -158,7 +164,10 @@ const App: React.FC = () => {
                   {/* Profile  */}
                   <Route path="/profile" component={Profile} />
                   <Route path="/editProfile" component={EditProfile} />
-
+                  <Route path="/changePassword" component={ChangePassword1} />
+                  <Route path="/changePassword2" component={ChangePassword2} />
+                  <Route path="/changePassword3" component={ChangePassword3} />
+                  <Route path="/changePassword4" component={ChangePassword4} />
                   <Route exact path="/">
                     <Redirect to="/home" />
                   </Route>
@@ -184,6 +193,8 @@ const App: React.FC = () => {
             <IonRouterOutlet>
               <Route exact path="/" component={Login} />
               <Route path="/register" component={Register} />
+              <Route path="/register2" component={Register2} />
+              <Route path="/register3" component={Register3} />
               <Route render={() => <Redirect to="/" />} />
             </IonRouterOutlet>
           )}

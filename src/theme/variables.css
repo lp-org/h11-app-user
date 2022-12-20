@@ -195,3 +195,7 @@ ion-textarea.custom-1 {
 .item-label-floating .sc-ion-input-ios-h {
   --padding-start: 8px;
 }
+
+hr.solid {
+  border-top: 1px solid #bbb;
+}

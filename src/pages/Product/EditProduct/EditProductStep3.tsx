@@ -38,7 +38,7 @@ const EditProductStep3: FC = () => {
 
           <IonButton
             className="text-white ion-margin-top"
-            expand="full"
+            expand="block"
             onClick={() => {
               if (productPreview) {
                 productAdd.mutate({

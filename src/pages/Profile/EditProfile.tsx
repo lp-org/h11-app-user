@@ -14,10 +14,7 @@ import { useFormik } from "formik";
 
 import { FC, Fragment } from "react";
 
-import { useAuthStore } from "store/useAuthStore";
-
 const EditProfile: React.FC = () => {
-  const removeToken = useAuthStore((state) => state.removeToken);
   const formik = useFormik<{}>({
     initialValues: {},
     enableReinitialize: true,

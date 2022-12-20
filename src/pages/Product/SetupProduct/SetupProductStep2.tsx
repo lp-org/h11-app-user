@@ -108,194 +108,231 @@ const SetupProductStep2: FC = () => {
         }
       />
       <IonContent fullscreen className="ion-padding">
-        <IonGrid fixed={true}>
+        <div style={{ display: "flex", flexFlow: "column", height: "100%" }}>
           <div className="ion-margin-bottom">
             <b>Nutrition Facts Setup </b>
           </div>
           <SteupSteppers step={2} />
-          <IonRow>
-            <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
-              {Object.entries(formik.values).map(([key]) => (
-                <Fragment>
-                  {key !== "Serving" ? (
+          <IonGrid style={{ height: "100%", width: "100%" }}>
+            <form
+              onSubmit={formik.handleSubmit}
+              style={{ display: "flex", flexFlow: "column", height: "100%" }}
+            >
+              <div style={{ flex: "0 1 auto" }}>
+                {Object.entries(formik.values).map(([key]) => (
+                  <IonRow>
                     <IonCol size="12">
-                      <IonItem lines="none" className="ion-no-padding">
-                        <IonLabel position="stacked">
-                          {key.replace(/_/g, " ")}:
-                        </IonLabel>
-                        <IonInput
-                          className="custom"
-                          required
-                          name={key}
-                          onIonChange={formik.handleChange}
-                          value={formik.values[key]}
-                        ></IonInput>
-                      </IonItem>
-                    </IonCol>
-                  ) : (
-                    <Fragment>
-                      {formik.values[key].map(
-                        (servingVal: any, index: number) => (
-                          <Fragment>
-                            <hr />
-                            <IonCol size="12">
-                              <IonItem
-                                lines="none"
-                                className={`ion-no-padding ${
-                                  !errorMessage(index) && "ion-invalid"
-                                }`}
-                              >
-                                <div style={{ display: "flex", width: "100%" }}>
-                                  <IonLabel position="stacked">
-                                    Nutrition Fact Type {index + 1}:
-                                  </IonLabel>
-                                  <div style={{ marginLeft: "auto" }}>
-                                    <IonIcon
-                                      style={{
-                                        marginLeft: "auto",
-                                        fontSize: "1.2rem",
-                                      }}
-                                      icon={trash}
-                                      color="primary"
-                                      onClick={() => {
-                                        formik.values.Serving.splice(index, 1);
-                                        formik.setValues({
-                                          ...formik.values,
-                                          Serving: [...formik.values.Serving],
-                                        });
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                                <IonInput
-                                  required
-                                  className="custom"
-                                  name={`${key}[${index}]["Nutrition_type"]`}
-                                  onIonChange={formik.handleChange}
-                                  value={
-                                    formik.values[key][index]["Nutrition_type"]
-                                  }
-                                ></IonInput>
-                                <IonNote slot="error">
-                                  {(function () {
-                                    if (!errorMessage(index)) {
-                                      return "Duplicate Nutrition Type";
-                                    } else {
-                                      return "";
-                                    }
-                                  })()}
-                                </IonNote>
-                              </IonItem>
-                            </IonCol>
-                            <IonCol size="12">
-                              <IonItem
-                                lines="none"
-                                className="ion-no-padding"
-                                style={{ paddingRight: 0 }}
-                              >
-                                <IonLabel position="stacked">
-                                  {key.replace(/_/g, " ")}:
-                                </IonLabel>
-                                <IonItem
-                                  lines="none"
-                                  className="ion-no-padding ion-no-margin"
-                                >
-                                  <IonInput
-                                    required
-                                    className="custom-1"
-                                    placeholder="0"
-                                    type="number"
-                                    step="0.01"
-                                    name={`${key}[${index}]["Size"]`}
-                                    onIonChange={formik.handleChange}
-                                    value={formik.values[key][index]["Size"]}
-                                  ></IonInput>
-                                  <IonItem lines="none" color={"light"}>
-                                    <IonSelect
-                                      value={formik.values[key][index].unit}
-                                      name={`${key}[${index}].unit`}
-                                      onIonChange={(e) => {
-                                        formik.values.Serving[index].unit =
-                                          e.target.value;
-                                        formik.setValues({
-                                          ...formik.values,
-                                          Serving: formik.values.Serving,
-                                        });
-                                        // formik.handleChange(e);
-                                      }}
-                                    >
-                                      <IonSelectOption value="g">
-                                        g
-                                      </IonSelectOption>
-                                      <IonSelectOption value="mg">
-                                        mg
-                                      </IonSelectOption>
-                                    </IonSelect>
-                                  </IonItem>
-
-                                  <IonInput
-                                    required
-                                    className="custom-1"
-                                    placeholder="0"
-                                    type="number"
-                                    name={`${key}[${index}]["Daily_Value"]`}
-                                    onIonChange={formik.handleChange}
-                                    value={
-                                      formik.values[key][index]["Daily_Value"]
-                                    }
-                                    style={{ marginLeft: 14 }}
-                                  ></IonInput>
-
+                      {key !== "Serving" ? (
+                        <IonItem lines="none" className="ion-no-padding">
+                          <IonLabel position="stacked">
+                            {key.replace(/_/g, " ")}:
+                          </IonLabel>
+                          <IonInput
+                            className="custom"
+                            required
+                            name={key}
+                            onIonChange={formik.handleChange}
+                            value={formik.values[key]}
+                          ></IonInput>
+                        </IonItem>
+                      ) : (
+                        <Fragment>
+                          {formik.values[key].map(
+                            (servingVal: any, index: number) => (
+                              <Fragment>
+                                <hr />
+                                <IonCol size="12">
                                   <IonItem
                                     lines="none"
-                                    color={"light"}
-                                    style={{ height: "100%" }}
+                                    className={`ion-no-padding ${
+                                      !errorMessage(index) && "ion-invalid"
+                                    }`}
                                   >
-                                    <span style={{ paddingRight: 14 }}>% </span>
+                                    <div
+                                      style={{ display: "flex", width: "100%" }}
+                                    >
+                                      <IonLabel position="stacked">
+                                        Nutrition Fact Type {index + 1}:
+                                      </IonLabel>
+                                      <div style={{ marginLeft: "auto" }}>
+                                        <IonIcon
+                                          style={{
+                                            marginLeft: "auto",
+                                            fontSize: "1.2rem",
+                                          }}
+                                          icon={trash}
+                                          color="primary"
+                                          onClick={() => {
+                                            formik.values.Serving.splice(
+                                              index,
+                                              1
+                                            );
+                                            formik.setValues({
+                                              ...formik.values,
+                                              Serving: [
+                                                ...formik.values.Serving,
+                                              ],
+                                            });
+                                          }}
+                                        />
+                                      </div>
+                                    </div>
+                                    <IonInput
+                                      required
+                                      className="custom"
+                                      name={`${key}[${index}]["Nutrition_type"]`}
+                                      onIonChange={formik.handleChange}
+                                      value={
+                                        formik.values[key][index][
+                                          "Nutrition_type"
+                                        ]
+                                      }
+                                    ></IonInput>
+                                    <IonNote slot="error">
+                                      {(function () {
+                                        if (!errorMessage(index)) {
+                                          return "Duplicate Nutrition Type";
+                                        } else {
+                                          return "";
+                                        }
+                                      })()}
+                                    </IonNote>
                                   </IonItem>
-                                </IonItem>
-                              </IonItem>
-                            </IonCol>
-                            <hr />
-                          </Fragment>
-                        )
-                      )}
-                    </Fragment>
-                  )}
-                </Fragment>
-              ))}
+                                </IonCol>
+                                <IonCol size="12">
+                                  <IonItem
+                                    lines="none"
+                                    className="ion-no-padding"
+                                    style={{ paddingRight: 0 }}
+                                  >
+                                    <IonLabel position="stacked">
+                                      {key.replace(/_/g, " ")}:
+                                    </IonLabel>
+                                    <IonItem
+                                      lines="none"
+                                      className="ion-no-padding "
+                                    >
+                                      <IonInput
+                                        required
+                                        className="custom-1"
+                                        placeholder="0"
+                                        type="number"
+                                        step="0.01"
+                                        style={{ height: "100%" }}
+                                        name={`${key}[${index}]["Size"]`}
+                                        onIonChange={formik.handleChange}
+                                        value={
+                                          formik.values[key][index]["Size"]
+                                        }
+                                      ></IonInput>
+                                      <IonItem
+                                        lines="none"
+                                        color={"light"}
+                                        style={{ marginLeft: 4 }}
+                                      >
+                                        <IonSelect
+                                          value={formik.values[key][index].unit}
+                                          name={`${key}[${index}].unit`}
+                                          onIonChange={(e) => {
+                                            formik.values.Serving[index].unit =
+                                              e.target.value;
+                                            formik.setValues({
+                                              ...formik.values,
+                                              Serving: formik.values.Serving,
+                                            });
+                                            // formik.handleChange(e);
+                                          }}
+                                        >
+                                          <IonSelectOption value="g">
+                                            g
+                                          </IonSelectOption>
+                                          <IonSelectOption value="mg">
+                                            mg
+                                          </IonSelectOption>
+                                        </IonSelect>
+                                      </IonItem>
 
-              <IonButton
-                expand="block"
-                shape="round"
-                class="ion-margin-top add-row-button"
-                onClick={() =>
-                  formik.setValues({
-                    ...formik.values,
-                    Serving: [
-                      ...formik.values.Serving,
-                      {
-                        Nutrition_type: "",
-                        Size: "",
-                        Daily_Value: "",
-                        unit: "g",
-                      },
-                    ],
-                  })
-                }
+                                      <IonInput
+                                        required
+                                        className="custom-1"
+                                        placeholder="0"
+                                        type="number"
+                                        name={`${key}[${index}]["Daily_Value"]`}
+                                        onIonChange={formik.handleChange}
+                                        value={
+                                          formik.values[key][index][
+                                            "Daily_Value"
+                                          ]
+                                        }
+                                        style={{
+                                          marginLeft: 14,
+                                          height: "100%",
+                                        }}
+                                      ></IonInput>
+
+                                      <IonItem
+                                        lines="none"
+                                        color={"light"}
+                                        style={{ marginLeft: 4 }}
+                                      >
+                                        <span style={{ paddingRight: 14 }}>
+                                          %{" "}
+                                        </span>
+                                      </IonItem>
+                                    </IonItem>
+                                  </IonItem>
+                                </IonCol>
+                                <hr className="solid" />
+                              </Fragment>
+                            )
+                          )}
+                        </Fragment>
+                      )}
+                    </IonCol>
+                  </IonRow>
+                ))}
+                <IonButton
+                  expand="block"
+                  shape="round"
+                  class="ion-margin-bottom add-row-button"
+                  onClick={() =>
+                    formik.setValues({
+                      ...formik.values,
+                      Serving: [
+                        ...formik.values.Serving,
+                        {
+                          Nutrition_type: "",
+                          Size: "",
+                          Daily_Value: "",
+                          unit: "g",
+                        },
+                      ],
+                    })
+                  }
+                >
+                  Add Row
+                </IonButton>
+              </div>
+              <div
+                style={{
+                  flex: "1 1 auto",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
               >
-                Add Row
-              </IonButton>
-              <IonButton
-                type="submit"
-                expand="block"
-                class="ion-margin-top text-white"
-              >
-                Preview
-              </IonButton>
+                {" "}
+                <IonButton
+                  type="submit"
+                  expand="block"
+                  style={{ marginTop: "auto" }}
+                  class="text-white"
+                >
+                  Preview
+                </IonButton>
+              </div>
             </form>
-          </IonRow>
-        </IonGrid>
+          </IonGrid>
+        </div>
       </IonContent>
     </IonPage>
   );

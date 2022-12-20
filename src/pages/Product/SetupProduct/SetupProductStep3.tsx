@@ -34,7 +34,7 @@ const SetupProductStep3: FC = () => {
           )}
 
           <IonButton
-            expand="full"
+            expand="block"
             className="text-white ion-margin-top"
             onClick={() => {
               if (productPreview) {

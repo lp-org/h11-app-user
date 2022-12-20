@@ -12,13 +12,22 @@ import {
 } from "@ionic/react";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
-import { checkmark, cloudUpload, pencil, personCircle } from "ionicons/icons";
+import {
+  checkmark,
+  chevronForward,
+  cloudUpload,
+  createOutline,
+  pencil,
+  personCircle,
+} from "ionicons/icons";
 import { FC, Fragment, useState } from "react";
+import { useHistory } from "react-router";
 
 import { useAuthStore } from "store/useAuthStore";
 
 const Profile: React.FC = () => {
   const removeToken = useAuthStore((state) => state.removeToken);
+  const history = useHistory();
   const formik = useFormik<{}>({
     initialValues: {},
     enableReinitialize: true,
@@ -31,52 +40,95 @@ const Profile: React.FC = () => {
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid>
-          <IonRow>
-            <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
-              <IonRow className="ion-justify-content-center">
-                <IonIcon
-                  icon={personCircle}
-                  color="gray"
-                  style={{ fontSize: 100 }}
-                />
-                <IonCol size="12" className="ion-text-center">
-                  <IonButton fill="outline" color={"dark"}>
-                    <IonIcon icon={cloudUpload} slot="start" />
-                    Upload Profile Photo
-                  </IonButton>
-                </IonCol>
-              </IonRow>
-
+          <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
+            <IonRow className="ion-justify-content-center">
+              <IonIcon
+                icon={personCircle}
+                color="gray"
+                style={{ fontSize: 100 }}
+              />
+              <IonCol size="12" className="ion-text-center">
+                <IonButton fill="outline" color="dark">
+                  <IonIcon icon={cloudUpload} slot="start" />
+                  Upload Profile Photo
+                </IonButton>
+              </IonCol>
+            </IonRow>
+            <IonRow>
+              <IonCol size="12">
+                <IonItem class="ion-no-padding" lines="none">
+                  <b>Profile</b>
+                  <IonIcon
+                    onClick={() => history.push("/editProfile")}
+                    icon={createOutline}
+                    slot="end"
+                    color="primary"
+                  ></IonIcon>
+                </IonItem>
+              </IonCol>
+            </IonRow>
+            <IonRow>
               <IonCol size="12">
                 <EditableInput label="First Name" />
               </IonCol>
-
+            </IonRow>
+            <IonRow>
               <IonCol size="12">
                 <EditableInput label="Last Name" />
               </IonCol>
-
+            </IonRow>
+            <IonRow>
               <IonCol size="12">
                 <EditableInput label="Email Address" />
               </IonCol>
-
+            </IonRow>
+            <IonRow>
               <IonCol size="12">
                 <EditableInput label="Mobile Number" />
               </IonCol>
-
+            </IonRow>
+            <IonRow>
               <IonCol size="12">
                 <EditableInput label="Company Name" />
               </IonCol>
-
+            </IonRow>
+            <IonRow>
               <IonCol size="12">
                 <EditableInput label="Company Address" />
               </IonCol>
-
+            </IonRow>
+            <IonRow>
               <IonCol size="12">
                 <EditableInput label="Password" />
               </IonCol>
-            </form>
+            </IonRow>
+          </form>
+          <IonRow>
+            <IonCol size="12">
+              <IonItem class="ion-no-padding" lines="none">
+                <b>Password</b>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="12">
+              <IonItem
+                className="ion-no-padding"
+                onClick={() => history.push("/changePassword")}
+              >
+                <IonLabel
+                  position="fixed"
+                  style={{ width: "unset", flex: "0 0 auto" }}
+                >
+                  Change Password
+                </IonLabel>
+                <IonIcon icon={chevronForward} slot="end" size="small" />
+              </IonItem>
+            </IonCol>
           </IonRow>
           <IonButton
+            expand="block"
+            className="text-white"
             onClick={() => {
               removeToken();
             }}
@@ -96,10 +148,11 @@ interface EditableInputProps {
 const EditableInput: FC<EditableInputProps> = ({ label }) => {
   return (
     <Fragment>
-      <IonItem lines="none" className="ion-no-padding">
-        <IonLabel position="stacked">{label}</IonLabel>
-
-        <IonInput name={label} className="custom"></IonInput>
+      <IonItem className="ion-no-padding">
+        <IonLabel position="fixed" style={{ width: "unset", flex: "0 0 auto" }}>
+          {label}
+        </IonLabel>
+        <div slot="end">xxxxxxx</div>
       </IonItem>
     </Fragment>
   );
