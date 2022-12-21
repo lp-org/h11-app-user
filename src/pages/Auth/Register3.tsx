@@ -85,7 +85,7 @@ const Register3: React.FC = () => {
                   history.push("/login");
                 }}
               >
-                Next
+                Confirm
               </IonButton>
             </div>
           </form>

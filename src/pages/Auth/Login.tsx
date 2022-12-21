@@ -3,6 +3,7 @@ import {
   IonCol,
   IonContent,
   IonGrid,
+  IonIcon,
   IonImg,
   IonInput,
   IonItem,
@@ -31,11 +32,19 @@ const Login: React.FC = () => {
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
-        <IonGrid>
-          <IonRow>
+        <IonGrid
+          style={{ display: "flex", flexDirection: "column", height: "100%" }}
+        >
+          <IonRow style={{ flex: "0 1 auto" }}>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
-              <IonRow className="ion-justify-content-center">
-                <IonImg src="/assets/logo.png" style={{ width: 200 }} />
+              <IonRow
+                className="ion-justify-content-center"
+                style={{ marginTop: 100 }}
+              >
+                <IonIcon
+                  src="/assets/icon/logo.svg"
+                  style={{ fontSize: 200 }}
+                />
                 <IonCol size="12" className="ion-text-center">
                   <h1>
                     <b>Login Now</b>
@@ -86,14 +95,25 @@ const Login: React.FC = () => {
               </IonRow>
             </form>
           </IonRow>
+          <IonRow
+            style={{ flex: "1 1 auto" }}
+            className="ion-justify-content-center"
+          >
+            <IonItem lines="none" style={{ marginTop: "auto", fontSize: 14 }}>
+              Don’t have an account?{" "}
+              <Link
+                to="/register"
+                style={{
+                  textDecoration: "none",
+                  marginLeft: 8,
+                  color: "#00A3FF",
+                }}
+              >
+                Sign Up
+              </Link>
+            </IonItem>
+          </IonRow>
         </IonGrid>
-        <IonItem lines="none">
-          Don’t have an account?{" "}
-          <Link to="/register" className="ion-margin-start">
-            {" "}
-            Sign Up
-          </Link>
-        </IonItem>
       </IonContent>
     </IonPage>
   );
