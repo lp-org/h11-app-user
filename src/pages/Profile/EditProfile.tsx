@@ -51,16 +51,6 @@ const EditProfile: React.FC = () => {
                   <EditableInput label="Mobile Number" />
                 </IonCol>
               </IonRow>
-              <IonRow>
-                <IonCol size="12">
-                  <EditableInput label="Company Name" />
-                </IonCol>
-              </IonRow>
-              <IonRow>
-                <IonCol size="12">
-                  <EditableInput label="Company Address" />
-                </IonCol>
-              </IonRow>
             </div>
 
             <IonButton
