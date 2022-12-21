@@ -53,7 +53,7 @@ const ChangePassword4: React.FC = () => {
                 style={{ marginTop: "auto" }}
                 onClick={() => history.push("/profile")}
               >
-                Next
+                Done
               </IonButton>
             </div>
           </form>
