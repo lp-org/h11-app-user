@@ -243,6 +243,7 @@ const EditProductStep1: FC = () => {
                     <Image
                       src={formik.values.prd_image}
                       onClick={() => takePicture()}
+                      width={200}
                     />
                   )}
                 </IonItem>

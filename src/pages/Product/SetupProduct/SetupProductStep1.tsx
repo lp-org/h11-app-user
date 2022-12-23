@@ -191,6 +191,7 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem
+                  lines="none"
                   className={`ion-no-padding ${
                     formik.errors.prd_expiry_period && "ion-invalid"
                   }`}
@@ -259,8 +260,9 @@ const SetupProductStep1: FC = () => {
                     </Fragment>
                   ) : (
                     <Image
-                      src={formik.values.prd_image}
+                      imgSrc={formik.values.prd_image}
                       onClick={() => takePicture()}
+                      width={200}
                     />
                   )}
                 </IonItem>
