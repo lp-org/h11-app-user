@@ -1,38 +1,36 @@
-import { IonImg } from "@ionic/react";
-
 import { fastFood } from "ionicons/icons";
-import { HTMLAttributes } from "react";
 
-interface ProductBatchBoxProps {
+import {
+  LazyLoadImage,
+  LazyLoadImageProps,
+} from "react-lazy-load-image-component";
+interface ProductBatchBoxProps extends LazyLoadImageProps {
   height?: number;
   width?: number;
-  src: string | null;
+  imgSrc?: string | null;
 }
 
-const Image: React.FC<
-  ProductBatchBoxProps & HTMLAttributes<HTMLIonImgElement>
-> = ({ height, width, src, ...rest }) => {
-  if (src) {
-    return (
-      <IonImg
-        src={
-          src.substring(0, 7) === "http://"
-            ? src.replace("http://", "https://")
-            : src
-        }
-        {...rest}
-        style={{ ...rest.style, height, width }}
-      />
-    );
-  } else {
-    return (
-      <IonImg
-        src={fastFood}
-        {...rest}
-        style={{ ...rest.style, height, width }}
-      />
-    );
-  }
+const Image: React.FC<ProductBatchBoxProps> = ({
+  height,
+  width,
+  imgSrc,
+  ...rest
+}) => {
+  return (
+    <LazyLoadImage
+      placeholderSrc={"/assets/placeholder.png"}
+      src={
+        imgSrc && imgSrc.substring(0, 7) === "http://"
+          ? imgSrc.replace("http://", "https://")
+          : imgSrc || fastFood
+      }
+      {...rest}
+      alt={""}
+      style={{ ...rest.style }}
+      width={width}
+      height={height || width}
+    />
+  );
 };
 
 export default Image;

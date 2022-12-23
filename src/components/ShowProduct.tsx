@@ -17,7 +17,7 @@ const ShowProduct: React.FC<ShowProductProps> = ({ item }) => {
             <IonRow style={{ justifyContent: "center", marginTop: "10px" }}>
               {item.prd_image && <Image src={item.prd_image} width={200} />}
             </IonRow>
-            <div style={{ background: "#FFFFFF", fontSize: 12, margin: 8 }}>
+            <div style={{ background: "#FFFFFF", fontSize: 12, margin: 12 }}>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
                   Product ID:

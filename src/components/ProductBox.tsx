@@ -23,8 +23,8 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
     >
       <div style={{ padding: 8, textAlign: "center", height: "130px" }}>
         <Image
-          src={item.prd_image}
-          height={120}
+          imgSrc={item.prd_image}
+          width={120}
           style={{ marginLeft: "auto", marginRight: "auto" }}
         />
       </div>
