@@ -109,7 +109,7 @@ const EditProductStep2: FC = () => {
           <div className="ion-margin-bottom">
             <b>Nutrition Facts Setup </b>
           </div>
-          <EditSteppers step={2} />
+          <EditSteppers step={2} code={code} />
           <IonGrid style={{ height: "100%", width: "100%" }}>
             <form
               onSubmit={formik.handleSubmit}

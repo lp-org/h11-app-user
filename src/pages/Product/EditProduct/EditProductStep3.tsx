@@ -2,17 +2,22 @@ import { IonButton, IonContent, IonGrid, IonIcon, IonPage } from "@ionic/react";
 import ShowProduct from "components/ShowProduct";
 import Toolbar from "components/Toolbar.tsx";
 import { useEditProduct } from "hooks/useProduct";
-import { code } from "ionicons/icons";
+
 import { FC } from "react";
-import { useHistory } from "react-router";
+import { useHistory, useRouteMatch } from "react-router";
 import { useProductWithoutLsStore } from "store/useProductStore";
 import { processNutritionInfoPayload } from "utils";
 import EditSteppers from "./EditSteppers";
 
+interface paramsProps {
+  code: string;
+}
 const EditProductStep3: FC = () => {
   const productPreview = useProductWithoutLsStore(
     (state) => state.tempProductEdit
   );
+  const match = useRouteMatch<paramsProps>();
+  const { code } = match.params;
   const productAdd = useEditProduct();
   const history = useHistory();
   return (
@@ -31,7 +36,7 @@ const EditProductStep3: FC = () => {
           <div className="ion-margin-bottom">
             <b>Preview</b>
           </div>
-          <EditSteppers step={3} />
+          <EditSteppers step={3} code={code} />
           {productPreview && (
             <ShowProduct item={processNutritionInfoPayload(productPreview)} />
           )}

@@ -181,6 +181,9 @@ ion-select.custom {
   --placeholder-color: #999999;
   --placeholder-opacity: 0.8;
 }
+textarea {
+  --padding-start: 10px;
+}
 
 ion-input.custom-1,
 ion-textarea.custom-1 {

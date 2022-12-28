@@ -27,25 +27,30 @@ import { useTakePicture } from "hooks/useTakePicture";
 import { ProductAddSchema } from "utils/validation";
 import SteupSteppers from "./SteupSteppers";
 
+const initialValues = {
+  prd_code: "",
+  prd_expiry_period: 0,
+  prd_flavour: "",
+  prd_ingredients: "",
+  prd_name: "",
+  prd_keep_it_fresh: "",
+  prd_nutrition_json: null,
+  prd_storage_instructions: "",
+  prd_category: "",
+  prd_type: "",
+  prd_image: "",
+};
+
 const SetupProductStep1: FC = () => {
   const history = useHistory();
   const { data: productId } = useGetProductId();
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
+  const clearTempProductSetup = useProductStore(
+    (state) => state.clearTempProductSetup
+  );
 
   const formik = useFormik<AddProductProps>({
-    initialValues: {
-      prd_code: "",
-      prd_expiry_period: 0,
-      prd_flavour: "",
-      prd_ingredients: "",
-      prd_name: "",
-      prd_keep_it_fresh: "",
-      prd_nutrition_json: null,
-      prd_storage_instructions: "",
-      prd_category: "",
-      prd_type: "",
-      prd_image: "",
-    },
+    initialValues,
     enableReinitialize: true,
     validationSchema: ProductAddSchema,
 
@@ -54,12 +59,13 @@ const SetupProductStep1: FC = () => {
     },
   });
   useEffect(() => {
-    if (tempProductSetup) {
+    if (tempProductSetup && tempProductSetup?.prd_code) {
       formik.setValues(tempProductSetup);
+    } else {
+      formik.setValues(initialValues);
     }
     formik.setFieldValue("prd_code", productId);
-  }, [productId]);
-
+  }, [productId, tempProductSetup?.prd_code]);
   const { takePicture, blob, photo } = useTakePicture();
   useMemo(() => {
     var imageUrl = photo?.webPath;
@@ -72,8 +78,8 @@ const SetupProductStep1: FC = () => {
     (state) => state.setTempProductSetup
   );
   useEffect(() => {
-    dispatchProductSetup(formik.values);
-  }, [dispatchProductSetup, formik.values]);
+    if (formik.values.prd_code) dispatchProductSetup(formik.values);
+  }, [formik.values]);
   return (
     <IonPage>
       <Toolbar

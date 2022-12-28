@@ -72,7 +72,7 @@ const EditProductStep1: FC = () => {
           <div className="ion-no-padding">
             <b>Product Information Setup </b>
           </div>
-          <EditSteppers step={1} />
+          <EditSteppers step={1} code={code} />
           <IonRow>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
               <IonCol size="12">

@@ -1,9 +1,13 @@
 import Steppers from "components/Steppers";
 
-const EditSteppers = ({ step }: { step: number }) => {
+const EditSteppers = ({ step, code }: { step: number; code: string }) => {
   return (
     <Steppers
-      steppers={["/product/edit", "/product/edit-2", "/product/edit-3"]}
+      steppers={[
+        `/product/edit/${code}`,
+        `/product/edit-2/${code}`,
+        `/product/edit-3/${code}`,
+      ]}
       currentStep={step}
     />
   );

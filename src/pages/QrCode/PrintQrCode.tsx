@@ -22,25 +22,31 @@ const PrintQrCode: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="View Product Information" defaultHref="/qrcode" />
+      <Toolbar title="Print QR Code" defaultHref="/qrcode" />
 
       <IonContent fullscreen className="ion-padding">
-        <ShowQrInfo item={data!} />
-        <IonRow>
-          <IonCol size="12">Print Count</IonCol>
-          <IonCol className="ion-margin-start ion-margin-bottom">111</IonCol>
-        </IonRow>
-        <IonButton
-          expand="full"
-          onClick={() => {
-            setLoading(true);
-            addBlockchainInfo.mutate(data!, {
-              onSuccess: () => setLoading(false),
-            });
-          }}
-        >
-          Print QR Code
-        </IonButton>
+        <div style={{ display: "flex", flexFlow: "column", height: "100%" }}>
+          <div style={{ flex: "0 1 auto" }}>
+            <ShowQrInfo item={data!} />
+          </div>
+          <div
+            style={{ flex: "1 1 auto", display: "flex", flexFlow: "column" }}
+          >
+            <IonButton
+              expand="block"
+              className="text-white"
+              style={{ marginTop: "auto" }}
+              onClick={() => {
+                setLoading(true);
+                addBlockchainInfo.mutate(data!, {
+                  onSuccess: () => setLoading(false),
+                });
+              }}
+            >
+              Print QR Code
+            </IonButton>
+          </div>
+        </div>
       </IonContent>
     </IonPage>
   );

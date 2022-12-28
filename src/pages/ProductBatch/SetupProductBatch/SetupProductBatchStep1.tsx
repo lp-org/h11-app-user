@@ -19,7 +19,7 @@ import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { useProductList } from "hooks/useProduct";
 import { useGetProducBatchCodeByProductId } from "hooks/useProductBatch";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useHistory } from "react-router";
 import { AddProductBatchProps } from "types/productBatch";
 import dayjs from "dayjs";
@@ -35,6 +35,7 @@ const SetupProductBatchStep1: FC = () => {
       dayjs(e.target.value).format("YYYY-MM-DD")
     );
   };
+
   const formik = useFormik<AddProductBatchProps>({
     initialValues: {
       pbth_prd_name: "",
@@ -58,6 +59,17 @@ const SetupProductBatchStep1: FC = () => {
   const { data: selectedProductBatch } = useGetProducBatchCodeByProductId(
     formik.values.pbth_prd_code
   );
+
+  useEffect(() => {
+    formik.setFieldValue(
+      "pbth_expiry_date",
+      selectedProductBatch?.pbth_expiry_date
+    );
+    formik.setFieldValue(
+      "pbth_manufactured_date",
+      selectedProductBatch?.pbth_manufactured_date
+    );
+  }, [selectedProductBatch]);
 
   return (
     <IonPage>
@@ -135,7 +147,11 @@ const SetupProductBatchStep1: FC = () => {
               </IonItem>
             </IonCol>
             <IonCol size="12">
-              <IonItem className="ion-no-padding" lines="none">
+              <IonItem
+                className="ion-no-padding"
+                lines="none"
+                id="manufactured_date"
+              >
                 <IonLabel position="stacked">Manufactured Date:</IonLabel>
                 <IonItem
                   lines="none"
@@ -144,14 +160,15 @@ const SetupProductBatchStep1: FC = () => {
                   class="ion-no-padding"
                 >
                   <IonDatetimeButton datetime="pbth_manufactured_date"></IonDatetimeButton>
-                  <IonModal keepContentsMounted={true}>
+                  <IonModal
+                    keepContentsMounted={true}
+                    trigger="manufactured_date"
+                  >
                     <IonDatetime
                       id="pbth_manufactured_date"
                       name="pbth_manufactured_date"
                       presentation="date"
-                      value={dayjs(
-                        selectedProductBatch?.pbth_manufactured_date
-                      ).format("YYYY-MM-DDTHH:mmZ")}
+                      value={formik.values.pbth_manufactured_date}
                       max={dayjs().add(100, "years").year().toString()}
                       onIonChange={handleDateChange}
                     ></IonDatetime>
@@ -170,6 +187,7 @@ const SetupProductBatchStep1: FC = () => {
               <IonItem
                 className="ion-no-padding ion-margin-bottom"
                 lines="none"
+                id="expiry_date"
               >
                 <IonLabel position="stacked">Expiry Date:</IonLabel>
                 <IonItem
@@ -180,14 +198,12 @@ const SetupProductBatchStep1: FC = () => {
                 >
                   <IonDatetimeButton datetime="pbth_expiry_date"></IonDatetimeButton>
 
-                  <IonModal keepContentsMounted={true}>
+                  <IonModal keepContentsMounted={true} trigger="expiry_date">
                     <IonDatetime
                       id="pbth_expiry_date"
                       name="pbth_expiry_date"
                       presentation="date"
-                      value={dayjs(
-                        selectedProductBatch?.pbth_expiry_date
-                      ).format("YYYY-MM-DDTHH:mmZ")}
+                      value={formik.values.pbth_expiry_date}
                       max={dayjs().add(100, "years").year().toString()}
                       onIonChange={handleDateChange}
                     ></IonDatetime>

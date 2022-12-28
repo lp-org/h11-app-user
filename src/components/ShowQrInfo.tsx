@@ -13,45 +13,39 @@ const ShowQrInfo: React.FC<ShowQrInfoProps> = ({ item }) => {
       {item && (
         <IonGrid>
           <IonRow>
-            <IonRow style={{ marginLeft: "auto", marginRight: "auto" }}>
-              <Image src={item?.bc_prd_image} width={200} />
-            </IonRow>
-            <IonCol size="12">
+            <IonCol size="5">
               <IonLabel>Product Name:</IonLabel>
             </IonCol>
-            <IonCol className="ion-margin-start ion-margin-bottom">
-              {item?.bc_prd_name}
-            </IonCol>
-            <IonCol size="12">
+            <IonCol>{item?.bc_prd_name}</IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="5">
               <IonLabel>Product ID: </IonLabel>
             </IonCol>
 
-            <IonCol className="ion-margin-start ion-margin-bottom">
-              {item?.bc_prd_code}
-            </IonCol>
-            <IonCol size="12">
+            <IonCol>{item?.bc_prd_code}</IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="5">
               <IonLabel>Product Batch ID:</IonLabel>
             </IonCol>
-            <IonCol size="12" className="ion-margin-start">
-              {item?.bc_pbth_code}
-            </IonCol>
-            <IonCol size="12" className="ion-margin-bottom">
-              <small style={{ opacity: 0.4 }}>
-                The Product Batch ID is auto generated and cannot be changed.
-              </small>
-            </IonCol>
-            <IonCol size="12">
+            <IonCol size="5">{item?.bc_pbth_code}</IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="5">
               <IonLabel>Manufactured Date:</IonLabel>
             </IonCol>
-            <IonCol className="ion-margin-start ion-margin-bottom">
-              {item?.bc_pbth_manufactured_date}
-            </IonCol>
-            <IonCol size="12">
+            <IonCol>{item?.bc_pbth_manufactured_date}</IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="5">
               <IonLabel>Expiry Date:</IonLabel>
             </IonCol>
-            <IonCol className="ion-margin-start ion-margin-bottom">
-              {item?.bc_pbth_expiry_date}
-            </IonCol>
+            <IonCol>{item?.bc_pbth_expiry_date}</IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="5">Print Count:</IonCol>
+            <IonCol>111</IonCol>
           </IonRow>
         </IonGrid>
       )}
