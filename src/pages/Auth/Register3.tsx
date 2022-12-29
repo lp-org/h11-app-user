@@ -74,6 +74,7 @@ const Register3: React.FC = () => {
             >
               <IonButton
                 expand="block"
+                disabled={parseInt(code).toString().length < 5}
                 className="text-white"
                 style={{ marginTop: "auto" }}
                 onClick={() => {
