@@ -58,7 +58,7 @@ const Home: React.FC = () => {
                       </IonCol>
                       <IonCol size="12">
                         <IonLabel>
-                          <p>QR code</p>
+                          <p>Scan QR code</p>
                         </IonLabel>
                       </IonCol>
                     </IonRow>

@@ -2,6 +2,7 @@ import { IonCard } from "@ionic/react";
 import dayjs from "dayjs";
 import { useHistory } from "react-router";
 import { ProductBatch } from "types/productBatch";
+import Image from "./Image";
 
 interface ProductBatchBoxProps {
   item: ProductBatch;
@@ -21,6 +22,9 @@ const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
         width: 150,
       }}
     >
+      <div className="ion-margin">
+        <Image src={item.pbth_prd_image} width={120} />
+      </div>
       <div className="wrap-text ion-margin">
         <b>{item.pbth_code}</b>
       </div>
