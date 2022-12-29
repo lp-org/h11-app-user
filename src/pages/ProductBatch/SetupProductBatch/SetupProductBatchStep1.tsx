@@ -47,6 +47,7 @@ const SetupProductBatchStep1: FC = () => {
     },
     enableReinitialize: true,
     validationSchema: ProductBatchAddSchema,
+    validateOnChange: false,
     onSubmit: (values) => {
       history.push({
         pathname: "/productBatch/add-2",
@@ -94,7 +95,12 @@ const SetupProductBatchStep1: FC = () => {
                     name="pbth_prd_name"
                     onBlur={() => formik.setFieldTouched("pbth_name", true)}
                   ></IonSelect>
-                  <IonItem className="ion-no-padding ion-invalid" lines="none">
+                  <IonItem
+                    className={`ion-no-padding ${
+                      formik.errors.pbth_prd_code && "ion-invalid"
+                    }`}
+                    lines="none"
+                  >
                     <IonLabel position="stacked">Select Product:</IonLabel>
                     <IonSelect
                       placeholder="Select Product"
@@ -124,6 +130,10 @@ const SetupProductBatchStep1: FC = () => {
                       {formik.errors.pbth_prd_code
                         ? formik.errors.pbth_prd_code
                         : ""}
+                    </IonNote>
+                    <IonNote slot="helper">
+                      You will need to choose the available product from the
+                      list. If not found, kindly create the product first.
                     </IonNote>
                   </IonItem>
                 </IonCol>
