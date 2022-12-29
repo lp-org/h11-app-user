@@ -4,6 +4,27 @@ import { request } from "utils/request";
 import { usePopUpMessage } from "./notification";
 
 export interface QrInfo {
+  bc_prd_code: string;
+  bc_prd_name: string;
+  bc_prd_flavour: string;
+  bc_prd_ingredients: string;
+  bc_pbth_code: string;
+  bc_pbth_manufactured_date: string;
+  bc_pbth_expiry_date: string;
+}
+
+export interface Blockchain {
+  bc_pbth_code: string;
+  bc_pbth_expiry_date: string;
+  bc_pbth_manufactured_date: string;
+  bc_prd_code: string;
+  bc_prd_flavour: string;
+  bc_prd_ingredients: string;
+  bc_prd_name: string;
+  bc_qr_code: string;
+}
+
+export interface VerifyQrInfo {
   bc_qr_code: string;
   bc_prd_code: string;
   bc_prd_name: string;
@@ -20,14 +41,14 @@ export interface QrInfo {
   bc_prd_nutrition_json: string;
 }
 
-export interface BlockchainQrInfo extends QrInfo {
+export interface BlockchainQrInfo extends VerifyQrInfo {
   bc_qr_code_image: string;
 }
 
 export function useBlockchainList() {
   return useQuery({
     queryKey: ["blockchainList"],
-    queryFn: async (): Promise<QrInfo[]> =>
+    queryFn: async (): Promise<Blockchain[]> =>
       await (
         await request.get(`/blockchain/showall`)
       ).data.data,
@@ -44,9 +65,13 @@ export function useGetBlockchainInfo(code: string) {
   });
 }
 
+interface BlockchainAddPayload {
+  bc_pbth_code: string;
+}
+
 export function useAddBlockchainInfo() {
   const popUpMsg = usePopUpMessage();
-  return useMutation(async (payload: QrInfo) => {
+  return useMutation(async (payload: BlockchainAddPayload) => {
     const res = await request.post(`/blockchain/add`, payload);
     if (res.data.code === 200) {
       popUpMsg("Print request has successfully been sent!", "success");
@@ -73,7 +98,7 @@ export function useScanResult(code: string) {
   const queryClient = new QueryClient();
   return useQuery({
     queryKey: ["scanResult", code],
-    queryFn: async (): Promise<QrInfo | null> => {
+    queryFn: async (): Promise<VerifyQrInfo | null> => {
       if (code) {
         const res = await request.get(`/blockchain/verify/${code}`);
 

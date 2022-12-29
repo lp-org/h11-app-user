@@ -1,11 +1,11 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
-import { QrInfo } from "hooks/useQrCode";
+import { VerifyQrInfo } from "hooks/useQrCode";
 import { Fragment } from "react";
 import Image from "./Image";
 import NutritionFacts from "./NutritionFacts";
 
 interface ShowQrScanInformationProps {
-  item: QrInfo | undefined;
+  item: VerifyQrInfo | undefined;
 }
 
 const ShowQrScanInformation: React.FC<ShowQrScanInformationProps> = ({

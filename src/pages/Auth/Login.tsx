@@ -20,8 +20,8 @@ const Login: React.FC = () => {
   const login = useLogin();
   const formik = useFormik<AuthLogin>({
     initialValues: {
-      email: "user",
-      password: "user123",
+      username: "user",
+      password: "password",
     },
     enableReinitialize: true,
     onSubmit: (values) => {
@@ -56,9 +56,9 @@ const Login: React.FC = () => {
                     <IonLabel position="stacked"></IonLabel>
                     <IonInput
                       className="custom"
-                      value={formik.values.email}
+                      value={formik.values.username}
                       onIonChange={formik.handleChange}
-                      name="email"
+                      name="username"
                       required
                       placeholder="Email Address"
                     ></IonInput>

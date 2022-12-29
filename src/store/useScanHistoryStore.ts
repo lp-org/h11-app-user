@@ -1,10 +1,10 @@
 import dayjs from "dayjs";
-import { QrInfo } from "hooks/useQrCode";
+import { VerifyQrInfo } from "hooks/useQrCode";
 
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-export interface QrInfoWithKey extends QrInfo {
+export interface QrInfoWithKey extends VerifyQrInfo {
   key: number;
   timestamp: number;
 }
@@ -12,7 +12,7 @@ export interface QrInfoWithKey extends QrInfo {
 interface scanHistoryState {
   scanHistoryList: QrInfoWithKey[];
 
-  addScanHistory: (payload: QrInfo) => void;
+  addScanHistory: (payload: VerifyQrInfo) => void;
   removeScanHistoryById: (keys: number[]) => void;
   clearScanHistory: () => void;
 }

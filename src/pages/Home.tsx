@@ -46,7 +46,7 @@ const Home: React.FC = () => {
                       height: "100%",
                       margin: 0,
                     }}
-                    onClick={() => history.push("/scan")}
+                    onClick={() => history.push("/scanProductInformation")}
                   >
                     <IonRow>
                       <IonCol size="12">

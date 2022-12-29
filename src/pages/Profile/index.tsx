@@ -4,7 +4,6 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
-  IonInput,
   IonItem,
   IonLabel,
   IonPage,
@@ -13,14 +12,12 @@ import {
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import {
-  checkmark,
   chevronForward,
   cloudUpload,
   createOutline,
-  pencil,
   personCircle,
 } from "ionicons/icons";
-import { FC, Fragment, useState } from "react";
+import { FC, Fragment } from "react";
 import { useHistory } from "react-router";
 
 import { useAuthStore } from "store/useAuthStore";

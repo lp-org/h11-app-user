@@ -21,7 +21,11 @@ const ScanProductInformation: React.FC = () => {
     openScanner();
   }, []);
   const openScanner = async () => {
-    const data = await BarcodeScanner.scan({ formats: "QR_CODE" });
+    const data = await BarcodeScanner.scan({
+      formats: "QR_CODE",
+      showTorchButton: true,
+      prompt: "Align QR within the frame to scan",
+    });
 
     if (data && data.text) {
       // temp because no fix url

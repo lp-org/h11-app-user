@@ -134,11 +134,9 @@ const MyScan: React.FC = () => {
                         }}
                       ></IonCheckbox>
                     )}
-                    <Image
-                      src={product.bc_prd_image}
-                      width={80}
-                      className="ion-margin-end"
-                    />
+                    <div className="ion-margin-end">
+                      <Image src={product.bc_prd_image} width={80} />
+                    </div>
                     <IonLabel
                       onClick={() => {
                         history.push(`/scanProductHistory/${product.key}`);
@@ -146,10 +144,10 @@ const MyScan: React.FC = () => {
                     >
                       <b className="wrap-text">{product.bc_prd_name}</b>
                       <div className="wrap-text">
-                        <small> Unique ID: {product.bc_qr_code}</small>
+                        <small>Unique ID: {product.bc_qr_code}</small>
                       </div>
                       <div className="wrap-text">
-                        <small> Product ID: {product.bc_prd_code}</small>
+                        <small>Product ID: {product.bc_prd_code}</small>
                       </div>
                       <div className="wrap-text">
                         <small>Product Batch ID: {product.bc_pbth_code} </small>

@@ -1,19 +1,25 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAppState } from "store";
 import { useAuthStore } from "store/useAuthStore";
 import { AuthLogin } from "types/auth";
+import { request } from "utils/request";
 import { usePopUpMessage } from "./notification";
 
 export function useLogin() {
   const setToken = useAuthStore((state) => state.setToken);
   const popUpMsg = usePopUpMessage();
   return useMutation(async (payload: AuthLogin) => {
-    if (payload.email === "user" && payload.password === "user123") {
-      setToken("thisisamocktoken");
+    try {
+      const res = await request.post("/auth/signin", payload);
+
+      setToken(res.data.token);
+      request.defaults.headers.common = {
+        Authorization: `Bearer ${res.data.token}`,
+      };
       popUpMsg("Login Successful!", "success");
-      return true;
-    } else {
+    } catch (error) {
       popUpMsg(
         "Email or Password is incorrect. Kindly enter the correct email or passsword.",
         "error"
@@ -52,10 +58,13 @@ export function useSession() {
 // }
 
 async function mockMeApi(token: string): Promise<boolean> {
-  return new Promise(async (resolve, reject) => {
-    setTimeout(() => {
-      if (token === "thisisamocktoken") resolve(true);
-      else reject("Incorrect Credentials");
-    }, 100);
-  });
+  try {
+    if (token) {
+      const { data } = await request.get("/test/user");
+      return true;
+    }
+    return false;
+  } catch (error) {
+    throw new Error("Incorrect Credentials");
+  }
 }
