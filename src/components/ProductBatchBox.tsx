@@ -23,12 +23,13 @@ const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
       }}
     >
       <div className="ion-margin">
-        <Image src={item.pbth_prd_image} width={120} />
+        <Image src={item.prd_image} width={120} />
       </div>
-      <div className="wrap-text ion-margin">
-        <b>{item.pbth_code}</b>
-      </div>
+
       <div style={{ padding: 8, textAlign: "left" }}>
+        <div className="wrap-text">
+          <b>Batch ID: {item.pbth_code}</b>
+        </div>
         <div className="wrap-text">
           <small>Product Name: {item.pbth_prd_name} </small>
         </div>

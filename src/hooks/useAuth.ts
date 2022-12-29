@@ -34,9 +34,15 @@ export function useSession() {
   const removeToken = useAuthStore((state) => state.removeToken);
   const [isAuthed, setIsAuthed] = useState(previousAuth);
   const token = useAuthStore((state) => state.token);
+  const setToken = useAuthStore((state) => state.setToken);
+
   const setLoading = useAppState((state) => state.setLoading);
   useEffect(() => {
     (async () => {
+      setToken(token);
+      request.defaults.headers.common = {
+        Authorization: `Bearer ${token}`,
+      };
       try {
         setLoading(true);
         const isAuthed = await mockMeApi(token);
