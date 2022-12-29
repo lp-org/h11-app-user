@@ -121,11 +121,10 @@ const Home: React.FC = () => {
               .sort((el, elj) => (el.key < elj.key ? 1 : -1))
               ?.map((product) => (
                 <IonItem key={product.key}>
-                  <Image
-                    src={product.bc_prd_image}
-                    width={80}
-                    className="ion-margin-end"
-                  />
+                  <div className="ion-margin-end">
+                    <Image src={product.bc_prd_image} width={80} />
+                  </div>
+
                   <IonLabel
                     onClick={() => {
                       history.push(`/scanProductHistory/${product.key}`);
