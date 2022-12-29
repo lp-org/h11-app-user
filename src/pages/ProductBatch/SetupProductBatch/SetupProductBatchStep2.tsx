@@ -1,4 +1,11 @@
-import { IonContent, IonPage, IonCol, IonLabel, IonButton } from "@ionic/react";
+import {
+  IonContent,
+  IonPage,
+  IonCol,
+  IonLabel,
+  IonButton,
+  IonIcon,
+} from "@ionic/react";
 import ShowProductBatch from "components/ShowProductBatch";
 import Toolbar from "components/Toolbar.tsx";
 
@@ -29,7 +36,18 @@ const SetupProductBatchStep2: FC = () => {
   };
   return (
     <IonPage>
-      <Toolbar title="Product Batch Setup" defaultHref="/productBatch" />
+      <Toolbar
+        title="Product Batch Setup"
+        defaultHref="/productBatch"
+        action={
+          <IonButton
+            onClick={() => history.push(`/manageProduct`)}
+            color="dark"
+          >
+            <IonIcon src={"/assets/icon/manage.svg"} />
+          </IonButton>
+        }
+      />
       <IonContent fullscreen className="ion-padding">
         <div style={{ display: "flex", flexFlow: "column", height: "100%" }}>
           <div style={{ flex: "0 1 auto" }}>

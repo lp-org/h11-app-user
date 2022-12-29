@@ -62,7 +62,10 @@ const EditProductStep1: FC = () => {
         title="Edit Product"
         defaultHref={`/product/${code}`}
         action={
-          <IonButton onClick={() => history.push(`/product/${code}`)}>
+          <IonButton
+            onClick={() => history.push(`/product/${code}`)}
+            color="dark"
+          >
             <IonIcon src={"/assets/icon/manage.svg"} />
           </IonButton>
         }

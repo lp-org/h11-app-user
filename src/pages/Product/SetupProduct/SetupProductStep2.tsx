@@ -102,7 +102,7 @@ const SetupProductStep2: FC = () => {
         title="Setup Product"
         defaultHref="/product"
         action={
-          <IonButton onClick={() => history.push("/product")}>
+          <IonButton onClick={() => history.push("/product")} color="dark">
             <IonIcon src={"/assets/icon/manage.svg"} />
           </IonButton>
         }

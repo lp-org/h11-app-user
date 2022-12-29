@@ -75,7 +75,18 @@ const SetupProductBatchStep1: FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Product Batch Setup" defaultHref="/productBatch" />
+      <Toolbar
+        title="Product Batch Setup"
+        defaultHref="/productBatch"
+        action={
+          <IonButton
+            onClick={() => history.push(`/manageProduct`)}
+            color="dark"
+          >
+            <IonIcon src={"/assets/icon/manage.svg"} />
+          </IonButton>
+        }
+      />
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>
           <form
@@ -249,7 +260,7 @@ const SetupProductBatchStep1: FC = () => {
                 style={{ marginTop: "auto" }}
                 class="ion-margin-top text-white"
               >
-                Next
+                Preview
               </IonButton>
             </div>
           </form>
