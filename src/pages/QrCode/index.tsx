@@ -86,7 +86,18 @@ const QrCode: React.FC = () => {
                       </div>
                     </IonCol>
                     <IonCol size="1">
-                      <IonIcon icon={print} onClick={() => {}} />
+                      <IonIcon
+                        icon={print}
+                        onClick={() => {
+                          setLoading(true);
+                          addBlockchainInfo.mutate(
+                            { bc_pbth_code: product.pbth_code },
+                            {
+                              onSuccess: () => setLoading(false),
+                            }
+                          );
+                        }}
+                      />
                     </IonCol>
                   </IonRow>
                 </IonGrid>

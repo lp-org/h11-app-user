@@ -21,7 +21,7 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
         width: 150,
       }}
     >
-      <div style={{ padding: 8, textAlign: "center", height: "130px" }}>
+      <div className="ion-margin">
         <Image
           imgSrc={item.prd_image}
           width={120}
@@ -33,13 +33,16 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
           <b>{item.prd_name}</b>
         </div>
         <div className="wrap-text">
+          <small>Product ID: {item.prd_code} </small>
+        </div>
+        <div className="wrap-text">
           <small>Manufacture Date: {item.prd_name} </small>
         </div>
         <div className="wrap-text">
-          <small>Expiry Date: {item.prd_name} </small>
+          <small>Product Category: {item.prd_category} </small>
         </div>
         <div className="wrap-text">
-          <small>Batch: {item.prd_name} </small>
+          <small>Product Type: {item.prd_type} </small>
         </div>
       </div>
     </IonCard>

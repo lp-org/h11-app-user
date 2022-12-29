@@ -4,6 +4,7 @@ export type ProductBatch = {
   pbth_manufactured_date: string;
   pbth_prd_code: string;
   pbth_prd_name: string;
+  pbth_prd_image?: string;
 };
 
 export type AddProductBatchProps = {

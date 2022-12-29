@@ -94,11 +94,6 @@ const Profile: React.FC = () => {
                 <EditableInput label="Company Address" />
               </IonCol>
             </IonRow>
-            <IonRow>
-              <IonCol size="12">
-                <EditableInput label="Password" />
-              </IonCol>
-            </IonRow>
           </form>
           <IonRow>
             <IonCol size="12">

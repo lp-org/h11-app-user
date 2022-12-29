@@ -13,18 +13,12 @@ import {
 import ProductBox from "components/ProductBox";
 
 import Toolbar from "components/Toolbar.tsx";
-import { addCircle, scanCircle, personCircle } from "ionicons/icons";
+import { addCircle } from "ionicons/icons";
 import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 import { useProductBatchList } from "hooks/useProductBatch";
 import ProductBatchBox from "components/ProductBatchBox";
 import { Trans } from "@lingui/macro";
-
-const QuickAccessList = [
-  { title: "Add New Product", path: "/product/add", icon: addCircle },
-  { title: "Scan QR Code", path: "/scan", icon: scanCircle },
-  { title: "My Profile", path: "/profile", icon: personCircle },
-];
 
 const Home: React.FC = () => {
   const { data: products } = useProductList();
@@ -117,7 +111,7 @@ const Home: React.FC = () => {
                       </IonCol>
                       <IonCol size="12">
                         <IonLabel>
-                          <p>QR code</p>
+                          <p>Scan QR code</p>
                         </IonLabel>
                       </IonCol>
                     </IonRow>
@@ -163,7 +157,7 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h2>Product Batch</h2>
+              <h2>My Products Batch</h2>
             </IonText>
 
             <IonButton

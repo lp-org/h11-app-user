@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonContent, IonPage, IonRow } from "@ionic/react";
+import { IonButton, IonContent, IonPage } from "@ionic/react";
 
 import ShowQrInfo from "components/ShowQrInfo";
 import Toolbar from "components/Toolbar.tsx";
