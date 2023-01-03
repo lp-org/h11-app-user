@@ -21,7 +21,7 @@ const Login: React.FC = () => {
     initialValues: {
       username: "user",
       password: "password",
-      apptype: "MERCHANT",
+      apptype: "USER",
     },
     enableReinitialize: true,
     onSubmit: (values) => {
