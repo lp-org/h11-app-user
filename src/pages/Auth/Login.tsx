@@ -4,7 +4,6 @@ import {
   IonContent,
   IonGrid,
   IonIcon,
-  IonImg,
   IonInput,
   IonItem,
   IonLabel,
@@ -22,6 +21,7 @@ const Login: React.FC = () => {
     initialValues: {
       username: "user",
       password: "password",
+      apptype: "MERCHANT",
     },
     enableReinitialize: true,
     onSubmit: (values) => {
