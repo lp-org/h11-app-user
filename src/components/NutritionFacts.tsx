@@ -25,7 +25,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
           </IonCol>
         </IonRow>
         {Object.entries(result.Nutrition_Facts).map(([key]) => (
-          <IonRow>
+          <IonRow key={key}>
             <IonCol size="12" style={{ padding: 0 }}>
               <small>
                 {typeof result.Nutrition_Facts[key] === "string" ? (
@@ -46,7 +46,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
         </IonRow>
         <hr style={{ border: "solid 1px", height: 0, margin: 1 }} />
         {Object.entries(result?.Nutrition_Facts?.Serving).map(([key]) => (
-          <IonRow>
+          <IonRow key={key}>
             <IonCol size="12" style={{ padding: 0 }}>
               {(function () {
                 if (typeof result.Nutrition_Facts.Serving[key] === "object") {
