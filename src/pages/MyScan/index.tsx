@@ -130,7 +130,7 @@ const MyScan: React.FC = () => {
           <IonRow class="ion-align-items-center">
             {dateList.length > 0 && "Filter:"}
             {dateList.map((date) => (
-              <div color="light" className="border-primary">
+              <div color="light" className="border-primary" key={date}>
                 {dayjs(date).format("DD MMM YYYY")}{" "}
                 <IonIcon
                   style={{ verticalAlign: "top" }}
