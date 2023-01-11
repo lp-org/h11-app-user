@@ -40,7 +40,7 @@ const SetupProductStep2: FC = () => {
 
   const formik = useFormik<any>({
     initialValues: tempProductSetup?.prd_nutrition_json || templatePayload,
-    // enableReinitialize: true,
+    enableReinitialize: true,
     onSubmit: (values) => {
       if (errorMessage()) {
         history.push("/product/add-3");

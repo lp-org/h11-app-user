@@ -23,12 +23,14 @@ export function useAddProduct() {
   );
   return useMutation(
     async (payload: AddProductProps) => {
+      const prd_image = payload.prd_image;
+      delete payload["prd_image"];
       const res = await request.post("/product/add", payload);
       if (res.data.code === 200) {
-        if (payload.prd_image?.substring(0, 4) === "blob") {
+        if (prd_image?.substring(0, 4) === "blob") {
           uploadImage.mutate({
             id: payload.prd_code,
-            filebody: payload.prd_image,
+            filebody: prd_image,
           });
           //@ts-ignore
           delete payload["prd_image"];

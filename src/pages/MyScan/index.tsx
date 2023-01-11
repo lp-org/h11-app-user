@@ -1,44 +1,71 @@
 import {
+  IonBadge,
   IonButton,
+  IonButtons,
   IonCheckbox,
   IonCol,
   IonContent,
+  IonDatetime,
   IonGrid,
   IonIcon,
   IonItem,
   IonLabel,
+  IonModal,
   IonPage,
   IonRow,
   IonSearchbar,
+  useIonPicker,
 } from "@ionic/react";
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 
-import { scan } from "ionicons/icons";
-import { useMemo, useState } from "react";
+import {
+  checkmarkOutline,
+  closeCircle,
+  closeCircleOutline,
+  closeOutline,
+  filter,
+} from "ionicons/icons";
+import dayjs from "dayjs";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
+import "./index.css";
 const MyScan: React.FC = () => {
   const history = useHistory();
   const [queryName, setQueryName] = useState("");
   const historyList = useScanHistoryStore((state) => state.scanHistoryList);
+  const [dateList, setDateList] = useState<string[]>([]);
 
   const historyFilteredList = useMemo(() => {
     return historyList.filter((el) => {
+      let nameValid = true;
+      let dateValid = true;
       if (queryName) {
-        return (
-          el.bc_prd_name.toLowerCase().search(queryName.toLowerCase()) >= 0
-        );
-      } else return true;
+        nameValid =
+          el.bc_prd_name.toLowerCase().search(queryName.toLowerCase()) >= 0;
+      }
+      if (dateList && dateList.length > 0) {
+        dateValid = dateList.some((elj) => {
+          return dayjs(elj).isSame(
+            dayjs.unix(el.timestamp).format("YYYY-MM-DD"),
+            "day"
+          );
+        });
+      }
+      return nameValid && dateValid;
     });
-  }, [historyList, queryName]);
+  }, [historyList, queryName, dateList]);
   const dispatchDeleteHistoryById = useScanHistoryStore(
     (state) => state.removeScanHistoryById
   );
   const [isSelection, setIsSelection] = useState(false);
 
   const [selectRows, setSelectRows] = useState<number[]>([]);
+
+  const modal = useRef<HTMLIonModalElement>(null);
+  const datetime = useRef<null | HTMLIonDatetimeElement>(null);
 
   return (
     <IonPage>
@@ -53,11 +80,69 @@ const MyScan: React.FC = () => {
       />
 
       <IonContent fullscreen>
-        <IonSearchbar
-          placeholder="Search Product Name"
-          value={queryName}
-          onIonChange={(e) => setQueryName(e.target.value!)}
-        />
+        <IonGrid className="ion-no-margin ion-no-padding">
+          <IonRow class="ion-align-items-center">
+            <IonCol>
+              <IonSearchbar
+                placeholder="Search Product Name"
+                value={queryName}
+                onIonChange={(e) => setQueryName(e.target.value!)}
+              />
+            </IonCol>
+            <IonCol size="auto" className="ion-padding-end">
+              <IonIcon icon={filter} id="scanned_date" />
+            </IonCol>
+          </IonRow>
+        </IonGrid>
+        <IonModal
+          ref={modal}
+          keepContentsMounted={true}
+          className="ion-datetime-button-overlay"
+          trigger="scanned_date"
+        >
+          <IonDatetime
+            id="scanned_date"
+            name="scanned_date"
+            presentation="date"
+            max={dayjs().year().toString()}
+            multiple
+            showDefaultButtons
+            onIonChange={(e: any) => {
+              if (e.target.value) setDateList(e.target.value);
+            }}
+            ref={datetime}
+          >
+            <IonButtons slot="buttons">
+              <IonButton
+                color="primary"
+                fill="solid"
+                style={{ marginLeft: "auto", marginRight: "auto" }}
+                onClick={() => {
+                  datetime.current?.confirm(true);
+                }}
+              >
+                <IonIcon icon={checkmarkOutline} className="text-white" />
+              </IonButton>
+            </IonButtons>
+          </IonDatetime>
+        </IonModal>
+        <IonGrid>
+          <IonRow class="ion-align-items-center">
+            {dateList.length > 0 && "Filter:"}
+            {dateList.map((date) => (
+              <div color="light" className="border-primary">
+                {dayjs(date).format("DD MMM YYYY")}{" "}
+                <IonIcon
+                  style={{ verticalAlign: "top" }}
+                  icon={closeCircleOutline}
+                  onClick={() => {
+                    setDateList((prev) => prev.filter((el) => el !== date));
+                  }}
+                />
+              </div>
+            ))}
+          </IonRow>
+        </IonGrid>
         {historyFilteredList && historyFilteredList?.length > 0 && (
           <IonGrid fixed={true} style={{ marginLeft: 0 }}>
             <IonRow>
@@ -79,9 +164,16 @@ const MyScan: React.FC = () => {
                       </IonItem>
                     </IonCol>
                   )}
-                  <IonCol>
+                  <IonCol
+                    style={{
+                      paddingLeft: 0,
+                    }}
+                  >
                     <IonItem lines="none" className="ion-no-margin">
                       <IonButton
+                        style={{
+                          margin: 0,
+                        }}
                         color="secondary"
                         onClick={() => {
                           setIsSelection((prev) => !prev);
@@ -89,9 +181,7 @@ const MyScan: React.FC = () => {
                         }}
                         fill="clear"
                       >
-                        <small>
-                          {!isSelection ? "Select Items" : "Cancel"}
-                        </small>
+                        {!isSelection ? "Select Items" : "Cancel"}
                       </IonButton>
                     </IonItem>
                   </IonCol>
