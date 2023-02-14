@@ -1,4 +1,5 @@
 import { IonButton, IonContent, IonGrid, IonIcon, IonPage } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import ShowProduct from "components/ShowProduct";
 import Toolbar from "components/Toolbar.tsx";
 import { useEditProduct } from "hooks/useProduct";
@@ -23,7 +24,7 @@ const EditProductStep3: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Edit Product"
+        title={t({ id: "Edit Product" })}
         defaultHref={`/product/${code}`}
         action={
           <IonButton
@@ -37,7 +38,9 @@ const EditProductStep3: FC = () => {
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div className="ion-margin-bottom">
-            <b>Preview</b>
+            <b>
+              <Trans>Preview</Trans>
+            </b>
           </div>
           <EditSteppers step={3} code={code} />
           {productPreview && (
@@ -56,7 +59,7 @@ const EditProductStep3: FC = () => {
               }
             }}
           >
-            Confirm
+            <Trans>Confirm</Trans>
           </IonButton>
         </IonGrid>
       </IonContent>

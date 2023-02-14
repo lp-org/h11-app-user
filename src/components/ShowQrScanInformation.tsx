@@ -1,4 +1,5 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
+import { Trans } from "@lingui/macro";
 import { VerifyQrInfo } from "hooks/useQrCode";
 import { Fragment } from "react";
 import Image from "./Image";
@@ -22,55 +23,55 @@ const ShowQrScanInformation: React.FC<ShowQrScanInformationProps> = ({
             <div style={{ background: "#FFFFFF", fontSize: 12, margin: 12 }}>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Batch ID:
+                  <Trans>Batch ID</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_pbth_code}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Unique ID:
+                  <Trans>Unique ID</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_qr_code}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Manufactured Date:
+                  <Trans>Manufactured Date</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_pbth_manufactured_date}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Expiry Date:
+                  <Trans>Expiry Date</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_pbth_expiry_date}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Product ID:
+                  <Trans>Product ID</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_prd_code}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Product Name:
+                  <Trans>Product Name</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_prd_name}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Food Category:
+                  <Trans>Food Category</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_prd_category}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Food Type:
+                  <Trans>Food Type</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_prd_type}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Flavour:
+                  <Trans>Flavour</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_prd_flavour}</IonCol>
               </IonRow>
@@ -82,13 +83,13 @@ const ShowQrScanInformation: React.FC<ShowQrScanInformationProps> = ({
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  Instruction:
+                  <Trans>Instruction</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_prd_storage_instructions}</IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="4" className="ion-text-right">
-                  How to keep fresh:
+                  <Trans>How to keep fresh</Trans>:
                 </IonCol>
                 <IonCol>{item?.bc_prd_keep_it_fresh}</IonCol>
               </IonRow>
@@ -100,7 +101,7 @@ const ShowQrScanInformation: React.FC<ShowQrScanInformationProps> = ({
               className="ion-text-right"
               style={{ fontSize: 12 }}
             >
-              Nutritional Facts:
+              <Trans>Nutritional Facts</Trans>:
             </IonCol>
           </IonRow>
 

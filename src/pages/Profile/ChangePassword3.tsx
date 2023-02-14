@@ -8,6 +8,7 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import OtpInput from "components/OtpInput";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
@@ -24,7 +25,7 @@ const ChangePassword3: React.FC = () => {
   const [code, setCode] = useState("");
   return (
     <IonPage>
-      <Toolbar title="Change Password" defaultHref="/" />
+      <Toolbar title={t({ id: "Change Password" })} defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>
@@ -40,7 +41,9 @@ const ChangePassword3: React.FC = () => {
                   style={{ fontSize: 220 }}
                 />
                 <IonNote class="ion-text-center">
-                  An OTP has been sent to your email. Please verify it.
+                  <Trans>
+                    An OTP has been sent to your email. Please verify it.
+                  </Trans>
                 </IonNote>
               </IonRow>
               <OtpInput
@@ -51,12 +54,12 @@ const ChangePassword3: React.FC = () => {
               <IonRow className="ion-justify-content-center ion-margin">
                 <IonNote class="ion-text-center">
                   <small>
-                    Didn’t Receive OTP?.{" "}
+                    <Trans>Didn’t Receive OTP?. </Trans>
                     <IonText
                       onClick={() => console.log("resend")}
                       color="secondary"
                     >
-                      Resend OTP
+                      <Trans>Resend OTP</Trans>
                     </IonText>
                   </small>
                 </IonNote>
@@ -71,7 +74,7 @@ const ChangePassword3: React.FC = () => {
                 style={{ marginTop: "auto" }}
                 onClick={() => history.push("/changePassword4")}
               >
-                Next
+                <Trans>Next</Trans>
               </IonButton>
             </div>
           </form>

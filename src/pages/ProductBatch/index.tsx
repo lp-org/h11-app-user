@@ -14,6 +14,7 @@ import { add } from "ionicons/icons";
 
 import { useProductBatchList } from "hooks/useProductBatch";
 import { useHistory } from "react-router";
+import { t } from "@lingui/macro";
 
 const ProductBatch: React.FC = () => {
   const { data: products } = useProductBatchList();
@@ -22,7 +23,7 @@ const ProductBatch: React.FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Product Batch"
+        title={t({ id: "Product Batch" })}
         defaultHref="/"
         action={
           <IonButton

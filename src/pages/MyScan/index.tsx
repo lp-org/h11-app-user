@@ -32,6 +32,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import "./index.css";
+import { t, Trans } from "@lingui/macro";
 const MyScan: React.FC = () => {
   const history = useHistory();
   const [queryName, setQueryName] = useState("");
@@ -70,7 +71,7 @@ const MyScan: React.FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="My Scans"
+        title={t({ id: "My Scan" })}
         defaultHref="/"
         action={
           <IonButton onClick={() => history.push("/scanProductInformation")}>
@@ -84,7 +85,7 @@ const MyScan: React.FC = () => {
           <IonRow class="ion-align-items-center">
             <IonCol>
               <IonSearchbar
-                placeholder="Search Product Name"
+                placeholder={t({ id: "Search Product Name" })}
                 value={queryName}
                 onIonChange={(e) => setQueryName(e.target.value!)}
               />
@@ -198,7 +199,9 @@ const MyScan: React.FC = () => {
                     }}
                     fill="clear"
                   >
-                    <small>Delete</small>
+                    <small>
+                      <Trans>Delete</Trans>
+                    </small>
                   </IonButton>
                 )}
               </IonCol>
@@ -234,23 +237,32 @@ const MyScan: React.FC = () => {
                     >
                       <b className="wrap-text">{product.bc_prd_name}</b>
                       <div className="wrap-text">
-                        <small>Unique ID: {product.bc_qr_code}</small>
+                        <small>
+                          <Trans>Unique ID</Trans>: {product.bc_qr_code}
+                        </small>
                       </div>
                       <div className="wrap-text">
-                        <small>Product ID: {product.bc_prd_code}</small>
+                        <small>
+                          <Trans>Product ID</Trans>: {product.bc_prd_code}
+                        </small>
                       </div>
                       <div className="wrap-text">
-                        <small>Product Batch ID: {product.bc_pbth_code} </small>
+                        <small>
+                          <Trans>Product Batch ID</Trans>:{" "}
+                          {product.bc_pbth_code}{" "}
+                        </small>
                       </div>
 
                       <div>
                         <small>
-                          Manufactured Date: {product.bc_pbth_manufactured_date}
+                          <Trans>Manufactured Date</Trans>:
+                          {product.bc_pbth_manufactured_date}
                         </small>
                       </div>
                       <div>
                         <small>
-                          Expiry Date: {product.bc_pbth_expiry_date}{" "}
+                          <Trans>Expiry Date</Trans>:{" "}
+                          {product.bc_pbth_expiry_date}{" "}
                         </small>
                       </div>
                     </IonLabel>

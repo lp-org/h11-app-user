@@ -1,4 +1,5 @@
 import { IonButton, IonContent, IonGrid, IonIcon, IonPage } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import ShowProduct from "components/ShowProduct";
 import Toolbar from "components/Toolbar.tsx";
 import { useAddProduct } from "hooks/useProduct";
@@ -15,7 +16,7 @@ const SetupProductStep3: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Setup Product"
+        title={t({ id: "Setup Product" })}
         defaultHref="/product"
         action={
           <IonButton onClick={() => history.push("/product")} color="dark">
@@ -26,7 +27,9 @@ const SetupProductStep3: FC = () => {
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div className="ion-margin-bottom">
-            <b>Preview</b>
+            <b>
+              <Trans>Preview</Trans>
+            </b>
           </div>
           <SteupSteppers step={3} />
           {productPreview && (
@@ -42,7 +45,7 @@ const SetupProductStep3: FC = () => {
               }
             }}
           >
-            Confirm
+            <Trans>Confirm</Trans>
           </IonButton>
         </IonGrid>
       </IonContent>

@@ -1,7 +1,7 @@
 import { LinguiConfig } from "@lingui/conf";
 
 const config: Partial<LinguiConfig> = {
-  locales: ["en", "cn"],
+  locales: ["en", "ms"],
   sourceLocale: "en",
   catalogs: [
     {
@@ -9,7 +9,7 @@ const config: Partial<LinguiConfig> = {
       include: ["src"],
     },
   ],
-  format: "po",
+  format: "minimal",
 };
 
 export default config;

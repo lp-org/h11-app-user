@@ -26,6 +26,7 @@ import Toolbar from "components/Toolbar.tsx";
 import { useTakePicture } from "hooks/useTakePicture";
 import { ProductAddSchema } from "utils/validation";
 import SteupSteppers from "./SteupSteppers";
+import { t, Trans } from "@lingui/macro";
 
 const initialValues = {
   prd_code: "",
@@ -80,7 +81,7 @@ const SetupProductStep1: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Setup Product"
+        title={t({ id: "Setup Product" })}
         defaultHref="/product"
         action={
           <IonButton onClick={() => history.push("/product")} color="dark">
@@ -91,7 +92,9 @@ const SetupProductStep1: FC = () => {
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div>
-            <b>Product Information Setup</b>
+            <b>
+              <Trans>Product Information Setup</Trans>
+            </b>
           </div>
           <SteupSteppers step={1} />
           <IonRow>
@@ -110,11 +113,13 @@ const SetupProductStep1: FC = () => {
               </IonCol>
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product Name</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product Name</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
-                    placeholder="Enter Product Name"
+                    placeholder={t({ id: "Enter Product Name" })}
                     name="prd_name"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_name}
@@ -124,11 +129,13 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product Category</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product Category</Trans>
+                  </IonLabel>
                   <IonInput
                     required
                     className="custom"
-                    placeholder="Enter food category"
+                    placeholder={t({ id: "Enter food category" })}
                     name="prd_category"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_category}
@@ -138,11 +145,13 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product Type</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product Type</Trans>
+                  </IonLabel>
                   <IonInput
                     required
                     className="custom"
-                    placeholder="Enter food type"
+                    placeholder={t({ id: "Enter food type" })}
                     name="prd_type"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_type}
@@ -152,11 +161,13 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Flavour</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Flavour</Trans>
+                  </IonLabel>
                   <IonInput
                     required
                     className="custom"
-                    placeholder="Enter flavour"
+                    placeholder={t({ id: "Enter flavour" })}
                     name="prd_flavour"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_flavour}
@@ -166,11 +177,13 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Storage Instructions </IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Storage Instructions</Trans>{" "}
+                  </IonLabel>
                   <IonInput
                     required
                     className="custom"
-                    placeholder="Enter instructions"
+                    placeholder={t({ id: "Enter instructions" })}
                     name="prd_storage_instructions"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_storage_instructions}
@@ -180,11 +193,15 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Ingredients</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Ingredients</Trans>
+                  </IonLabel>
                   <IonInput
                     required
                     className="custom"
-                    placeholder="Enter ingredients in yoour food products"
+                    placeholder={t({
+                      id: "Enter ingredients in yoour food products",
+                    })}
                     name="prd_ingredients"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_ingredients}
@@ -199,12 +216,14 @@ const SetupProductStep1: FC = () => {
                     formik.errors.prd_expiry_period && "ion-invalid"
                   }`}
                 >
-                  <IonLabel position="stacked">Expiry Period</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Expiry Period</Trans>
+                  </IonLabel>
                   <IonInput
                     required
                     className="custom"
                     type="number"
-                    placeholder="Enter Period"
+                    placeholder={t({ id: "Enter Period" })}
                     name="prd_expiry_period"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_expiry_period}
@@ -218,12 +237,14 @@ const SetupProductStep1: FC = () => {
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
                   <IonLabel position="stacked">
-                    How to keep product fresh
+                    <Trans>How to keep product fresh</Trans>
                   </IonLabel>
                   <IonTextarea
                     className="custom"
                     required
-                    placeholder="Enter instructions for keeping the food product"
+                    placeholder={t({
+                      id: "Enter instructions for keeping the food product",
+                    })}
                     name="prd_keep_it_fresh"
                     onIonChange={formik.handleChange}
                     autoGrow
@@ -234,7 +255,9 @@ const SetupProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Upload Product Photo</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Upload Product Photo</Trans>
+                  </IonLabel>
 
                   {!formik.values.prd_image ? (
                     <Fragment>
@@ -258,7 +281,9 @@ const SetupProductStep1: FC = () => {
                     </small> */}
                       </IonButton>
                       <small style={{ color: "#999999" }}>
-                        Optional: Upload product photo to showcase the product
+                        <Trans>
+                          Optional: Upload product photo to showcase the product
+                        </Trans>
                       </small>
                     </Fragment>
                   ) : (
@@ -276,7 +301,7 @@ const SetupProductStep1: FC = () => {
                 expand="block"
                 class="ion-margin-top text-white"
               >
-                Next
+                <Trans>Next</Trans>
               </IonButton>
             </form>
           </IonRow>

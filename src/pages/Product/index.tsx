@@ -6,6 +6,7 @@ import {
   IonList,
   IonPage,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 
 import Toolbar from "components/Toolbar.tsx";
 import { chevronForward } from "ionicons/icons";
@@ -15,23 +16,25 @@ const Manage: React.FC = () => {
   const history = useHistory();
   return (
     <IonPage>
-      <Toolbar title="Product" defaultHref="/" />
+      <Toolbar title={t({ id: "Product" })} defaultHref="/" />
       <IonContent fullscreen>
         <IonList>
           <IonItem class="ion-margin">
             <IonLabel onClick={() => history.push("/product")}>
-              Product List
+              <Trans>Product List</Trans>
             </IonLabel>
             <IonIcon icon={chevronForward} />
           </IonItem>
           <IonItem class="ion-margin">
             <IonLabel onClick={() => history.push("/productBatch")}>
-              Product Batch
+              <Trans>Product Batch</Trans>
             </IonLabel>
             <IonIcon icon={chevronForward} />
           </IonItem>
           <IonItem class="ion-margin">
-            <IonLabel onClick={() => history.push("/qrcode")}>QR Code</IonLabel>
+            <IonLabel onClick={() => history.push("/qrcode")}>
+              <Trans>QR Code</Trans>
+            </IonLabel>
             <IonIcon icon={chevronForward} />
           </IonItem>
         </IonList>

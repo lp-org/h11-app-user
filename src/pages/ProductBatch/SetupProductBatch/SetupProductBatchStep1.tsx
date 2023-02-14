@@ -27,6 +27,7 @@ import dayjs from "dayjs";
 import { ProductBatchAddSchema } from "utils/validation";
 import "./index.css";
 import { calendar } from "ionicons/icons";
+import { t, Trans } from "@lingui/macro";
 const SetupProductBatchStep1: FC = () => {
   const history = useHistory();
 
@@ -76,7 +77,7 @@ const SetupProductBatchStep1: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Product Batch Setup"
+        title={t({ id: "Product Batch Setup" })}
         defaultHref="/productBatch"
         action={
           <IonButton
@@ -112,9 +113,11 @@ const SetupProductBatchStep1: FC = () => {
                     }`}
                     lines="none"
                   >
-                    <IonLabel position="stacked">Select Product:</IonLabel>
+                    <IonLabel position="stacked">
+                      <Trans>Select Product</Trans>:
+                    </IonLabel>
                     <IonSelect
-                      placeholder="Select Product"
+                      placeholder={t({ id: "Select Product" })}
                       className="custom ion-no-margin"
                       onIonChange={(e) => {
                         formik.setFieldValue("pbth_prd_code", e.target.value);
@@ -150,11 +153,15 @@ const SetupProductBatchStep1: FC = () => {
                 </IonCol>
                 <IonCol size="12">
                   <IonItem className="ion-no-padding" lines="none">
-                    <IonLabel position="stacked">Product ID:</IonLabel>
+                    <IonLabel position="stacked">
+                      <Trans>Product ID</Trans>:
+                    </IonLabel>
                     <IonInput
                       className="custom"
                       disabled
-                      placeholder="Product ID will be auto filled once product is selected"
+                      placeholder={t({
+                        id: "Product ID will be auto filled once product is selected",
+                      })}
                       name="pbth_prd_code"
                       onIonChange={formik.handleChange}
                       value={formik.values.pbth_prd_code}
@@ -163,12 +170,14 @@ const SetupProductBatchStep1: FC = () => {
                 </IonCol>
                 <IonCol size="12">
                   <IonItem className="ion-no-padding" lines="none">
-                    <IonLabel position="stacked">Product Batch ID:</IonLabel>
+                    <IonLabel position="stacked">
+                      <Trans>Product Batch ID</Trans>:
+                    </IonLabel>
                     <IonInput
                       className="custom"
                       disabled
                       name="pbth_code"
-                      placeholder="Batch ID will be auto generated"
+                      placeholder={t({ id: "Batch ID will be auto generated" })}
                       onIonChange={formik.handleChange}
                       value={selectedProductBatch?.pbth_code}
                     ></IonInput>
@@ -180,7 +189,9 @@ const SetupProductBatchStep1: FC = () => {
                     lines="none"
                     id="manufactured_date"
                   >
-                    <IonLabel position="stacked">Manufactured Date:</IonLabel>
+                    <IonLabel position="stacked">
+                      <Trans>Manufactured Date</Trans>:
+                    </IonLabel>
                     <IonItem
                       lines="none"
                       style={{ width: "100%" }}
@@ -217,7 +228,9 @@ const SetupProductBatchStep1: FC = () => {
                     lines="none"
                     id="expiry_date"
                   >
-                    <IonLabel position="stacked">Expiry Date:</IonLabel>
+                    <IonLabel position="stacked">
+                      <Trans>Expiry Date</Trans>:
+                    </IonLabel>
                     <IonItem
                       style={{ width: "100%" }}
                       color="gray"

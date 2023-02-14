@@ -9,6 +9,8 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
+import I18Switcher from "components/i18n/I18Switcher";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import {
@@ -33,7 +35,7 @@ const Profile: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="My Profile" defaultHref="/" />
+      <Toolbar title={t({ id: "My Profile" })} defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid>
@@ -47,14 +49,16 @@ const Profile: React.FC = () => {
               <IonCol size="12" className="ion-text-center">
                 <IonButton fill="outline" color="dark">
                   <IonIcon icon={cloudUpload} slot="start" />
-                  Upload Profile Photo
+                  <Trans>Upload Profile Photo</Trans>
                 </IonButton>
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
                 <IonItem class="ion-no-padding" lines="none">
-                  <b>Profile</b>
+                  <b>
+                    <Trans>Profile</Trans>
+                  </b>
                   <IonIcon
                     onClick={() => history.push("/editProfile")}
                     icon={createOutline}
@@ -98,7 +102,9 @@ const Profile: React.FC = () => {
           <IonRow>
             <IonCol size="12">
               <IonItem class="ion-no-padding" lines="none">
-                <b>Password</b>
+                <b>
+                  <Trans>Password</Trans>
+                </b>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -112,7 +118,7 @@ const Profile: React.FC = () => {
                   position="fixed"
                   style={{ width: "unset", flex: "0 0 auto" }}
                 >
-                  Change Password
+                  <Trans>Change Password</Trans>
                 </IonLabel>
                 <IonIcon icon={chevronForward} slot="end" size="small" />
               </IonItem>
@@ -125,8 +131,9 @@ const Profile: React.FC = () => {
               removeToken();
             }}
           >
-            Sign Out
+            <Trans>Sign Out</Trans>
           </IonButton>
+          <I18Switcher />
         </IonGrid>
       </IonContent>
     </IonPage>

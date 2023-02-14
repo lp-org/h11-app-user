@@ -12,6 +12,7 @@ import {
   IonIcon,
   IonNote,
 } from "@ionic/react";
+import { t } from "@lingui/macro";
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 import { environment } from "environment/environment";
@@ -59,7 +60,7 @@ const EditProductStep1: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Edit Product"
+        title={t({ id: "Edit Product" })}
         defaultHref={`/product/${code}`}
         action={
           <IonButton
@@ -96,7 +97,7 @@ const EditProductStep1: FC = () => {
                   <IonInput
                     className="custom"
                     required
-                    placeholder="Enter Product Name"
+                    placeholder={t({ id: "Enter Product Name" })}
                     name="prd_name"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_name}
@@ -110,7 +111,7 @@ const EditProductStep1: FC = () => {
                   <IonInput
                     className="custom"
                     required
-                    placeholder="Enter food category"
+                    placeholder={t({ id: "Enter food category" })}
                     name="prd_category"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_category}
@@ -124,7 +125,7 @@ const EditProductStep1: FC = () => {
                   <IonInput
                     className="custom"
                     required
-                    placeholder="Enter food type"
+                    placeholder={t({ id: "Enter food type" })}
                     name="prd_type"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_type}
@@ -138,7 +139,7 @@ const EditProductStep1: FC = () => {
                   <IonInput
                     className="custom"
                     required
-                    placeholder="Enter flavour"
+                    placeholder={t({ id: "Enter flavour" })}
                     name="prd_flavour"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_flavour}
@@ -152,7 +153,7 @@ const EditProductStep1: FC = () => {
                   <IonInput
                     className="custom"
                     required
-                    placeholder="Enter instructions"
+                    placeholder={t({ id: "Enter instructions" })}
                     name="prd_storage_instructions"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_storage_instructions}
@@ -166,7 +167,9 @@ const EditProductStep1: FC = () => {
                   <IonInput
                     className="custom"
                     required
-                    placeholder="Enter ingredients in yoour food products"
+                    placeholder={t({
+                      id: "Enter ingredients in yoour food products",
+                    })}
                     name="prd_ingredients"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_ingredients}
@@ -186,7 +189,7 @@ const EditProductStep1: FC = () => {
                     className="custom"
                     required
                     type="number"
-                    placeholder="Enter Period"
+                    placeholder={t({ id: "Enter Period" })}
                     name="prd_expiry_period"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_expiry_period}
@@ -206,7 +209,9 @@ const EditProductStep1: FC = () => {
                     className="custom"
                     required
                     autoGrow
-                    placeholder="Enter instructions for keeping the food product"
+                    placeholder={t({
+                      id: "Enter instructions for keeping the food product",
+                    })}
                     name="prd_keep_it_fresh"
                     onIonChange={formik.handleChange}
                     value={formik.values.prd_keep_it_fresh}

@@ -1,4 +1,5 @@
 import { IonCard } from "@ionic/react";
+import { Trans } from "@lingui/macro";
 import { useHistory } from "react-router";
 import { Product } from "../types/product";
 import Image from "./Image";
@@ -33,16 +34,24 @@ const ProductBox: React.FC<ProductBoxProps> = ({ item }) => {
           <b>{item.prd_name}</b>
         </div>
         <div className="wrap-text">
-          <small>Product ID: {item.prd_code} </small>
+          <small>
+            <Trans>Product ID</Trans>: {item.prd_code}{" "}
+          </small>
         </div>
         <div className="wrap-text">
-          <small>Manufacture Date: {item.prd_name} </small>
+          <small>
+            <Trans>Manufacture Date</Trans>: {item.prd_name}{" "}
+          </small>
         </div>
         <div className="wrap-text">
-          <small>Product Category: {item.prd_category} </small>
+          <small>
+            <Trans>Product Category</Trans>: {item.prd_category}{" "}
+          </small>
         </div>
         <div className="wrap-text">
-          <small>Product Type: {item.prd_type} </small>
+          <small>
+            <Trans>Product Type</Trans>: {item.prd_type}{" "}
+          </small>
         </div>
       </div>
     </IonCard>

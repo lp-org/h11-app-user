@@ -11,6 +11,7 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 
@@ -27,7 +28,7 @@ const ChangePassword1: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Change Password" defaultHref="/" />
+      <Toolbar title={t({ id: "Change Password" })} defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>
@@ -39,8 +40,10 @@ const ChangePassword1: React.FC = () => {
               <IonRow>
                 <IonCol size="12" class="ion-text-center">
                   <small style={{ color: "#999999" }}>
-                    Keep your account safe, please verify your identity by
-                    entering your password.
+                    <Trans>
+                      Keep your account safe, please verify your identity by
+                      entering your password.
+                    </Trans>
                   </small>
                 </IonCol>
               </IonRow>
@@ -51,7 +54,7 @@ const ChangePassword1: React.FC = () => {
                     <IonInput
                       className="custom"
                       name="current_password"
-                      placeholder="Please enter your password"
+                      placeholder={t({ id: "Please enter your password" })}
                       onIonChange={formik.handleChange}
                     ></IonInput>
                   </IonItem>
@@ -59,7 +62,9 @@ const ChangePassword1: React.FC = () => {
               </IonRow>
               <IonRow class="ion-justify-content-center ion-margin-top">
                 <IonText color="secondary">
-                  <small>Forgot Password?</small>
+                  <small>
+                    <Trans>Forgot Password?</Trans>
+                  </small>
                 </IonText>
               </IonRow>
             </div>

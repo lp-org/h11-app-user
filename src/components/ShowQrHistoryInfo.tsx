@@ -1,4 +1,5 @@
 import { IonButton, IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
+import { Trans } from "@lingui/macro";
 import { BlockchainQrInfo } from "hooks/useQrCode";
 import { Fragment } from "react";
 import NutritionFacts from "./NutritionFacts";
@@ -20,7 +21,7 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonCol>
           <IonCol size="12">
             <IonButton shape="round" className="text-white">
-              Reprint QR Code
+              <Trans>Reprint QR Code</Trans>
             </IonButton>
           </IonCol>
           <IonCol size="12">
@@ -33,7 +34,9 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           {" "}
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Batch ID:</IonLabel>
+              <IonLabel>
+                <Trans>Batch ID</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start ion-margin-bottom">
               {item?.bc_pbth_code}
@@ -41,7 +44,9 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Manufactured Date:</IonLabel>
+              <IonLabel>
+                <Trans>Manufactured Date</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start ion-margin-bottom">
               {item?.bc_pbth_manufactured_date}
@@ -49,7 +54,7 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Expiry Date:</IonLabel>
+              <IonLabel>Expiry Date</IonLabel>:
             </IonCol>
             <IonCol className="ion-margin-start ion-margin-bottom">
               {item?.bc_pbth_expiry_date}
@@ -57,7 +62,9 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Unique ID </IonLabel>
+              <IonLabel>
+                <Trans>Unique ID</Trans>:
+              </IonLabel>
             </IonCol>
 
             <IonCol className="ion-margin-start ion-margin-bottom">
@@ -66,19 +73,25 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Product ID:</IonLabel>
+              <IonLabel>
+                <Trans>Product ID</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">{item?.bc_prd_code}</IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Product Name:</IonLabel>
+              <IonLabel>
+                <Trans>Product Name</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">{item?.bc_prd_name}</IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Food Category:</IonLabel>
+              <IonLabel>
+                <Trans>Food Category</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">
               {item?.bc_prd_category}
@@ -86,19 +99,25 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Food Type:</IonLabel>
+              <IonLabel>
+                <Trans>Food Type</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">{item?.bc_prd_type}</IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Flavour:</IonLabel>
+              <IonLabel>
+                <Trans>Flavour</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">{item?.bc_prd_flavour}</IonCol>
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Ingredients:</IonLabel>
+              <IonLabel>
+                <Trans>Ingredients</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">
               {item?.bc_prd_ingredients}
@@ -106,7 +125,9 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>Instruction: </IonLabel>
+              <IonLabel>
+                <Trans>Instruction</Trans>:{" "}
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">
               {item?.bc_prd_storage_instructions}
@@ -114,7 +135,9 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
           </IonRow>
           <IonRow>
             <IonCol size="4">
-              <IonLabel>How to keep fresh:</IonLabel>
+              <IonLabel>
+                <Trans>How to keep fresh</Trans>:
+              </IonLabel>
             </IonCol>
             <IonCol className="ion-margin-start">
               {item?.bc_prd_keep_it_fresh}
@@ -124,7 +147,9 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
       </IonGrid>
       <IonRow style={{ fontSize: 12 }}>
         <IonCol size="4">
-          <IonLabel>Nutritional Facts:</IonLabel>
+          <IonLabel>
+            <Trans>Nutritional Facts</Trans>:
+          </IonLabel>
         </IonCol>
       </IonRow>
       <IonRow>

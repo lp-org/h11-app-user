@@ -13,6 +13,7 @@ import {
   IonPage,
   IonNote,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { useGetProductById } from "hooks/useProduct";
@@ -96,7 +97,7 @@ const EditProductStep2: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Edit Product"
+        title={t({ id: "Edit Product" })}
         defaultHref={`/product/${code}`}
         action={
           <IonButton
@@ -110,7 +111,9 @@ const EditProductStep2: FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div style={{ display: "flex", flexFlow: "column", height: "100%" }}>
           <div className="ion-margin-bottom">
-            <b>Nutrition Facts Setup </b>
+            <b>
+              <Trans>Nutrition Facts Setup</Trans>{" "}
+            </b>
           </div>
           <EditSteppers step={2} code={code} />
           <IonGrid style={{ height: "100%", width: "100%" }}>
@@ -156,7 +159,8 @@ const EditProductStep2: FC = () => {
                             >
                               <div style={{ display: "flex", width: "100%" }}>
                                 <IonLabel position="stacked">
-                                  Nutrition Fact Type {index + 1}:
+                                  <Trans>Nutrition Fact Type</Trans> {index + 1}
+                                  :
                                 </IonLabel>
                                 <div style={{ marginLeft: "auto" }}>
                                   <IonIcon
@@ -297,7 +301,7 @@ const EditProductStep2: FC = () => {
                         })
                       }
                     >
-                      Add Row
+                      <Trans>Add Row</Trans>
                     </IonButton>
                   </div>
                   <div
@@ -313,7 +317,7 @@ const EditProductStep2: FC = () => {
                       style={{ marginTop: "auto" }}
                       class="text-white"
                     >
-                      Preview
+                      <Trans>Preview</Trans>
                     </IonButton>
                   </div>
                 </Fragment>

@@ -6,6 +6,7 @@ import {
   IonButton,
   IonIcon,
 } from "@ionic/react";
+import { t } from "@lingui/macro";
 import ShowProductBatch from "components/ShowProductBatch";
 import Toolbar from "components/Toolbar.tsx";
 
@@ -37,7 +38,7 @@ const SetupProductBatchStep2: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Product Batch Setup"
+        title={t({ id: "Product Batch Setup" })}
         defaultHref="/productBatch"
         action={
           <IonButton

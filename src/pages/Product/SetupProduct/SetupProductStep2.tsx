@@ -13,6 +13,7 @@ import {
   IonPage,
   IonNote,
 } from "@ionic/react";
+import { t } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 import { removeCircle, trash } from "ionicons/icons";
@@ -99,7 +100,7 @@ const SetupProductStep2: FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Setup Product"
+        title={t({ id: "Setup Product" })}
         defaultHref="/product"
         action={
           <IonButton onClick={() => history.push("/product")} color="dark">

@@ -1,4 +1,5 @@
 import { IonContent, IonPage } from "@ionic/react";
+import { t } from "@lingui/macro";
 import ShowQrHistoryInfo from "components/ShowQrHistoryInfo";
 
 import Toolbar from "components/Toolbar.tsx";
@@ -19,7 +20,7 @@ const ViewQrCodeHistory: React.FC = () => {
   const { data } = useGetBlockchainInfo(code);
   return (
     <IonPage>
-      <Toolbar title="View QR Code" defaultHref="/qrcode" />
+      <Toolbar title={t({ id: "View QR Code" })} defaultHref="/qrcode" />
 
       <IonContent fullscreen className="ion-padding">
         {data && <ShowQrHistoryInfo item={data} />}

@@ -9,6 +9,7 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 
@@ -36,47 +37,49 @@ const Register: React.FC = () => {
             <div style={{ flex: "0 1 auto" }}>
               <IonRow className="ion-justify-content-center">
                 <h1>
-                  <b>Registration</b>
+                  <b>
+                    <Trans>Registration</Trans>
+                  </b>
                 </h1>
               </IonRow>
               <IonRow>
                 <IonCol size="6">
-                  <EditableInput label="First Name" />
+                  <EditableInput label={t({ id: "First Name" })} />
                 </IonCol>
 
                 <IonCol size="6">
-                  <EditableInput label="Last Name" />
+                  <EditableInput label={t({ id: "Last Name" })} />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
                   <EditableInput
-                    label="Email Address"
-                    placeholder="Please enter your email address"
+                    label={t({ id: "Email Address" })}
+                    placeholder={t({ id: "Please enter your email address" })}
                   />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
                   <EditableInput
-                    label="Mobile Number"
-                    placeholder="Please enter your phone number"
+                    label={t({ id: "Mobile Number" })}
+                    placeholder={t({ id: "Please enter your phone number" })}
                   />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
                   <EditableInput
-                    label="Company Name"
-                    placeholder="Please enter your company name"
+                    label={t({ id: "Company Name" })}
+                    placeholder={t({ id: "Please enter your company name" })}
                   />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
                   <EditableInput
-                    label="Company Address"
-                    placeholder="Please enter your company address"
+                    label={t({ id: "Company Address" })}
+                    placeholder={t({ id: "Please enter your company address" })}
                   />
                 </IonCol>
               </IonRow>
@@ -88,7 +91,7 @@ const Register: React.FC = () => {
               style={{ marginTop: "auto" }}
               onClick={() => history.push("/register2")}
             >
-              Next
+              <Trans>Next</Trans>
             </IonButton>
           </form>
         </IonGrid>

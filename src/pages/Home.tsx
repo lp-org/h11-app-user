@@ -18,7 +18,7 @@ import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 import { useProductBatchList } from "hooks/useProductBatch";
 import ProductBatchBox from "components/ProductBatchBox";
-import { Trans } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 
 const Home: React.FC = () => {
   const { data: products } = useProductList();
@@ -27,7 +27,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="My Home" />
+      <Toolbar title={t({ id: "My Home" })} />
       <IonContent fullscreen className="ion-padding">
         {/* Quick Access */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
                       />
 
                       <IonLabel class="ion-margin-start">
-                        <p>Add New Product List</p>
+                        <Trans>Add New Product List</Trans>
                       </IonLabel>
                     </div>
                   </IonCard>
@@ -81,7 +81,7 @@ const Home: React.FC = () => {
                       />
 
                       <IonLabel class="ion-margin-start">
-                        <p>Add New Product Batch</p>
+                        <Trans>Add New Product Batch</Trans>
                       </IonLabel>
                     </div>
                   </IonCard>
@@ -111,7 +111,7 @@ const Home: React.FC = () => {
                       </IonCol>
                       <IonCol size="12">
                         <IonLabel>
-                          <p>Scan QR code</p>
+                          <Trans>Scan QR code</Trans>
                         </IonLabel>
                       </IonCol>
                     </IonRow>
@@ -125,7 +125,9 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h2>My Products List</h2>
+              <h2>
+                <Trans>My Products List</Trans>
+              </h2>
             </IonText>
 
             <IonButton
@@ -135,7 +137,7 @@ const Home: React.FC = () => {
               size="small"
               color="secondary"
             >
-              View all
+              <Trans> View all</Trans>
             </IonButton>
           </IonRow>
           <IonRow
@@ -157,7 +159,9 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h2>My Products Batch</h2>
+              <h2>
+                <Trans>My Products Batch</Trans>
+              </h2>
             </IonText>
 
             <IonButton
@@ -167,7 +171,7 @@ const Home: React.FC = () => {
               size="small"
               color="secondary"
             >
-              View all
+              <Trans>View all</Trans>
             </IonButton>
           </IonRow>
           <IonRow

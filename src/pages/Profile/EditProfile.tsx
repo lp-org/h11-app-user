@@ -9,6 +9,7 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 
@@ -23,7 +24,7 @@ const EditProfile: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Edit Profile" defaultHref="/" />
+      <Toolbar title={t({ id: "Edit Profile" })} defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>
@@ -68,7 +69,7 @@ const EditProfile: React.FC = () => {
               className="text-white"
               style={{ marginTop: "auto" }}
             >
-              Done
+              <Trans>Done</Trans>
             </IonButton>
           </form>
         </IonGrid>

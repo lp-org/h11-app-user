@@ -20,6 +20,7 @@ import { add } from "ionicons/icons";
 import { useProductList } from "hooks/useProduct";
 import { useHistory } from "react-router";
 import Image from "components/Image";
+import { t, Trans } from "@lingui/macro";
 
 const ProductList: React.FC = () => {
   const { data: products, refetch } = useProductList();
@@ -32,7 +33,7 @@ const ProductList: React.FC = () => {
   return (
     <IonPage>
       <Toolbar
-        title="Product List"
+        title={t({ id: "Product List" })}
         defaultHref="/"
         action={
           <IonButton fill="solid" onClick={() => history.push("/product/add")}>
@@ -48,11 +49,13 @@ const ProductList: React.FC = () => {
 
         <IonSegment value="default" color="primary">
           <IonSegmentButton value="default">
-            <IonLabel className="ion-text-capitalize">Active Products</IonLabel>
+            <IonLabel className="ion-text-capitalize">
+              <Trans>Active Products</Trans>
+            </IonLabel>
           </IonSegmentButton>
           <IonSegmentButton value="segment">
             <IonLabel className="ion-text-capitalize">
-              Archived Products
+              <Trans>Archived Products</Trans>
             </IonLabel>
           </IonSegmentButton>
         </IonSegment>
@@ -70,16 +73,24 @@ const ProductList: React.FC = () => {
               >
                 <b>{product.prd_name}</b>
                 <div>
-                  <small>Product ID: {product.prd_code} </small>
+                  <small>
+                    <Trans>Product ID</Trans>: {product.prd_code}{" "}
+                  </small>
                 </div>
                 <div>
-                  <small>Category: {product.prd_category} </small>
+                  <small>
+                    <Trans>Category</Trans>: {product.prd_category}{" "}
+                  </small>
                 </div>
                 <div>
-                  <small>Type: {product.prd_type} </small>
+                  <small>
+                    <Trans>Type</Trans>: {product.prd_type}{" "}
+                  </small>
                 </div>
                 <div>
-                  <small>Flavour: {product.prd_flavour} </small>
+                  <small>
+                    <Trans>Flavour</Trans>: {product.prd_flavour}{" "}
+                  </small>
                 </div>
               </IonLabel>
             </IonItem>

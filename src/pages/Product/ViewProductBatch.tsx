@@ -1,4 +1,5 @@
 import { IonContent, IonItem, IonPage } from "@ionic/react";
+import { t } from "@lingui/macro";
 
 import ShowProductBatch from "components/ShowProductBatch";
 import Toolbar from "components/Toolbar.tsx";
@@ -18,7 +19,10 @@ const ViewProductBatch: React.FC = () => {
   const { data } = useGetProductBatchById(code);
   return (
     <IonPage>
-      <Toolbar title="View Product Batch" defaultHref="/productBatch" />
+      <Toolbar
+        title={t({ id: "View Product Batch" })}
+        defaultHref="/productBatch"
+      />
 
       <IonContent fullscreen className="ion-padding">
         <ShowProductBatch item={data!} />

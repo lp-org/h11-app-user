@@ -1,4 +1,5 @@
 import { IonButton, IonContent, IonPage } from "@ionic/react";
+import { t } from "@lingui/macro";
 
 import ShowQrInfo from "components/ShowQrInfo";
 import Toolbar from "components/Toolbar.tsx";
@@ -22,7 +23,7 @@ const PrintQrCode: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Print QR Code" defaultHref="/qrcode" />
+      <Toolbar title={t({ id: "Print QR Code" })} defaultHref="/qrcode" />
 
       <IonContent fullscreen className="ion-padding">
         <div style={{ display: "flex", flexFlow: "column", height: "100%" }}>

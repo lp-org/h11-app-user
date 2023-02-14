@@ -1,4 +1,5 @@
 import { IonCard } from "@ionic/react";
+import { Trans } from "@lingui/macro";
 import dayjs from "dayjs";
 import { useHistory } from "react-router";
 import { ProductBatch } from "types/productBatch";
@@ -28,23 +29,30 @@ const ProductBatchBox: React.FC<ProductBatchBoxProps> = ({ item }) => {
 
       <div style={{ padding: 8, textAlign: "left" }}>
         <div className="wrap-text">
-          <b>Batch ID: {item.pbth_code}</b>
-        </div>
-        <div className="wrap-text">
-          <small>Product Name: {item.pbth_prd_name} </small>
-        </div>
-        <div className="wrap-text">
-          <small>Product ID: {item.pbth_prd_code} </small>
+          <b>
+            <Trans>Batch ID</Trans>: {item.pbth_code}
+          </b>
         </div>
         <div className="wrap-text">
           <small>
-            Manufactured Date:
+            <Trans>Product Name</Trans>: {item.pbth_prd_name}{" "}
+          </small>
+        </div>
+        <div className="wrap-text">
+          <small>
+            <Trans>Product ID</Trans>: {item.pbth_prd_code}{" "}
+          </small>
+        </div>
+        <div className="wrap-text">
+          <small>
+            <Trans>Manufactured Date</Trans>:
             {dayjs(item.pbth_manufactured_date).format("DD/MM/YYYY")}{" "}
           </small>
         </div>
         <div className="wrap-text">
           <small>
-            Expiry Date: {dayjs(item.pbth_expiry_date).format("DD/MM/YYYY")}{" "}
+            <Trans>Expiry Date</Trans>:{" "}
+            {dayjs(item.pbth_expiry_date).format("DD/MM/YYYY")}{" "}
           </small>
         </div>
       </div>
