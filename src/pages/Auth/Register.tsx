@@ -48,7 +48,7 @@ const Register: React.FC = () => {
                 </IonCol>
 
                 <IonCol size="6">
-                  <EditableInput label={t({ id: "Last Name" })} />
+                  <EditableInput label={t({ id: "Family Name" })} />
                 </IonCol>
               </IonRow>
               <IonRow>

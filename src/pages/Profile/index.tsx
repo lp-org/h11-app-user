@@ -10,8 +10,8 @@ import {
   IonRow,
 } from "@ionic/react";
 import { t, Trans } from "@lingui/macro";
-import I18Switcher from "components/i18n/I18Switcher";
 import Toolbar from "components/Toolbar.tsx";
+import { languages } from "constant";
 import { useFormik } from "formik";
 import {
   chevronForward,
@@ -21,6 +21,7 @@ import {
 } from "ionicons/icons";
 import { FC, Fragment } from "react";
 import { useHistory } from "react-router";
+import { useAppStateWithLs } from "store";
 
 import { useAuthStore } from "store/useAuthStore";
 
@@ -32,7 +33,7 @@ const Profile: React.FC = () => {
     enableReinitialize: true,
     onSubmit: (values) => {},
   });
-
+  const locale = useAppStateWithLs((state) => state.locale);
   return (
     <IonPage>
       <Toolbar title={t({ id: "My Profile" })} defaultHref="/" />
@@ -70,32 +71,32 @@ const Profile: React.FC = () => {
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="First Name" />
+                <EditableInput label={t({ id: "First Name" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Last Name" />
+                <EditableInput label={t({ id: "Family Name" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Email Address" />
+                <EditableInput label={t({ id: "Email Address" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Mobile Number" />
+                <EditableInput label={t({ id: "Mobile Number" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Company Name" />
+                <EditableInput label={t({ id: "Company Name" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Company Address" />
+                <EditableInput label={t({ id: "Company Address" })} />
               </IonCol>
             </IonRow>
           </form>
@@ -124,6 +125,32 @@ const Profile: React.FC = () => {
               </IonItem>
             </IonCol>
           </IonRow>
+
+          <IonRow>
+            <IonCol size="12">
+              <IonItem class="ion-no-padding" lines="none">
+                <b>
+                  <Trans>Language</Trans>
+                </b>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="12">
+              <IonItem
+                className="ion-no-padding"
+                onClick={() => history.push("/updateLanguage")}
+              >
+                <IonLabel
+                  position="fixed"
+                  style={{ width: "unset", flex: "0 0 auto" }}
+                >
+                  {languages.find((el) => el.code === locale)?.text}
+                </IonLabel>
+                <IonIcon icon={chevronForward} slot="end" size="small" />
+              </IonItem>
+            </IonCol>
+          </IonRow>
           <IonButton
             expand="block"
             className="text-white"
@@ -133,7 +160,6 @@ const Profile: React.FC = () => {
           >
             <Trans>Sign Out</Trans>
           </IonButton>
-          <I18Switcher />
         </IonGrid>
       </IonContent>
     </IonPage>

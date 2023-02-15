@@ -27,7 +27,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title={t({ id: "My Home" })} />
+      <Toolbar title={t({ id: "Home" })} />
       <IonContent fullscreen className="ion-padding">
         {/* Quick Access */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>

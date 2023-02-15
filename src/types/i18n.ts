@@ -6,6 +6,6 @@ export interface I18nContextProps {
 
 export enum LocaleEnum {
   English = "en",
-  Chinese = "cn",
-  Malay = "ms",
+  Mandarin = "cn",
+  Melayu = "ms",
 }

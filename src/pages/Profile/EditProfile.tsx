@@ -35,31 +35,31 @@ const EditProfile: React.FC = () => {
             <div style={{ flex: "0 1 auto" }}>
               <IonRow>
                 <IonCol size="6">
-                  <EditableInput label="First Name" />
+                  <EditableInput label={t({ id: "First Name" })} />
                 </IonCol>
 
                 <IonCol size="6">
-                  <EditableInput label="Last Name" />
+                  <EditableInput label={t({ id: "Family Name" })} />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput label="Email Address" />
+                  <EditableInput label={t({ id: "Email Address" })} />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput label="Mobile Number" />
+                  <EditableInput label={t({ id: "Mobile Number" })} />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput label="Company Name" />
+                  <EditableInput label={t({ id: "Company Name" })} />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput label="Company Address" />
+                  <EditableInput label={t({ id: "Company Address" })} />
                 </IonCol>
               </IonRow>
             </div>
