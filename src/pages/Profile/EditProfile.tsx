@@ -9,6 +9,7 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
 
@@ -23,7 +24,7 @@ const EditProfile: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Edit Profile" defaultHref="/" />
+      <Toolbar title={t({ id: "Edit Profile" })} defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>
@@ -34,21 +35,21 @@ const EditProfile: React.FC = () => {
             <div style={{ flex: "0 1 auto" }}>
               <IonRow>
                 <IonCol size="6">
-                  <EditableInput label="First Name" />
+                  <EditableInput label={t({ id: "First Name" })} />
                 </IonCol>
 
                 <IonCol size="6">
-                  <EditableInput label="Last Name" />
+                  <EditableInput label={t({ id: "Family Name" })} />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput label="Email Address" />
+                  <EditableInput label={t({ id: "Email Address" })} />
                 </IonCol>
               </IonRow>
               <IonRow>
                 <IonCol size="12">
-                  <EditableInput label="Mobile Number" />
+                  <EditableInput label={t({ id: "Mobile Number" })} />
                 </IonCol>
               </IonRow>
             </div>
@@ -58,7 +59,7 @@ const EditProfile: React.FC = () => {
               className="text-white"
               style={{ marginTop: "auto" }}
             >
-              Done
+              <Trans>Done</Trans>
             </IonButton>
           </form>
         </IonGrid>

@@ -14,6 +14,7 @@ import { useScanResult } from "hooks/useQrCode";
 
 import ShowQrScanInformation from "components/ShowQrScanInformation";
 import { useHistory } from "react-router";
+import { t } from "@lingui/macro";
 const ScanProductInformation: React.FC = () => {
   const [url, setUrl] = useState("");
   const history = useHistory();
@@ -40,7 +41,7 @@ const ScanProductInformation: React.FC = () => {
   const { data, isLoading } = useScanResult(url);
   return (
     <IonPage>
-      <Toolbar title="Product Information" defaultHref="/scan" />
+      <Toolbar title={t({ id: "Product Information" })} defaultHref="/scan" />
 
       <IonContent fullscreen className="ion-padding">
         {isLoading ? (

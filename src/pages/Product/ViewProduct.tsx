@@ -1,4 +1,5 @@
 import { IonContent, IonIcon, IonItem, IonPage } from "@ionic/react";
+import { t } from "@lingui/macro";
 import ShowProduct from "components/ShowProduct";
 import Toolbar from "components/Toolbar.tsx";
 
@@ -18,7 +19,7 @@ const ViewProduct: React.FC = () => {
   const { data } = useGetProductById(code);
   return (
     <IonPage>
-      <Toolbar title="View Product" defaultHref="/product" />
+      <Toolbar title={t({ id: "View Product" })} defaultHref="/product" />
 
       <IonContent fullscreen className="ion-padding">
         <IonItem lines="none">

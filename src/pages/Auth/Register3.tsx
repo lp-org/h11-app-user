@@ -8,6 +8,7 @@ import {
   IonRow,
   IonText,
 } from "@ionic/react";
+import { Trans } from "@lingui/macro";
 import OtpInput from "components/OtpInput";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
@@ -37,7 +38,9 @@ const Register3: React.FC = () => {
             <div style={{ flex: "0 1 auto" }}>
               <IonRow className="ion-justify-content-center">
                 <h1>
-                  <b>Registration</b>
+                  <b>
+                    <Trans>Registration</Trans>
+                  </b>
                 </h1>
               </IonRow>
               <IonRow className="ion-justify-content-center ion-margin">
@@ -47,7 +50,9 @@ const Register3: React.FC = () => {
                   style={{ fontSize: 220 }}
                 />
                 <IonNote class="ion-text-center">
-                  An OTP has been sent to your email. Please verify it.
+                  <Trans>
+                    An OTP has been sent to your email. Please verify it.
+                  </Trans>
                 </IonNote>
               </IonRow>
               <OtpInput
@@ -58,12 +63,12 @@ const Register3: React.FC = () => {
               <IonRow className="ion-justify-content-center ion-margin">
                 <IonNote class="ion-text-center">
                   <small>
-                    Didn’t Receive OTP?.{" "}
+                    <Trans>Didn’t Receive OTP?. </Trans>
                     <IonText
                       onClick={() => console.log("resend")}
                       color="secondary"
                     >
-                      Resend OTP
+                      <Trans>Resend OTP</Trans>
                     </IonText>
                   </small>
                 </IonNote>
@@ -86,7 +91,7 @@ const Register3: React.FC = () => {
                   history.push("/login");
                 }}
               >
-                Confirm
+                <Trans>Confirm</Trans>
               </IonButton>
             </div>
           </form>

@@ -11,10 +11,9 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
-
-import { FC, Fragment } from "react";
 import { useHistory } from "react-router";
 
 const Register2: React.FC = () => {
@@ -38,7 +37,9 @@ const Register2: React.FC = () => {
             <div style={{ flex: "0 1 auto" }}>
               <IonRow className="ion-justify-content-center">
                 <h1>
-                  <b>Registration</b>
+                  <b>
+                    <Trans>Registration</Trans>
+                  </b>
                 </h1>
               </IonRow>
               <IonRow className="ion-justify-content-center ion-margin">
@@ -51,15 +52,19 @@ const Register2: React.FC = () => {
               <IonRow>
                 <IonCol size="12">
                   <IonItem lines="none" className="ion-no-padding">
-                    <IonLabel position="stacked">New Password</IonLabel>
+                    <IonLabel position="stacked">
+                      <Trans>New Password</Trans>
+                    </IonLabel>
                     <IonInput
                       className="custom"
                       name="current_password"
-                      placeholder="Please enter your password"
+                      placeholder={t({ id: "Please enter your password" })}
                       onIonChange={formik.handleChange}
                     ></IonInput>
                     <IonNote slot="helper">
-                      Password must be at least contain 8 characters.
+                      <Trans>
+                        Password must be at least contain 8 characters.
+                      </Trans>
                     </IonNote>
                   </IonItem>
                 </IonCol>
@@ -74,7 +79,7 @@ const Register2: React.FC = () => {
                     <IonInput
                       className="custom"
                       name="current_password"
-                      placeholder="Please confirm your password"
+                      placeholder={t({ id: "Please confirm your password" })}
                       onIonChange={formik.handleChange}
                     ></IonInput>
                   </IonItem>
@@ -90,7 +95,7 @@ const Register2: React.FC = () => {
                 style={{ marginTop: "auto" }}
                 onClick={() => history.push("/register3")}
               >
-                Next
+                <Trans>Next</Trans>
               </IonButton>
             </div>
           </form>

@@ -1,4 +1,5 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
+import { Trans } from "@lingui/macro";
 import { Fragment, useMemo } from "react";
 
 interface NutritionFactsProps {
@@ -21,7 +22,9 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
       >
         <IonRow>
           <IonCol className="ion-text-center" style={{ padding: 0 }}>
-            <b>Nutrition Facts</b>
+            <b>
+              <Trans>Nutrition Facts</Trans>
+            </b>
           </IonCol>
         </IonRow>
         {Object.entries(result.Nutrition_Facts).map(([key]) => (
@@ -41,7 +44,9 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
         <hr style={{ border: "solid 4px", height: 0 }} />
         <IonRow className="ion-justify-content-end">
           <small>
-            <b>% Daily Value*</b>
+            <b>
+              % <Trans>Daily Value</Trans>*
+            </b>
           </small>
         </IonRow>
         <hr style={{ border: "solid 1px", height: 0, margin: 1 }} />

@@ -1,5 +1,5 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { t } from "@lingui/macro";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useAppState } from "store";
 import { useAuthStore } from "store/useAuthStore";
@@ -18,13 +18,15 @@ export function useLogin() {
       request.defaults.headers.common = {
         Authorization: `Bearer ${res.data.token}`,
       };
-      popUpMsg("Login Successful!", "success");
+      popUpMsg(t({ id: "Login Successful!" }), "success");
     } catch (error) {
       popUpMsg(
-        "Email or Password is incorrect. Kindly enter the correct email or passsword.",
+        t({
+          id: "Email or Password is incorrect. Kindly enter the correct email or passsword.",
+        }),
         "error"
       );
-      throw new Error("Incorrect Credentials");
+      throw new Error(t({ id: "Incorrect Credentials" }));
     }
   });
 }
@@ -71,6 +73,6 @@ async function mockMeApi(token: string): Promise<boolean> {
     }
     return false;
   } catch (error) {
-    throw new Error("Incorrect Credentials");
+    throw new Error(t({ id: "Incorrect Credentials" }));
   }
 }

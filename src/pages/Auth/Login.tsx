@@ -10,6 +10,7 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import { useFormik } from "formik";
 import { useLogin } from "hooks/useAuth";
 import { Link } from "react-router-dom";
@@ -47,9 +48,13 @@ const Login: React.FC = () => {
                 />
                 <IonCol size="12" className="ion-text-center">
                   <h1>
-                    <b>Login Now</b>
+                    <b>
+                      <Trans>Login Now</Trans>
+                    </b>
                   </h1>
-                  <h6>Please sign in to continue.</h6>
+                  <h6>
+                    <Trans>Please sign in to continue.</Trans>
+                  </h6>
                 </IonCol>
                 <IonCol size="12" className="ion-text-center">
                   <IonItem lines="none" className="ion-no-padding">
@@ -60,7 +65,7 @@ const Login: React.FC = () => {
                       onIonChange={formik.handleChange}
                       name="username"
                       required
-                      placeholder="Email Address"
+                      placeholder={t({ id: `Email Address` })}
                     ></IonInput>
                   </IonItem>
                 </IonCol>
@@ -74,13 +79,15 @@ const Login: React.FC = () => {
                       name="password"
                       type="password"
                       required
-                      placeholder="Password"
+                      placeholder={t({ id: `Password` })}
                     ></IonInput>
                   </IonItem>
                 </IonCol>
                 <IonCol size="12" className="ion-text-end">
                   <Link to="/register" className="ion-margin-start">
-                    <small>Forgot Password?</small>
+                    <small>
+                      <Trans>Forgot Password?</Trans>
+                    </small>
                   </Link>
                 </IonCol>
                 <IonCol size="12" className="ion-text-center">
@@ -89,7 +96,7 @@ const Login: React.FC = () => {
                     expand="block"
                     className="text-white"
                   >
-                    Login
+                    <Trans>Login</Trans>
                   </IonButton>
                 </IonCol>
               </IonRow>
@@ -100,7 +107,7 @@ const Login: React.FC = () => {
             className="ion-justify-content-center"
           >
             <IonItem lines="none" style={{ marginTop: "auto", fontSize: 14 }}>
-              Don’t have an account?{" "}
+              <Trans>Don’t have an account? </Trans>
               <Link
                 to="/register"
                 style={{
@@ -109,7 +116,7 @@ const Login: React.FC = () => {
                   color: "#00A3FF",
                 }}
               >
-                Sign Up
+                <Trans>Sign Up</Trans>
               </Link>
             </IonItem>
           </IonRow>

@@ -17,7 +17,8 @@ import { personCircleOutline } from "ionicons/icons";
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import Image from "components/Image";
-import { Trans } from "@lingui/macro";
+import ProductBatchBox from "components/ProductBatchBox";
+import { t, Trans } from "@lingui/macro";
 
 const Home: React.FC = () => {
   const historyList = useScanHistoryStore((state) => state.scanHistoryList);
@@ -25,7 +26,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="My Home" />
+      <Toolbar title={t({ id: "Home" })} />
       <IonContent fullscreen className="ion-padding">
         {/* Quick Access */}
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
                       </IonCol>
                       <IonCol size="12">
                         <IonLabel>
-                          <p>Scan QR code</p>
+                          <Trans>Scan QR code</Trans>
                         </IonLabel>
                       </IonCol>
                     </IonRow>
@@ -89,7 +90,9 @@ const Home: React.FC = () => {
                       </IonCol>
                       <IonCol size="12">
                         <IonLabel>
-                          <p>Profile</p>
+                          <p>
+                            <Trans>Profile</Trans>
+                          </p>
                         </IonLabel>
                       </IonCol>
                     </IonRow>
@@ -103,7 +106,9 @@ const Home: React.FC = () => {
         <IonGrid fixed={true} style={{ marginLeft: 0 }}>
           <IonRow style={{ alignItems: "baseline" }}>
             <IonText>
-              <h2>Recently Scanned Products</h2>
+              <h2>
+                <Trans>Recently Scanned Products</Trans>
+              </h2>
             </IonText>
 
             <IonButton
@@ -113,7 +118,7 @@ const Home: React.FC = () => {
               size="small"
               color="secondary"
             >
-              View all
+              <Trans> View all</Trans>
             </IonButton>
           </IonRow>
           {historyList &&
@@ -132,18 +137,21 @@ const Home: React.FC = () => {
                   >
                     <b className="wrap-text">{product.bc_prd_name}</b>
                     <div className="wrap-text">
-                      Product ID: {product.bc_prd_code}
+                      <Trans>Product ID</Trans>: {product.bc_prd_code}
                     </div>
                     <div className="wrap-text">
-                      Batch ID: {product.bc_pbth_code}
+                      <Trans>Batch ID</Trans>: {product.bc_pbth_code}
                     </div>
                     <div className="wrap-text">
-                      Unique ID: {product.bc_qr_code}
+                      <Trans>Unique ID</Trans>: {product.bc_qr_code}
                     </div>
                     <div>
-                      Manufactured Date: {product.bc_pbth_manufactured_date}
+                      <Trans>Manufactured Date</Trans>:{" "}
+                      {product.bc_pbth_manufactured_date}
                     </div>
-                    <div>Expiry Date: {product.bc_pbth_expiry_date} </div>
+                    <div>
+                      <Trans>Expiry Date</Trans>: {product.bc_pbth_expiry_date}{" "}
+                    </div>
                   </IonLabel>
                 </IonItem>
               ))}

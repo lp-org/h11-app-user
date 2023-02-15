@@ -9,7 +9,9 @@ import {
   IonPage,
   IonRow,
 } from "@ionic/react";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
+import { languages } from "constant";
 import { useFormik } from "formik";
 import {
   chevronForward,
@@ -19,6 +21,7 @@ import {
 } from "ionicons/icons";
 import { FC, Fragment } from "react";
 import { useHistory } from "react-router";
+import { useAppStateWithLs } from "store";
 
 import { useAuthStore } from "store/useAuthStore";
 
@@ -30,10 +33,10 @@ const Profile: React.FC = () => {
     enableReinitialize: true,
     onSubmit: (values) => {},
   });
-
+  const locale = useAppStateWithLs((state) => state.locale);
   return (
     <IonPage>
-      <Toolbar title="My Profile" defaultHref="/" />
+      <Toolbar title={t({ id: "My Profile" })} defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid>
@@ -47,14 +50,16 @@ const Profile: React.FC = () => {
               <IonCol size="12" className="ion-text-center">
                 <IonButton fill="outline" color="dark">
                   <IonIcon icon={cloudUpload} slot="start" />
-                  Upload Profile Photo
+                  <Trans>Upload Profile Photo</Trans>
                 </IonButton>
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
                 <IonItem class="ion-no-padding" lines="none">
-                  <b>Profile</b>
+                  <b>
+                    <Trans>Profile</Trans>
+                  </b>
                   <IonIcon
                     onClick={() => history.push("/editProfile")}
                     icon={createOutline}
@@ -66,29 +71,31 @@ const Profile: React.FC = () => {
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="First Name" />
+                <EditableInput label={t({ id: "First Name" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Last Name" />
+                <EditableInput label={t({ id: "Family Name" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Email Address" />
+                <EditableInput label={t({ id: "Email Address" })} />
               </IonCol>
             </IonRow>
             <IonRow>
               <IonCol size="12">
-                <EditableInput label="Mobile Number" />
+                <EditableInput label={t({ id: "Mobile Number" })} />
               </IonCol>
             </IonRow>
           </form>
           <IonRow>
             <IonCol size="12">
               <IonItem class="ion-no-padding" lines="none">
-                <b>Password</b>
+                <b>
+                  <Trans>Password</Trans>
+                </b>
               </IonItem>
             </IonCol>
           </IonRow>
@@ -102,7 +109,33 @@ const Profile: React.FC = () => {
                   position="fixed"
                   style={{ width: "unset", flex: "0 0 auto" }}
                 >
-                  Change Password
+                  <Trans>Change Password</Trans>
+                </IonLabel>
+                <IonIcon icon={chevronForward} slot="end" size="small" />
+              </IonItem>
+            </IonCol>
+          </IonRow>
+
+          <IonRow>
+            <IonCol size="12">
+              <IonItem class="ion-no-padding" lines="none">
+                <b>
+                  <Trans>Language</Trans>
+                </b>
+              </IonItem>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol size="12">
+              <IonItem
+                className="ion-no-padding"
+                onClick={() => history.push("/updateLanguage")}
+              >
+                <IonLabel
+                  position="fixed"
+                  style={{ width: "unset", flex: "0 0 auto" }}
+                >
+                  {languages.find((el) => el.code === locale)?.text}
                 </IonLabel>
                 <IonIcon icon={chevronForward} slot="end" size="small" />
               </IonItem>
@@ -115,7 +148,7 @@ const Profile: React.FC = () => {
               removeToken();
             }}
           >
-            Sign Out
+            <Trans>Sign Out</Trans>
           </IonButton>
         </IonGrid>
       </IonContent>

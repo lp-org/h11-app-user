@@ -57,6 +57,7 @@ import ChangePassword3 from "pages/Profile/ChangePassword3";
 import ChangePassword4 from "pages/Profile/ChangePassword4";
 import Register2 from "pages/Auth/Register2";
 import Register3 from "pages/Auth/Register3";
+import UpdateLanguage from "pages/Profile/UpdateLanguage";
 
 /**
  * Load messages for requested locale and activate it.
@@ -113,6 +114,7 @@ const App: React.FC = () => {
                   <Route exact path="/">
                     <Redirect to="/home" />
                   </Route>
+                  <Route path="/updateLanguage" component={UpdateLanguage} />
                 </IonRouterOutlet>
 
                 <IonTabBar slot={showTab ? "bottom" : undefined}>

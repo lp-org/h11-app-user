@@ -6,12 +6,10 @@ import {
   IonNote,
   IonPage,
   IonRow,
-  IonText,
 } from "@ionic/react";
-import OtpInput from "components/OtpInput";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
-import { useState } from "react";
 import { useHistory } from "react-router";
 
 const ChangePassword4: React.FC = () => {
@@ -24,7 +22,7 @@ const ChangePassword4: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar title="Complete" defaultHref="/" />
+      <Toolbar title={t({ id: "Complete" })} defaultHref="/" />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>
@@ -40,7 +38,7 @@ const ChangePassword4: React.FC = () => {
                   style={{ fontSize: 220 }}
                 />
                 <IonNote class="ion-text-center ion-margin">
-                  Password Change Completed!!
+                  <Trans>Password Change Completed!</Trans>
                 </IonNote>
               </IonRow>
             </div>
@@ -53,7 +51,7 @@ const ChangePassword4: React.FC = () => {
                 style={{ marginTop: "auto" }}
                 onClick={() => history.push("/profile")}
               >
-                Done
+                <Trans>Done</Trans>
               </IonButton>
             </div>
           </form>

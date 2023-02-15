@@ -1,4 +1,5 @@
 import { IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
+import { Trans } from "@lingui/macro";
 import { Fragment } from "react";
 import { ProductBatch } from "types/productBatch";
 
@@ -12,7 +13,9 @@ const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
       <IonGrid style={{ fontSize: 14 }}>
         <IonRow>
           <IonCol size="5">
-            <IonLabel>Product Name:</IonLabel>
+            <IonLabel>
+              <Trans>Product Name</Trans>:
+            </IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_prd_name}
@@ -20,7 +23,9 @@ const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
         </IonRow>
         <IonRow>
           <IonCol size="5">
-            <IonLabel>Product ID: </IonLabel>
+            <IonLabel>
+              <Trans>Product ID</Trans>:{" "}
+            </IonLabel>
           </IonCol>
 
           <IonCol className="ion-margin-start ion-margin-bottom">
@@ -29,7 +34,9 @@ const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
         </IonRow>
         <IonRow>
           <IonCol size="5">
-            <IonLabel>Product Batch ID:</IonLabel>
+            <IonLabel>
+              <Trans>Product Batch ID</Trans>:
+            </IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_code}
@@ -37,7 +44,9 @@ const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
         </IonRow>
         <IonRow>
           <IonCol size="5">
-            <IonLabel>Manufactured Date:</IonLabel>
+            <IonLabel>
+              <Trans>Manufactured Date</Trans>:
+            </IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_manufactured_date}
@@ -45,7 +54,9 @@ const ShowProductBatch: React.FC<ShowProductBatchProps> = ({ item }) => {
         </IonRow>
         <IonRow>
           <IonCol size="5">
-            <IonLabel>Expiry Date:</IonLabel>
+            <IonLabel>
+              <Trans>Expiry Date</Trans>:
+            </IonLabel>
           </IonCol>
           <IonCol className="ion-margin-start ion-margin-bottom">
             {item?.pbth_expiry_date}
