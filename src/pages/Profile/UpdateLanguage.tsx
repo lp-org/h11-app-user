@@ -10,14 +10,19 @@ import { t } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { languages } from "constant";
 import { checkmarkOutline } from "ionicons/icons";
+import { useHistory } from "react-router";
 import { useAppStateWithLs } from "store";
 
 const UpdateLanguage = () => {
   const locale = useAppStateWithLs((state) => state.locale);
   const setLocale = useAppStateWithLs((state) => state.setLocale);
+  const history = useHistory();
+  //@ts-ignore
+  const from = history?.location.state ? history?.location.state.from : "/";
+
   return (
     <IonPage>
-      <Toolbar title={t({ id: "Language" })} defaultHref="/profile" />
+      <Toolbar title={t({ id: "Language" })} defaultHref={from} />
 
       <IonContent fullscreen className="ion-padding">
         <IonList>

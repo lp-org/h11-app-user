@@ -169,10 +169,10 @@ const App: React.FC = () => {
                   <Route path="/changePassword2" component={ChangePassword2} />
                   <Route path="/changePassword3" component={ChangePassword3} />
                   <Route path="/changePassword4" component={ChangePassword4} />
+                  <Route path="/updateLanguage" component={UpdateLanguage} />
                   <Route exact path="/">
                     <Redirect to="/home" />
                   </Route>
-                  <Route path="/updateLanguage" component={UpdateLanguage} />
                 </IonRouterOutlet>
 
                 <IonTabBar slot={showTab ? "bottom" : undefined}>
@@ -197,6 +197,7 @@ const App: React.FC = () => {
               <Route path="/register" component={Register} />
               <Route path="/register2" component={Register2} />
               <Route path="/register3" component={Register3} />
+              <Route path="/updateLanguage" component={UpdateLanguage} />
               <Route render={() => <Redirect to="/" />} />
             </IonRouterOutlet>
           )}

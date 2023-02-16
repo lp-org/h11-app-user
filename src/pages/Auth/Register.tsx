@@ -3,6 +3,7 @@ import {
   IonCol,
   IonContent,
   IonGrid,
+  IonIcon,
   IonInput,
   IonItem,
   IonLabel,
@@ -26,7 +27,17 @@ const Register: React.FC = () => {
 
   return (
     <IonPage>
-      <Toolbar defaultHref="/" />
+      <Toolbar
+        defaultHref="/"
+        action={
+          <IonIcon
+            src="/assets/icon/language.svg"
+            onClick={() =>
+              history.push("/updateLanguage", { from: "/register" })
+            }
+          />
+        }
+      />
 
       <IonContent fullscreen className="ion-padding">
         <IonGrid style={{ height: "100%" }}>

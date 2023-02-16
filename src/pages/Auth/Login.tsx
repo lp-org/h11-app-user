@@ -13,7 +13,7 @@ import {
 import { t, Trans } from "@lingui/macro";
 import { useFormik } from "formik";
 import { useLogin } from "hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthLogin } from "types/auth";
 
 const Login: React.FC = () => {
@@ -30,17 +30,24 @@ const Login: React.FC = () => {
       login.mutate(values);
     },
   });
+  const history = useHistory();
   return (
     <IonPage>
       <IonContent fullscreen className="ion-padding">
         <IonGrid
           style={{ display: "flex", flexDirection: "column", height: "100%" }}
         >
+          <IonRow className="ion-justify-content-end">
+            <IonIcon
+              src="/assets/icon/language.svg"
+              onClick={() => history.push("/updateLanguage", { from: "/" })}
+            />
+          </IonRow>
           <IonRow style={{ flex: "0 1 auto" }}>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
               <IonRow
                 className="ion-justify-content-center"
-                style={{ marginTop: 100 }}
+                style={{ marginTop: 70 }}
               >
                 <IonIcon
                   src="/assets/icon/logo.svg"

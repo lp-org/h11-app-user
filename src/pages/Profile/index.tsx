@@ -139,7 +139,11 @@ const Profile: React.FC = () => {
             <IonCol size="12">
               <IonItem
                 className="ion-no-padding"
-                onClick={() => history.push("/updateLanguage")}
+                onClick={() =>
+                  history.push("/updateLanguage", {
+                    from: "/profile",
+                  })
+                }
               >
                 <IonLabel
                   position="fixed"
