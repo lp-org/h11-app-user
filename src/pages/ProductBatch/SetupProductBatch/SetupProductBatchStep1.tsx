@@ -146,8 +146,10 @@ const SetupProductBatchStep1: FC = () => {
                         : ""}
                     </IonNote>
                     <IonNote slot="helper">
-                      You will need to choose the available product from the
-                      list. If not found, kindly create the product first.
+                      <Trans>
+                        You will need to choose the available product from the
+                        list. If not found, kindly create the product first.
+                      </Trans>
                     </IonNote>
                   </IonItem>
                 </IonCol>

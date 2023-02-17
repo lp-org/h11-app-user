@@ -12,7 +12,7 @@ import {
   IonIcon,
   IonNote,
 } from "@ionic/react";
-import { t } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 import { environment } from "environment/environment";
@@ -74,14 +74,18 @@ const EditProductStep1: FC = () => {
       <IonContent fullscreen className="ion-padding">
         <IonGrid fixed={true}>
           <div className="ion-no-padding">
-            <b>Product Information Setup </b>
+            <b>
+              <Trans>Product Information Setup</Trans>{" "}
+            </b>
           </div>
           <EditSteppers step={1} code={code} />
           <IonRow>
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product ID</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product ID</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     disabled
@@ -93,7 +97,9 @@ const EditProductStep1: FC = () => {
               </IonCol>
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product Name</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product Name</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
@@ -107,7 +113,9 @@ const EditProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product Category</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product Category</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
@@ -121,7 +129,9 @@ const EditProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product Type</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product Type</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
@@ -135,7 +145,9 @@ const EditProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Flavour</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Flavour</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
@@ -149,7 +161,9 @@ const EditProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Storage Instructions: </IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Storage Instructions</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
@@ -163,7 +177,9 @@ const EditProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Ingredients</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Ingredients</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
@@ -184,7 +200,11 @@ const EditProductStep1: FC = () => {
                     formik.errors.prd_expiry_period && "ion-invalid"
                   }`}
                 >
-                  <IonLabel position="stacked">Expiry Period</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>
+                      <Trans>Expiry Period</Trans>
+                    </Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     required
@@ -203,7 +223,7 @@ const EditProductStep1: FC = () => {
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
                   <IonLabel position="stacked">
-                    How to keep product fresh:
+                    <Trans>How to keep product fresh</Trans>
                   </IonLabel>
                   <IonTextarea
                     className="custom"
@@ -221,7 +241,9 @@ const EditProductStep1: FC = () => {
 
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Upload Product Photo</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Upload Product Photo</Trans>
+                  </IonLabel>
                   {!formik.values.prd_image ? (
                     <Fragment>
                       <IonButton

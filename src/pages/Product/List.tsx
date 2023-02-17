@@ -61,7 +61,7 @@ const ProductList: React.FC = () => {
         </IonSegment>
 
         <IonList lines="full" className="ion-padding">
-          <IonSearchbar />
+          <IonSearchbar placeholder={t({ id: "Search" })} />
           {products?.map((product) => (
             <IonItem key={product.prd_code}>
               <div className="ion-margin-end">

@@ -101,7 +101,9 @@ const SetupProductStep1: FC = () => {
             <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
               <IonCol size="12">
                 <IonItem lines="none" className="ion-no-padding">
-                  <IonLabel position="stacked">Product ID</IonLabel>
+                  <IonLabel position="stacked">
+                    <Trans>Product ID</Trans>
+                  </IonLabel>
                   <IonInput
                     className="custom"
                     disabled

@@ -31,6 +31,7 @@ const Register: React.FC = () => {
         defaultHref="/"
         action={
           <IonIcon
+            style={{ marginRight: 12 }}
             src="/assets/icon/language.svg"
             onClick={() =>
               history.push("/updateLanguage", { from: "/register" })

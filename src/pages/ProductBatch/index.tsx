@@ -14,7 +14,7 @@ import { add } from "ionicons/icons";
 
 import { useProductBatchList } from "hooks/useProductBatch";
 import { useHistory } from "react-router";
-import { t } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 
 const ProductBatch: React.FC = () => {
   const { data: products } = useProductBatchList();
@@ -37,7 +37,7 @@ const ProductBatch: React.FC = () => {
 
       <IonContent fullscreen className="ion-padding">
         <IonList lines="full" style={{ background: "transparent" }}>
-          <IonSearchbar />
+          <IonSearchbar placeholder={t({ id: "Search" })} />
           {products?.map((product) => (
             <IonItem key={product.pbth_code}>
               <IonLabel
@@ -45,20 +45,29 @@ const ProductBatch: React.FC = () => {
                   history.push(`/productBatch/${product.pbth_code}`)
                 }
               >
-                <b>Batch ID: {product.pbth_code} </b>
-                <div>
-                  <small>Product Name: {product.pbth_prd_name} </small>
-                </div>
-                <div>
-                  <small>Product ID: {product.pbth_prd_code} </small>
-                </div>
+                <b>
+                  <Trans>Batch ID</Trans>: {product.pbth_code}
+                </b>
                 <div>
                   <small>
-                    Manufactured Date: {product.pbth_manufactured_date}
+                    <Trans>Product Name</Trans>: {product.pbth_prd_name}
                   </small>
                 </div>
                 <div>
-                  <small>Expiry Date: {product.pbth_expiry_date} </small>
+                  <small>
+                    <Trans>Product ID</Trans>: {product.pbth_prd_code}
+                  </small>
+                </div>
+                <div>
+                  <small>
+                    <Trans>Manufactured Date</Trans>:
+                    {product.pbth_manufactured_date}
+                  </small>
+                </div>
+                <div>
+                  <small>
+                    <Trans>Expiry Date</Trans>: {product.pbth_expiry_date}
+                  </small>
                 </div>
               </IonLabel>
             </IonItem>

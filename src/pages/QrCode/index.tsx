@@ -36,17 +36,21 @@ const QrCode: React.FC = () => {
 
       <IonContent fullscreen>
         <IonItem lines="none">
-          <b>Select The Batch to Print</b>
+          <b>
+            <Trans>Select The Batch to Print</Trans>
+          </b>
         </IonItem>
 
         <IonSegment value={tab} onIonChange={(e) => setTab(e.target.value!)}>
           <IonSegmentButton value="1">
             <IonLabel className="ion-text-capitalize">
-              Generate QR Code
+              <Trans>Generate QR Code</Trans>
             </IonLabel>
           </IonSegmentButton>
           <IonSegmentButton value="2">
-            <IonLabel className="ion-text-capitalize">History</IonLabel>
+            <IonLabel className="ion-text-capitalize">
+              <Trans>History</Trans>
+            </IonLabel>
           </IonSegmentButton>
         </IonSegment>
 
