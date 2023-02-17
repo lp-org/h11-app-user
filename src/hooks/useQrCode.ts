@@ -1,3 +1,4 @@
+import { t } from "@lingui/macro";
 import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { useScanHistoryStore } from "store/useScanHistoryStore";
 import { request } from "utils/request";
@@ -74,7 +75,10 @@ export function useAddBlockchainInfo() {
   return useMutation(async (payload: BlockchainAddPayload) => {
     const res = await request.post(`/blockchain/add`, payload);
     if (res.data.code === 200) {
-      popUpMsg("Print request has successfully been sent!", "success");
+      popUpMsg(
+        t({ id: "Print request has successfully been sent!" }),
+        "success"
+      );
       return res;
     } else {
       popUpMsg(res.data.message, "error");

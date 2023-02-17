@@ -23,13 +23,17 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({
     const load = async () => {
       try {
         // import("@lingui/remote-loader").then(async ({ remoteLoader }) => {
-        const res = await fetch(
-          `https://anchongkincho.github.io/locales/${locale}/messages.json`
-        );
+        // const res = await fetch(
+        //   `https://anchongkincho.github.io/locales/${locale}/messages.json`
+        // );
 
-        const remoteMessages = await res.json();
+        // const remoteMessages = await res.json();
 
-        i18n.load(locale, remoteMessages);
+        // i18n.load(locale, remoteMessages);
+        import(`../../locales/${locale}/messages`).then((module) => {
+          const messages = module.messages;
+          i18n.load(locale, messages);
+        });
       } catch (error) {
         // Dynamically load the catalogs
         import(`../../locales/${locale}/messages`).then((module) => {
