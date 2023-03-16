@@ -58,7 +58,7 @@ const ShowQrInfo: React.FC<ShowQrInfoProps> = ({ item }) => {
             <IonCol size="5">
               <Trans>Print Count</Trans>:
             </IonCol>
-            <IonCol>111</IonCol>
+            <IonCol>{item?.bc_count}</IonCol>
           </IonRow>
         </IonGrid>
       )}

@@ -1,6 +1,8 @@
 import { Photo } from "@capacitor/camera";
 import { environment } from "environment/environment";
-import { AddProductProps } from "types/product";
+import { useLanguage } from "hooks/useLanguage";
+import { LanguageString } from "types/i18n";
+import { AddProductProps, Product } from "types/product";
 
 export function processNutritionInfoPayload(
   payload: AddProductProps
@@ -25,14 +27,18 @@ export function processNutritionInfoPayload(
 }
 
 export function processNutritionInfoToInputData(
-  payload: any
+  payload: Product
 ): AddProductProps | undefined {
   if (!payload.prd_nutrition_json) {
     return undefined;
   }
 
-  const nutritionInfo = payload.prd_nutrition_json.Nutrition_Facts;
+  let nutritionInfoJson = payload.prd_nutrition_json;
+  if (typeof payload.prd_nutrition_json === "string") {
+    nutritionInfoJson = JSON.parse(payload.prd_nutrition_json);
+  }
 
+  const nutritionInfo = nutritionInfoJson.Nutrition_Facts;
   const input = {
     ...nutritionInfo,
     Serving: Object.entries(nutritionInfo.Serving).map(([key]) => {

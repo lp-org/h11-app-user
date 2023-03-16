@@ -1,11 +1,12 @@
 import { IonButton, IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
 import { Trans } from "@lingui/macro";
-import { BlockchainQrInfo } from "hooks/useQrCode";
+
 import { Fragment } from "react";
+import { VerifyQrInfo } from "types/qrCode";
 import NutritionFacts from "./NutritionFacts";
 
 interface ShowQrHistoryInfoProps {
-  item: BlockchainQrInfo | undefined;
+  item: VerifyQrInfo | undefined;
 }
 
 const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
@@ -25,7 +26,7 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
             </IonButton>
           </IonCol>
           <IonCol size="12">
-            <small>Print Count: 1</small>
+            <small>Print Count: {item?.bc_pbth_code}</small>
           </IonCol>
         </IonRow>
         <div

@@ -1,16 +1,31 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 import { environment } from "environment/environment";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
-import { AddProductProps, Product } from "types/product";
-import { request } from "utils/request";
+import { LanguageString } from "types/i18n";
+import {
+  AddProductProps,
+  AddProductRequestProps,
+  Product,
+  ProductResponse,
+} from "types/product";
+import { requestV2 as request } from "utils/request";
 import { usePopUpMessage } from "./notification";
+import { useLanguage } from "./useLanguage";
 
 export function useProductList() {
+  const { getString } = useLanguage();
   return useQuery({
     queryKey: ["products"],
-    queryFn: async (): Promise<Product[]> =>
-      (await request.get("/product/showall")).data.data,
+    queryFn: async (): Promise<Product[]> => {
+      const res = await request.get<AxiosResponse<ProductResponse[]>>(
+        "/product/showall"
+      );
+      const products = res.data.data;
+      const result = products.map((payload) => getResponse(payload, getString));
+      return result;
+    },
   });
 }
 
@@ -21,11 +36,16 @@ export function useAddProduct() {
   const dispatchClearTempProductSetup = useProductStore(
     (state) => state.clearTempProductSetup
   );
+  const { setLangRequest } = useLanguage();
   return useMutation(
     async (payload: AddProductProps) => {
       const prd_image = payload.prd_image;
       delete payload["prd_image"];
-      const res = await request.post("/product/add", payload);
+      const res = await request.post<
+        any,
+        AxiosResponse<any, any>,
+        AddProductRequestProps
+      >("/product/add", processPayload(payload, setLangRequest));
       if (res.data.code === 200) {
         if (prd_image?.substring(0, 4) === "blob") {
           uploadImage.mutate({
@@ -56,6 +76,7 @@ export function useEditProduct() {
   const queryClient = useQueryClient();
   const popUpMsg = usePopUpMessage();
   const uploadImage = useUploadProductImage();
+  const { setLangRequest } = useLanguage();
   return useMutation(
     async ({ id, payload }: { id: string; payload: AddProductProps }) => {
       if (payload.prd_image?.substring(0, 4) === "blob") {
@@ -64,7 +85,11 @@ export function useEditProduct() {
         delete payload["prd_image"];
       }
 
-      const res = await request.post(`/product/edit/${id}`, payload);
+      const res = await request.post<
+        any,
+        AxiosResponse<any, any>,
+        AddProductRequestProps
+      >(`/product/edit/${id}`, processPayload(payload, setLangRequest));
 
       if (res.data.code === 200) {
         queryClient.invalidateQueries(["products"]);
@@ -85,10 +110,17 @@ export function useEditProduct() {
 }
 
 export function useGetProductById(code: string) {
+  const { getString } = useLanguage();
   return useQuery({
     queryKey: ["product", code],
-    queryFn: async (): Promise<Product> =>
-      (await request.get(`/product/show/${code}`)).data.data,
+    queryFn: async (): Promise<Product> => {
+      const product = (
+        await request.get<AxiosResponse<ProductResponse>>(
+          `/product/show/${code}`
+        )
+      ).data.data;
+      return getResponse(product, getString);
+    },
   });
 }
 
@@ -118,4 +150,74 @@ export function useUploadProductImage() {
       }
     }
   );
+}
+
+function processPayload(
+  payload: AddProductProps,
+  set: (p: string) => LanguageString
+) {
+  const {
+    prd_category,
+    prd_flavour,
+    prd_ingredients,
+    prd_keep_it_fresh,
+    prd_name,
+    prd_nutrition_json,
+    prd_storage_instructions,
+    prd_type,
+    // Not required language
+    prd_code,
+    prd_image,
+    prd_expiry_period,
+  } = payload;
+
+  return {
+    prd_code,
+    prd_image,
+    prd_expiry_period,
+
+    prd_category: set(prd_category),
+    prd_flavour: set(prd_flavour),
+    prd_ingredients: set(prd_ingredients),
+    prd_keep_it_fresh: set(prd_keep_it_fresh),
+    prd_name: set(prd_name),
+    prd_nutrition_json: set(prd_nutrition_json),
+    prd_storage_instructions: set(prd_storage_instructions),
+    prd_type: set(prd_type),
+  };
+}
+
+function getResponse(
+  payload: ProductResponse,
+  get: (p: LanguageString) => string
+) {
+  const {
+    prd_category,
+    prd_flavour,
+    prd_ingredients,
+    prd_keep_it_fresh,
+    prd_name,
+    prd_nutrition_json,
+    prd_storage_instructions,
+    prd_type,
+    // Not required language
+    prd_code,
+    prd_image,
+    prd_expiry_period,
+  } = payload;
+
+  return {
+    prd_code,
+    prd_image,
+    prd_expiry_period,
+
+    prd_category: get(prd_category),
+    prd_flavour: get(prd_flavour),
+    prd_ingredients: get(prd_ingredients),
+    prd_keep_it_fresh: get(prd_keep_it_fresh),
+    prd_name: get(prd_name),
+    prd_nutrition_json: get(prd_nutrition_json),
+    prd_storage_instructions: get(prd_storage_instructions),
+    prd_type: get(prd_type),
+  };
 }

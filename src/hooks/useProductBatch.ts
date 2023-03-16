@@ -1,8 +1,14 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 import { useHistory } from "react-router";
-import { AddProductBatchProps, ProductBatch } from "types/productBatch";
-import { request } from "utils/request";
+import {
+  AddProductBatchProps,
+  ProductBatch,
+  ProductBatchResponse,
+} from "types/productBatch";
+import { requestV2 as request } from "utils/request";
 import { usePopUpMessage } from "./notification";
+import { useLanguage } from "./useLanguage";
 
 interface ProductBatchInfo {
   pbth_code: string;
@@ -11,10 +17,34 @@ interface ProductBatchInfo {
 }
 
 export function useProductBatchList() {
+  const { getString } = useLanguage();
   return useQuery({
     queryKey: ["productBatchList"],
-    queryFn: async (): Promise<ProductBatch[]> =>
-      (await request.get("/product_batch/showall")).data.data,
+    queryFn: async (): Promise<ProductBatch[]> => {
+      const res = await request.get<AxiosResponse<ProductBatchResponse[]>>(
+        "/product_batch/showall"
+      );
+      const productBatch = res.data.data;
+      const result = productBatch.map(
+        ({
+          pbth_code,
+          pbth_expiry_date,
+          pbth_manufactured_date,
+          pbth_prd_code,
+          prd_image,
+
+          pbth_prd_name,
+        }) => ({
+          pbth_code,
+          pbth_expiry_date,
+          pbth_manufactured_date,
+          pbth_prd_code,
+          prd_image,
+          pbth_prd_name: getString(pbth_prd_name),
+        })
+      );
+      return result;
+    },
   });
 }
 
@@ -43,9 +73,33 @@ export function useAddProductBatch() {
 }
 
 export function useGetProductBatchById(code: string) {
+  const { getString } = useLanguage();
   return useQuery({
-    queryFn: async (): Promise<ProductBatch> =>
-      (await request.get(`/product_batch/show/${code}`)).data.data,
+    queryFn: async (): Promise<ProductBatch> => {
+      const productBatch = (
+        await request.get<AxiosResponse<ProductBatchResponse>>(
+          `/product_batch/show/${code}`
+        )
+      ).data.data;
+      const {
+        pbth_code,
+        pbth_expiry_date,
+        pbth_manufactured_date,
+        pbth_prd_code,
+        prd_image,
+
+        pbth_prd_name,
+      } = productBatch;
+      return {
+        pbth_code,
+        pbth_expiry_date,
+        pbth_manufactured_date,
+        pbth_prd_code,
+        prd_image,
+
+        pbth_prd_name: getString(pbth_prd_name),
+      };
+    },
   });
 }
 

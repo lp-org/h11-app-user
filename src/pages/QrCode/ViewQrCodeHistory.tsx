@@ -4,7 +4,7 @@ import ShowQrHistoryInfo from "components/ShowQrHistoryInfo";
 
 import Toolbar from "components/Toolbar.tsx";
 
-import { useGetBlockchainInfo } from "hooks/useQrCode";
+import { useScanResult } from "hooks/useQrCode";
 
 import { useRouteMatch } from "react-router";
 
@@ -17,7 +17,7 @@ const ViewQrCodeHistory: React.FC = () => {
 
   const { code } = match.params;
 
-  const { data } = useGetBlockchainInfo(code);
+  const { data } = useScanResult(code);
   return (
     <IonPage>
       <Toolbar title={t({ id: "View QR Code" })} defaultHref="/qrcode" />

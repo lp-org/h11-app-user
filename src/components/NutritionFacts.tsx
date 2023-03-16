@@ -8,7 +8,7 @@ interface NutritionFactsProps {
 
 const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
   const result = useMemo(() => {
-    if (typeof json === "string") return JSON.parse(json);
+    if (json && typeof json === "string") return JSON.parse(json);
     return json;
   }, [json]);
 
