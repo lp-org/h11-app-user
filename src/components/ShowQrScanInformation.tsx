@@ -1,7 +1,8 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
 import { Trans } from "@lingui/macro";
-import { VerifyQrInfo } from "hooks/useQrCode";
+
 import { Fragment } from "react";
+import { VerifyQrInfo } from "types/qrCode";
 import Image from "./Image";
 import NutritionFacts from "./NutritionFacts";
 

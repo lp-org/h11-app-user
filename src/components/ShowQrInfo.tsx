@@ -1,8 +1,8 @@
 import { IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
 import { Trans } from "@lingui/macro";
-import { QrInfo } from "hooks/useQrCode";
+
 import { Fragment } from "react";
-import Image from "./Image";
+import { QrInfo } from "types/qrCode";
 
 interface ShowQrInfoProps {
   item: QrInfo | undefined;

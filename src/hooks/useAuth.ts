@@ -5,6 +5,7 @@ import { useAppState } from "store";
 import { useAuthStore } from "store/useAuthStore";
 import { AuthLogin } from "types/auth";
 import { request } from "utils/request";
+import { requestV2 } from "utils/request";
 import { usePopUpMessage } from "./notification";
 
 export function useLogin() {
@@ -16,6 +17,9 @@ export function useLogin() {
 
       setToken(res.data.token);
       request.defaults.headers.common = {
+        Authorization: `Bearer ${res.data.token}`,
+      };
+      requestV2.defaults.headers.common = {
         Authorization: `Bearer ${res.data.token}`,
       };
       popUpMsg(t({ id: "Login Successful!" }), "success");
