@@ -19,7 +19,10 @@ export function processNutritionInfoPayload(
     ...payload,
     prd_nutrition_json: translateKeys(
       JSON.stringify({
-        Nutrition_Facts: { ...payload.prd_nutrition_json, Serving },
+        [t({ id: "Nutrition_Facts" })]: {
+          ...payload.prd_nutrition_json,
+          Serving,
+        },
       })
     ),
   };
@@ -39,30 +42,46 @@ export function processNutritionInfoToInputData(
     nutritionInfoJson = JSON.parse(payload.prd_nutrition_json);
   }
 
-  const nutritionInfo = nutritionInfoJson.Nutrition_Facts;
-  const input = {
+  const nutritionInfo = nutritionInfoJson?.[t({ id: "Nutrition_Facts" })];
+
+  if (nutritionInfo) {
+    const input = {
+      ...nutritionInfo,
+      Serving: Object.entries(nutritionInfo?.[t({ id: "Serving" })]).map(
+        ([key]) => {
+          const Size = parseFloat(
+            nutritionInfo?.[t({ id: "Serving" })][key]?.[t({ id: "Size" })]
+          );
+          const unit = nutritionInfo?.[t({ id: "Serving" })][key]?.[
+            t({ id: "Size" })
+          ].replace(Size, "");
+          const Daily_Value = parseFloat(
+            nutritionInfo?.[t({ id: "Serving" })][key]?.[
+              t({ id: "Daily_Value" })
+            ]
+          );
+          return {
+            Nutrition_type: key.replace(/_/g, " "),
+            Size,
+            unit,
+            Daily_Value,
+          };
+        }
+      ),
+    };
+    return input;
+  }
+  return {
     ...nutritionInfo,
-    Serving: Object.entries(nutritionInfo?.[t({ id: "Serving" })]).map(
-      ([key]) => {
-        const Size = parseFloat(
-          nutritionInfo?.[t({ id: "Serving" })][key]?.[t({ id: "Size" })]
-        );
-        const unit = nutritionInfo?.[t({ id: "Serving" })][key]?.[
-          t({ id: "Size" })
-        ].replace(Size, "");
-        const Daily_Value = parseFloat(
-          nutritionInfo?.[t({ id: "Serving" })][key]?.[t({ id: "Daily_Value" })]
-        );
-        return {
-          Nutrition_type: key.replace(/_/g, " "),
-          Size,
-          unit,
-          Daily_Value,
-        };
-      }
-    ),
+    Serving: [
+      {
+        Nutrition_type: "",
+        Size: "",
+        unit: "",
+        Daily_Value: "",
+      },
+    ],
   };
-  return input;
 }
 
 export async function checkFile(image: Photo) {

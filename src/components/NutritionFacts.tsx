@@ -14,7 +14,7 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
     return json;
   }, [json]);
 
-  if (!result?.Nutrition_Facts) return <></>;
+  if (!result?.[t({ id: "Nutrition_Facts" })]) return <></>;
 
   return (
     <Fragment>
@@ -29,13 +29,14 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
             </b>
           </IonCol>
         </IonRow>
-        {Object.entries(result.Nutrition_Facts).map(([key]) => (
+        {Object.entries(result[t({ id: "Nutrition_Facts" })]).map(([key]) => (
           <IonRow key={key}>
             <IonCol size="12" style={{ padding: 0 }}>
               <small>
-                {typeof result.Nutrition_Facts[key] === "string" ? (
+                {typeof result[t({ id: "Nutrition_Facts" })][key] ===
+                "string" ? (
                   `${key.replace(/_/g, " ")}
-                : ${result.Nutrition_Facts[key]}`
+                : ${result[t({ id: "Nutrition_Facts" })][key]}`
                 ) : (
                   <></>
                 )}
@@ -52,54 +53,54 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
           </small>
         </IonRow>
         <hr style={{ border: "solid 1px", height: 0, margin: 1 }} />
-        {result?.Nutrition_Facts?.[t({ id: "Serving" })] &&
-          Object.entries(result?.Nutrition_Facts?.[t({ id: "Serving" })])?.map(
-            ([key]) => (
-              <IonRow key={key}>
-                <IonCol size="12" style={{ padding: 0 }}>
-                  {(function () {
-                    if (
-                      typeof result.Nutrition_Facts[t({ id: "Serving" })][
-                        key
-                      ] === "object"
-                    ) {
-                      return (
-                        <Fragment>
-                          <div style={{ display: "flex" }}>
-                            <small>
-                              <b>{key.replace(/_/g, " ")}</b>
-                            </small>
+        {result?.[t({ id: "Nutrition_Facts" })]?.[t({ id: "Serving" })] &&
+          Object.entries(
+            result?.[t({ id: "Nutrition_Facts" })]?.[t({ id: "Serving" })]
+          )?.map(([key]) => (
+            <IonRow key={key}>
+              <IonCol size="12" style={{ padding: 0 }}>
+                {(function () {
+                  if (
+                    typeof result[t({ id: "Nutrition_Facts" })][
+                      t({ id: "Serving" })
+                    ][key] === "object"
+                  ) {
+                    return (
+                      <Fragment>
+                        <div style={{ display: "flex" }}>
+                          <small>
+                            <b>{key.replace(/_/g, " ")}</b>
+                          </small>
 
-                            <small style={{ marginLeft: "10px" }}>
-                              {
-                                result.Nutrition_Facts[t({ id: "Serving" })][
-                                  key
-                                ].Size
-                              }
-                            </small>
-                            <small style={{ marginLeft: "auto" }}>
-                              {
-                                result.Nutrition_Facts[t({ id: "Serving" })][
-                                  key
-                                ].Daily_Value
-                              }
-                            </small>
-                          </div>
-                          <hr
-                            style={{
-                              border: "solid 1px",
-                              height: 0,
-                              margin: 1,
-                            }}
-                          />
-                        </Fragment>
-                      );
-                    }
-                  })()}
-                </IonCol>
-              </IonRow>
-            )
-          )}
+                          <small style={{ marginLeft: "10px" }}>
+                            {
+                              result[t({ id: "Nutrition_Facts" })][
+                                t({ id: "Serving" })
+                              ][key].Size
+                            }
+                          </small>
+                          <small style={{ marginLeft: "auto" }}>
+                            {
+                              result[t({ id: "Nutrition_Facts" })][
+                                t({ id: "Serving" })
+                              ][key].Daily_Value
+                            }
+                          </small>
+                        </div>
+                        <hr
+                          style={{
+                            border: "solid 1px",
+                            height: 0,
+                            margin: 1,
+                          }}
+                        />
+                      </Fragment>
+                    );
+                  }
+                })()}
+              </IonCol>
+            </IonRow>
+          ))}
         <IonRow></IonRow>
       </IonGrid>
     </Fragment>

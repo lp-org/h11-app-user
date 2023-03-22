@@ -94,6 +94,7 @@ const EditProductStep2: FC = () => {
     },
     [formik.values]
   );
+
   return (
     <IonPage>
       <Toolbar
@@ -145,7 +146,7 @@ const EditProductStep2: FC = () => {
                       </IonRow>
                     ))}
 
-                    {formik.values[SERVING].map(
+                    {formik.values.Serving.map(
                       (servingVal: any, index: number) => (
                         <Fragment key={index}>
                           <hr />
