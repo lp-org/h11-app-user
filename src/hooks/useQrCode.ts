@@ -137,6 +137,7 @@ export function useScanResult(code: string) {
           bc_prd_storage_instructions,
           bc_prd_type,
           bc_qr_code,
+          pbth_bc_count,
         } = verifyData;
 
         return {
@@ -147,6 +148,7 @@ export function useScanResult(code: string) {
           bc_prd_code,
           bc_prd_image,
           bc_qr_code,
+          pbth_bc_count,
           bc_prd_category: getString(bc_prd_category),
           bc_prd_flavour: getString(bc_prd_flavour),
           bc_prd_ingredients: getString(bc_prd_ingredients),

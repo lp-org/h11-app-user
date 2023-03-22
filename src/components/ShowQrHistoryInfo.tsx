@@ -26,7 +26,7 @@ const ShowQrHistoryInfo: React.FC<ShowQrHistoryInfoProps> = ({ item }) => {
             </IonButton>
           </IonCol>
           <IonCol size="12">
-            <small>Print Count: {item?.bc_pbth_code}</small>
+            <small>Print Count: {item?.pbth_bc_count}</small>
           </IonCol>
         </IonRow>
         <div

@@ -97,7 +97,7 @@ const QrCode: React.FC = () => {
                       </div>
                       <div>
                         <small>
-                          <Trans>Print Count</Trans>: 11{" "}
+                          <Trans>Print Count</Trans>: {product.pbth_bc_count}{" "}
                         </small>
                       </div>
                     </IonCol>

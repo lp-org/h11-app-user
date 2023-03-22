@@ -32,7 +32,7 @@ export function useProductBatchList() {
           pbth_manufactured_date,
           pbth_prd_code,
           prd_image,
-
+          pbth_bc_count,
           pbth_prd_name,
         }) => ({
           pbth_code,
@@ -40,6 +40,7 @@ export function useProductBatchList() {
           pbth_manufactured_date,
           pbth_prd_code,
           prd_image,
+          pbth_bc_count,
           pbth_prd_name: getString(pbth_prd_name),
         })
       );
@@ -87,7 +88,7 @@ export function useGetProductBatchById(code: string) {
         pbth_manufactured_date,
         pbth_prd_code,
         prd_image,
-
+        pbth_bc_count,
         pbth_prd_name,
       } = productBatch;
       return {
@@ -96,7 +97,7 @@ export function useGetProductBatchById(code: string) {
         pbth_manufactured_date,
         pbth_prd_code,
         prd_image,
-
+        pbth_bc_count,
         pbth_prd_name: getString(pbth_prd_name),
       };
     },

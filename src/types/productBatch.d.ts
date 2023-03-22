@@ -7,6 +7,7 @@ export type ProductBatchResponse = {
   pbth_prd_code: string;
   pbth_prd_name: LanguageString;
   prd_image?: string;
+  pbth_bc_count: number;
 };
 
 export type ProductBatch = {
@@ -16,6 +17,7 @@ export type ProductBatch = {
   pbth_prd_code: string;
   pbth_prd_name: string;
   prd_image?: string;
+  pbth_bc_count?: number;
 };
 
 export type AddProductBatchProps = {

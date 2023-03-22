@@ -59,6 +59,7 @@ export interface VerifyQrInfoResponse {
   bc_prd_keep_it_fresh: LanguageString;
   bc_prd_nutrition_json: LanguageString;
   bc_qr_code_image: string;
+  pbth_bc_count: number;
 }
 
 export interface VerifyQrInfo {
@@ -77,4 +78,5 @@ export interface VerifyQrInfo {
   bc_prd_keep_it_fresh: string;
   bc_prd_nutrition_json: string;
   bc_qr_code_image: string;
+  pbth_bc_count: number;
 }
