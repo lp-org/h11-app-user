@@ -22,7 +22,6 @@ export const ProductJsonAddSchema = Yup.object().shape({
         }
       });
 
-      console.log(valid);
       return valid;
     }
   ),

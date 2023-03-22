@@ -266,7 +266,9 @@ const EditProductStep1: FC = () => {
                     </small> */}
                       </IonButton>
                       <small style={{ color: "#999999" }}>
-                        Optional: Upload product photo to showcase the product
+                        <Trans>
+                          Optional: Upload product photo to showcase the product
+                        </Trans>
                       </small>
                     </Fragment>
                   ) : (

@@ -40,6 +40,7 @@ const initialValues = {
   prd_category: "",
   prd_type: "",
   prd_image: "",
+  prd_archived: 0,
 };
 
 const SetupProductStep1: FC = () => {

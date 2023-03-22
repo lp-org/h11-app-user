@@ -147,7 +147,7 @@ const Home: React.FC = () => {
               overflowY: "hidden",
             }}
           >
-            {products?.map((product, i) => (
+            {products?.result?.map((product, i) => (
               <IonCol key={i}>
                 <ProductBox item={product} />
               </IonCol>

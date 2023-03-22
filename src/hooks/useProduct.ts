@@ -1,12 +1,20 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { t } from "@lingui/macro";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { environment } from "environment/environment";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
 import { LanguageString } from "types/i18n";
 import {
   AddProductProps,
   AddProductRequestProps,
+  PaginationProps,
   Product,
   ProductResponse,
 } from "types/product";
@@ -18,14 +26,94 @@ export function useProductList() {
   const { getString } = useLanguage();
   return useQuery({
     queryKey: ["products"],
-    queryFn: async (): Promise<Product[]> => {
-      const res = await request.get<AxiosResponse<ProductResponse[]>>(
-        "/product/showall"
-      );
+    queryFn: async (): Promise<
+      {
+        result: Product[];
+      } & PaginationProps
+    > => {
+      const res = await request.get<
+        AxiosResponse<ProductResponse[]> & PaginationProps
+      >("/product/showall");
+      const { totalPages, totalElements, nextCursor } = res.data;
       const products = res.data.data;
       const result = products.map((payload) => getResponse(payload, getString));
-      return result;
+
+      return { result, totalPages, totalElements, nextCursor };
     },
+    getNextPageParam: ({ nextCursor, totalElements, totalPages }) => ({
+      nextCursor,
+      totalElements,
+      totalPages,
+    }),
+  });
+}
+
+interface useProductPaginationProps {
+  keyword?: string | null;
+  type?: string;
+  size?: number;
+}
+
+export function useProductPagination({
+  keyword = "",
+  type = "active",
+  size = 5,
+}: useProductPaginationProps = {}) {
+  let page = 0;
+  let url = "/product/showall-active";
+  if (type === "archived") {
+    url = "/product/showall-archived";
+  }
+  if (keyword) {
+    if (type === "active") {
+      url = "/product/search-active-products";
+    } else {
+      url = "/product/search-archived-products";
+    }
+  }
+  const { getString, lang } = useLanguage();
+  return useInfiniteQuery({
+    queryKey: ["products", page, keyword, type],
+    queryFn: async ({
+      pageParam,
+    }): Promise<
+      {
+        result: Product[];
+      } & PaginationProps
+    > => {
+      let res;
+      if (keyword) {
+        res = await request.post<
+          AxiosResponse<ProductResponse[]> & PaginationProps
+        >(
+          url,
+          {
+            language_code: lang,
+            keyword,
+          },
+          { params: { page: pageParam?.page || 0, size } }
+        );
+      } else {
+        res = await request.get<
+          AxiosResponse<ProductResponse[]> & PaginationProps
+        >(url, { params: { page: pageParam?.page || 0, size } });
+      }
+
+      const { totalPages, totalElements, nextCursor } = res.data;
+      const products = res.data.data;
+      const result = products.map((payload) => getResponse(payload, getString));
+
+      return { result, totalPages, totalElements, nextCursor };
+    },
+    getNextPageParam: ({ nextCursor, totalElements, totalPages }) =>
+      nextCursor
+        ? {
+            page: page + 1,
+            nextCursor,
+            totalElements,
+            totalPages,
+          }
+        : undefined,
   });
 }
 
@@ -55,7 +143,10 @@ export function useAddProduct() {
           //@ts-ignore
           delete payload["prd_image"];
         }
-        popUpMsg("Product have been successfully created!", "success");
+        popUpMsg(
+          t({ id: "Product have been successfully created!" }),
+          "success"
+        );
         return res;
       } else {
         popUpMsg(res.data.message, "error");
@@ -94,7 +185,10 @@ export function useEditProduct() {
       if (res.data.code === 200) {
         queryClient.invalidateQueries(["products"]);
         queryClient.invalidateQueries(["product", id]);
-        popUpMsg("Product have been successfully updated!", "success");
+        popUpMsg(
+          t({ id: "Product have been successfully updated!" }),
+          "success"
+        );
         return res;
       } else {
         popUpMsg(res.data.message, "error");
@@ -105,6 +199,31 @@ export function useEditProduct() {
       onSuccess: () => {
         history.replace("/product");
       },
+    }
+  );
+}
+
+export function useArchivedProduct() {
+  const queryClient = useQueryClient();
+  const popUpMsg = usePopUpMessage();
+  const uploadImage = useUploadProductImage();
+  const { setLangRequest } = useLanguage();
+  return useMutation(
+    async ({ id, prd_archived }: { id: string; prd_archived: number }) => {
+      const res = await request.post(`/product/edit/${id}`, { prd_archived });
+
+      if (res.data.code === 200) {
+        queryClient.invalidateQueries(["products"]);
+        queryClient.invalidateQueries(["product", id]);
+        popUpMsg(
+          t({ id: "Product have been successfully archived!" }),
+          "success"
+        );
+        return res;
+      } else {
+        popUpMsg(res.data.message, "error");
+        throw new Error(res.data.message);
+      }
     }
   );
 }
@@ -156,7 +275,7 @@ function processPayload(
   payload: AddProductProps,
   set: (p: string) => LanguageString
 ) {
-  const {
+  let {
     prd_category,
     prd_flavour,
     prd_ingredients,
@@ -169,13 +288,16 @@ function processPayload(
     prd_code,
     prd_image,
     prd_expiry_period,
+    prd_archived,
   } = payload;
-
+  if (typeof prd_nutrition_json === "object") {
+    prd_nutrition_json = JSON.stringify(prd_nutrition_json);
+  }
   return {
     prd_code,
     prd_image,
     prd_expiry_period,
-
+    prd_archived,
     prd_category: set(prd_category),
     prd_flavour: set(prd_flavour),
     prd_ingredients: set(prd_ingredients),
@@ -204,13 +326,14 @@ function getResponse(
     prd_code,
     prd_image,
     prd_expiry_period,
+    prd_archived,
   } = payload;
 
   return {
     prd_code,
     prd_image,
     prd_expiry_period,
-
+    prd_archived,
     prd_category: get(prd_category),
     prd_flavour: get(prd_flavour),
     prd_ingredients: get(prd_ingredients),

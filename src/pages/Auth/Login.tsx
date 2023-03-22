@@ -26,7 +26,6 @@ const Login: React.FC = () => {
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      console.log(values);
       login.mutate(values);
     },
   });

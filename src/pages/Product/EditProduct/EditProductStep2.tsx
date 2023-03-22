@@ -126,7 +126,7 @@ const EditProductStep2: FC = () => {
                   <div style={{ flex: "0 1 auto" }}>
                     {Object.entries(formik.values).map(([key], i) => (
                       <IonRow>
-                        {key !== SERVING && (
+                        {typeof formik.values[key] === "string" && (
                           <IonCol size="12">
                             <IonItem lines="none" className="ion-no-padding">
                               <IonLabel position="stacked">
@@ -209,7 +209,7 @@ const EditProductStep2: FC = () => {
                               style={{ paddingRight: 0 }}
                             >
                               <IonLabel position="stacked">
-                                {SERVING.replace(/_/g, " ")}:
+                                {t({ id: "Serving" }).replace(/_/g, " ")}:
                               </IonLabel>
                               <IonItem
                                 lines="none"

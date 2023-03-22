@@ -123,13 +123,13 @@ const SetupProductBatchStep1: FC = () => {
                         formik.setFieldValue("pbth_prd_code", e.target.value);
                         formik.setFieldValue(
                           "pbth_prd_name",
-                          productList?.find(
+                          productList?.result?.find(
                             (el) => el.prd_code === e.target.value
                           )?.prd_name
                         );
                       }}
                     >
-                      {productList?.map((product) => (
+                      {productList?.result?.map((product) => (
                         <IonSelectOption
                           key={product.prd_code}
                           value={product.prd_code}

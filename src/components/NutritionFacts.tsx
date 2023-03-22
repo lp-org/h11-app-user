@@ -1,5 +1,5 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
-import { Trans } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import { Fragment, useMemo } from "react";
 
 interface NutritionFactsProps {
@@ -8,7 +8,9 @@ interface NutritionFactsProps {
 
 const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
   const result = useMemo(() => {
-    if (json && typeof json === "string") return JSON.parse(json);
+    if (json && typeof json === "string") {
+      return JSON.parse(json);
+    }
     return json;
   }, [json]);
 
@@ -50,35 +52,54 @@ const NutritionFacts: React.FC<NutritionFactsProps> = ({ json }) => {
           </small>
         </IonRow>
         <hr style={{ border: "solid 1px", height: 0, margin: 1 }} />
-        {Object.entries(result?.Nutrition_Facts?.Serving).map(([key]) => (
-          <IonRow key={key}>
-            <IonCol size="12" style={{ padding: 0 }}>
-              {(function () {
-                if (typeof result.Nutrition_Facts.Serving[key] === "object") {
-                  return (
-                    <Fragment>
-                      <div style={{ display: "flex" }}>
-                        <small>
-                          <b>{key.replace(/_/g, " ")}</b>
-                        </small>
+        {result?.Nutrition_Facts?.[t({ id: "Serving" })] &&
+          Object.entries(result?.Nutrition_Facts?.[t({ id: "Serving" })])?.map(
+            ([key]) => (
+              <IonRow key={key}>
+                <IonCol size="12" style={{ padding: 0 }}>
+                  {(function () {
+                    if (
+                      typeof result.Nutrition_Facts[t({ id: "Serving" })][
+                        key
+                      ] === "object"
+                    ) {
+                      return (
+                        <Fragment>
+                          <div style={{ display: "flex" }}>
+                            <small>
+                              <b>{key.replace(/_/g, " ")}</b>
+                            </small>
 
-                        <small style={{ marginLeft: "10px" }}>
-                          {result.Nutrition_Facts.Serving[key].Size}
-                        </small>
-                        <small style={{ marginLeft: "auto" }}>
-                          {result.Nutrition_Facts.Serving[key].Daily_Value}
-                        </small>
-                      </div>
-                      <hr
-                        style={{ border: "solid 1px", height: 0, margin: 1 }}
-                      />
-                    </Fragment>
-                  );
-                }
-              })()}
-            </IonCol>
-          </IonRow>
-        ))}
+                            <small style={{ marginLeft: "10px" }}>
+                              {
+                                result.Nutrition_Facts[t({ id: "Serving" })][
+                                  key
+                                ].Size
+                              }
+                            </small>
+                            <small style={{ marginLeft: "auto" }}>
+                              {
+                                result.Nutrition_Facts[t({ id: "Serving" })][
+                                  key
+                                ].Daily_Value
+                              }
+                            </small>
+                          </div>
+                          <hr
+                            style={{
+                              border: "solid 1px",
+                              height: 0,
+                              margin: 1,
+                            }}
+                          />
+                        </Fragment>
+                      );
+                    }
+                  })()}
+                </IonCol>
+              </IonRow>
+            )
+          )}
         <IonRow></IonRow>
       </IonGrid>
     </Fragment>

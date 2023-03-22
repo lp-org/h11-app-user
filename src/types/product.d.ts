@@ -12,6 +12,7 @@ export type ProductResponse = {
   prd_expiry_period: number | null;
   prd_nutrition_json: LanguageString;
   prd_image: string | null;
+  prd_archived: number;
 };
 
 export type Product = {
@@ -26,6 +27,7 @@ export type Product = {
   prd_expiry_period: number | null;
   prd_nutrition_json: any | null;
   prd_image?: string | null;
+  prd_archived: number;
 };
 
 export type AddProductRequestProps = {
@@ -40,6 +42,7 @@ export type AddProductRequestProps = {
   prd_expiry_period: number | null;
   prd_nutrition_json: LanguageString;
   prd_image?: string | null;
+  prd_archived: number;
 };
 
 export type AddProductProps = {
@@ -54,4 +57,11 @@ export type AddProductProps = {
   prd_expiry_period: number | null;
   prd_nutrition_json: any | null;
   prd_image?: string | null;
+  prd_archived: number;
 };
+
+export interface PaginationProps {
+  totalPages: number;
+  totalElements: number;
+  nextCursor: boolean;
+}

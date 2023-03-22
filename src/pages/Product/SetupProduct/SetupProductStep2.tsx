@@ -13,29 +13,29 @@ import {
   IonPage,
   IonNote,
 } from "@ionic/react";
-import { t } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import Toolbar from "components/Toolbar.tsx";
 import { useFormik } from "formik";
-import { removeCircle, trash } from "ionicons/icons";
+import { trash } from "ionicons/icons";
 import { FC, Fragment, useCallback, useEffect } from "react";
 import { useHistory } from "react-router";
 import { useProductStore } from "store/useProductStore";
 import SteupSteppers from "./SteupSteppers";
 
-const templatePayload = {
-  Serving_Size: "",
-  "Amount_Per_Serving_(Calories)": "",
-  Serving: [
-    {
-      Nutrition_type: "",
-      Size: "",
-      unit: "g",
-      Daily_Value: "",
-    },
-  ],
-};
-
 const SetupProductStep2: FC = () => {
+  const templatePayload = {
+    Serving_Size: "",
+    "Amount_Per_Serving_(Calories)": "",
+    Serving: [
+      {
+        Nutrition_type: "",
+        Size: "",
+        unit: "g",
+        Daily_Value: "",
+      },
+    ],
+  };
+
   const history = useHistory();
   const tempProductSetup = useProductStore((state) => state.tempProductSetup);
 
@@ -93,6 +93,7 @@ const SetupProductStep2: FC = () => {
             prd_storage_instructions: "",
             prd_type: "",
             prd_image: "",
+            prd_archived: 0,
           }
     );
   }, [formik.values]);
@@ -111,7 +112,9 @@ const SetupProductStep2: FC = () => {
       <IonContent fullscreen className="ion-padding">
         <div style={{ display: "flex", flexFlow: "column", height: "100%" }}>
           <div className="ion-margin-bottom">
-            <b>Nutrition Facts Setup </b>
+            <b>
+              <Trans>Nutrition Facts Setup</Trans>{" "}
+            </b>
           </div>
           <SteupSteppers step={2} />
           <IonGrid style={{ height: "100%", width: "100%" }}>
@@ -126,7 +129,7 @@ const SetupProductStep2: FC = () => {
                       {key !== "Serving" ? (
                         <IonItem lines="none" className="ion-no-padding">
                           <IonLabel position="stacked">
-                            {key.replace(/_/g, " ")}:
+                            {t({ id: key }).replace(/_/g, " ")}:
                           </IonLabel>
                           <IonInput
                             className="custom"
@@ -153,7 +156,8 @@ const SetupProductStep2: FC = () => {
                                       style={{ display: "flex", width: "100%" }}
                                     >
                                       <IonLabel position="stacked">
-                                        Nutrition Fact Type {index + 1}:
+                                        <Trans>Nutrition Fact Type</Trans>{" "}
+                                        {index + 1}:
                                       </IonLabel>
                                       <div style={{ marginLeft: "auto" }}>
                                         <IonIcon
@@ -207,7 +211,7 @@ const SetupProductStep2: FC = () => {
                                     style={{ paddingRight: 0 }}
                                   >
                                     <IonLabel position="stacked">
-                                      {key.replace(/_/g, " ")}:
+                                      {t({ id: key }).replace(/_/g, " ")}:
                                     </IonLabel>
                                     <IonItem
                                       lines="none"
@@ -311,7 +315,7 @@ const SetupProductStep2: FC = () => {
                     })
                   }
                 >
-                  Add Row
+                  <Trans>Add Row</Trans>
                 </IonButton>
               </div>
               <div
@@ -328,7 +332,7 @@ const SetupProductStep2: FC = () => {
                   style={{ marginTop: "auto" }}
                   class="text-white"
                 >
-                  Preview
+                  <Trans>Preview</Trans>
                 </IonButton>
               </div>
             </form>

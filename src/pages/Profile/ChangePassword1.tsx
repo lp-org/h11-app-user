@@ -50,7 +50,9 @@ const ChangePassword1: React.FC = () => {
               <IonRow>
                 <IonCol size="12">
                   <IonItem lines="none" className="ion-no-padding">
-                    <IonLabel position="stacked">Current Password</IonLabel>
+                    <IonLabel position="stacked">
+                      <Trans>Current Password</Trans>
+                    </IonLabel>
                     <IonInput
                       className="custom"
                       name="current_password"
@@ -75,7 +77,7 @@ const ChangePassword1: React.FC = () => {
               style={{ marginTop: "auto" }}
               onClick={() => history.push("/changePassword2")}
             >
-              Next
+              <Trans>Next</Trans>
             </IonButton>
           </form>
         </IonGrid>
