@@ -9,3 +9,9 @@ export enum LocaleEnum {
   Mandarin = "cn",
   Melayu = "ms",
 }
+
+export type LanguageString = {
+  [LocaleEnum.English]?: string;
+  [LocaleEnum.Melayu]?: string;
+  [LocaleEnum.Mandarin]?: string;
+};

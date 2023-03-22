@@ -1,6 +1,6 @@
-import { IonLoading, useIonRouter } from "@ionic/react";
+import { useIonRouter } from "@ionic/react";
 
-import { Fragment, useCallback, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { useAppState } from "store";
 
 const CheckRoute: React.FC = () => {

@@ -6,7 +6,7 @@ import { useAuthStore } from "store/useAuthStore";
 import { AuthLogin } from "types/auth";
 import { request } from "utils/request";
 import { usePopUpMessage } from "./notification";
-
+import { requestV2 } from "utils/request";
 export function useLogin() {
   const setToken = useAuthStore((state) => state.setToken);
   const popUpMsg = usePopUpMessage();
@@ -18,6 +18,10 @@ export function useLogin() {
       request.defaults.headers.common = {
         Authorization: `Bearer ${res.data.token}`,
       };
+      requestV2.defaults.headers.common = {
+        Authorization: `Bearer ${res.data.token}`,
+      };
+
       popUpMsg(t({ id: "Login Successful!" }), "success");
     } catch (error) {
       popUpMsg(
@@ -43,6 +47,9 @@ export function useSession() {
     (async () => {
       setToken(token);
       request.defaults.headers.common = {
+        Authorization: `Bearer ${token}`,
+      };
+      requestV2.defaults.headers.common = {
         Authorization: `Bearer ${token}`,
       };
       try {

@@ -1,5 +1,4 @@
 import {
-  IonBadge,
   IonButton,
   IonButtons,
   IonCheckbox,
@@ -14,20 +13,13 @@ import {
   IonPage,
   IonRow,
   IonSearchbar,
-  useIonPicker,
 } from "@ionic/react";
 import Image from "components/Image";
 import Toolbar from "components/Toolbar.tsx";
 
-import {
-  checkmarkOutline,
-  closeCircle,
-  closeCircleOutline,
-  closeOutline,
-  filter,
-} from "ionicons/icons";
+import { checkmarkOutline, closeCircleOutline, filter } from "ionicons/icons";
 import dayjs from "dayjs";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 import { useHistory } from "react-router";
 import { useScanHistoryStore } from "store/useScanHistoryStore";

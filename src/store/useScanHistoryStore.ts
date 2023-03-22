@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { VerifyQrInfo } from "hooks/useQrCode";
+import { VerifyQrInfo } from "types/qrCode";
 
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";

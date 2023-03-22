@@ -1,8 +1,8 @@
 import { IonCol, IonGrid, IonLabel, IonRow } from "@ionic/react";
 import { Trans } from "@lingui/macro";
-import { QrInfo } from "hooks/useQrCode";
+
 import { Fragment } from "react";
-import Image from "./Image";
+import { QrInfo } from "types/qrCode";
 
 interface ShowQrInfoProps {
   item: QrInfo | undefined;
@@ -58,7 +58,7 @@ const ShowQrInfo: React.FC<ShowQrInfoProps> = ({ item }) => {
             <IonCol size="5">
               <Trans>Print Count</Trans>:
             </IonCol>
-            <IonCol>111</IonCol>
+            <IonCol>{item?.bc_count}</IonCol>
           </IonRow>
         </IonGrid>
       )}
